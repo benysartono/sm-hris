@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchOrderItem>Select * from dongan_order_item where idPO=?</searchOrderItem> 
+		<searchOrderItemByIdPOnPage>Select * from dongan_order_item where idPO=? order by idItem limit ?,2</searchOrderItemByIdPOnPage> 
+		<orderItemDelete>Delete from dongan_order_item where idPO = ? and idItem=?</orderItemDelete> 
+		<orderItemDeleteByIdPO>Delete from dongan_order_item where idPO = ?</orderItemDeleteByIdPO> 
+		<orderItemAdd>Insert into dongan_order_item(idPO,idItem,idColor; qty,description,unitPrice,extendedPrice) values(?,?,?,?,?,?,?)</orderItemAdd>
+		<orderItemEdit>Update dongan_order_item set idPO=?,idItem=?,qty=?,description=?,unitPrice=?,extendedPrice=? where idPO=? and idItem=?</orderItemEdit>
+</xmlquery>		

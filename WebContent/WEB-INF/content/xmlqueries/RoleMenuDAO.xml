@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchRoleMenu>Select * from smhris_role_menu</searchRoleMenu> 
+		<searchRoleMenuLike>Select * from smhris_role_menu where idRole like ?</searchRoleMenuLike> 
+		<roleMenuDelete>Delete from smhris_role_menu where idRole = ? and idMenu = ?</roleMenuDelete> 
+		<roleMenuAdd>Insert into smhris_role_menu(idRole,idMenu) values(?,?)</roleMenuAdd>
+		<roleMenuEdit>Update smhris_role_menu set idRole=?,idMenu=? where idRole=? and idMenu=?</roleMenuEdit>
+</xmlquery>		

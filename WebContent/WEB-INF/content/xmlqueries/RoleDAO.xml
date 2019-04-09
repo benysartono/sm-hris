@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchRole>Select * from smhris_role</searchRole> 
+		<searchRoleByNameLike>Select * from smhris_role where roleName like ?</searchRoleByNameLike> 
+		<searchRoleFR>Select * from smhris_role</searchRoleFR> 
+		<roleDelete>Delete from smhris_role where idRole = ?</roleDelete> 
+		<roleAdd>Insert into smhris_role(roleName,description) values(?,?)</roleAdd>
+		<roleEdit>Update smhris_role set roleName=?,description=? where idRole=?</roleEdit>
+</xmlquery>		

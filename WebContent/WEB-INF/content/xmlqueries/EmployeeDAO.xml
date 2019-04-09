@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployee>Select * from smhris_employee</searchEmployee> 
+		<searchEmployeeLogin>Select * from smhris_employee where uid = ? and password = ?</searchEmployeeLogin> 
+		<searchEmployeeByName>Select * from smhris_employee where name like ?</searchEmployeeByName> 
+		<searchEmployeeFRByNameAndDOB>Select * from smhris_employee where name like ? and dob between ? and ?</searchEmployeeFRByNameAndDOB> 
+		<searchEmployeeFR>Select * from smhris_employee</searchEmployeeFR> 
+		<employeeDelete>Delete from smhris_employee where idEmployee = ?</employeeDelete> 
+		<employeeAdd>Insert into smhris_employee(idEmployee,name,address,dob,idDepartment,idUnit,idPosition,idSite,imgURL,password) values(?,?,?,?,?,?,?,?,?,?)</employeeAdd>
+		<employeeEdit>Update smhris_employee set name=?,address=?,dob=?,idDepartment=?,idUnit=?,idPosition=?,idSite=?,imgURL=? where idEmployee=?</employeeEdit>
+</xmlquery>		

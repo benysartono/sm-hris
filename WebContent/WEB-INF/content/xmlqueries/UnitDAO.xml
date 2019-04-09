@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchUnit>Select * from smhris_unit</searchUnit> 
+		<searchUnitP>Select * from smhris_unit where name like ?</searchUnitP> 
+		<searchUnitBaseOnDept>Select * from smhris_unit where idDepartment = ?</searchUnitBaseOnDept> 
+		<unitDelete>Delete from smhris_unit where idUnit = ?</unitDelete> 
+		<unitAdd>Insert into smhris_unit(idUnit,name,description) values(?,?,?)</unitAdd>
+</xmlquery>		

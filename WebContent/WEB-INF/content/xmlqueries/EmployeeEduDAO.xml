@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployeeEdu>Select * from smhris_employee_edu where idEmployee = ?</searchEmployeeEdu> 
+		<searchEmployeeEduP>Select * from smhris_employee_edu where schoolName like ?</searchEmployeeEduP> 
+		<employeeEduDelete>Delete from smhris_employee_edu where idEmployeeEdu = ?</employeeEduDelete> 
+		<employeeEduAdd>Insert into smhris_employee_edu(idEmployeeEdu,idEmployee,schoolName,institution,description,yearFrom,yearTo) values(?,?,?,?,?,?,?)</employeeEduAdd>
+		<employeeEduEdit>Update smhris_employee_edu set schoolName=?, institution=?, description=?, yearFrom=?, yearTo=? where idEmployee=? and idEmployeeEdu=?</employeeEduEdit>
+</xmlquery>		

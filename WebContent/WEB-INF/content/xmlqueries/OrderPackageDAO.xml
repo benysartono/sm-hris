@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchOrderPackageByIdPO>Select * from dongan_order_package where idPO = ?</searchOrderPackageByIdPO> 
+		<orderPackageDelete>Delete from dongan_order_package where idPO = ?</orderPackageDelete> 
+		<orderPackageAdd>Insert into dongan_order_package(idPO,label,tag,innerBox,cardBoard,wrap,ctBox,smallBox,style,DSTN) values(?,?,?,?,?,?,?,?,?,?)</orderPackageAdd>
+		<orderPackageEdit>Update dongan_order set idPO=?,label=?,tag=?,innerBox=?,cardBoard=?,wrap=?,ctBox=?,smallBox=?,style=?,DSTN=?  where idPO=?</orderPackageEdit>
+</xmlquery>		

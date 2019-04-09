@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchDepartment>Select * from smhris_department</searchDepartment> 
+		<searchDepartmentP>Select * from smhris_department where name like ?</searchDepartmentP> 
+		<departmentDelete>Delete from smhris_department where idDepartment = ?</departmentDelete> 
+		<departmentAdd>Insert into smhris_department(idDepartment,name,description) values(?,?,?)</departmentAdd>
+		<departmentEdit>Update smhris_department set id=?,name=?,description=? where idDepartment=?</departmentEdit>
+</xmlquery>		

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+  
+<!DOCTYPE tiles-definitions PUBLIC   
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"  
+ "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">   
+  
+<tiles-definitions>  
+     
+  <definition name="layout" template="/WEB-INF/content/base/layout.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="header" value="/WEB-INF/content/base/header.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/content/base/menu.jsp"/>
+      <put-attribute name="body"   value="/WEB-INF/content/base/body.jsp"/>
+      <put-attribute name="footer"   value="/WEB-INF/content/base/footer.jsp"/>
+  </definition>
+  
+  <definition name="welcome" extends="layout">
+      <put-attribute name="title"  value="Welcome"/>
+      <put-attribute name="body"   value="/welcome.jsp"/>      
+  </definition>
+  
+  <definition name="struts" extends="layout">
+      <put-attribute name="title"  value="Struts Tutorial"/>
+      <put-attribute name="body"   value="/struts_tutorial.jsp"/>      
+  </definition>
+  
+  <definition name="hibernate" extends="layout">
+      <put-attribute name="title"  value="Hibernate Tutorial"/>
+      <put-attribute name="body"   value="/hibernate_tutorial.jsp"/>      
+  </definition>
+
+    <definition name="REGEXP:(.*)#(.*)"  extends="default">
+        <put-attribute name="title" />
+        <put-attribute name="body" value="/WEB-INF/content{1}/{2}"/>
+    </definition>
+         
+</tiles-definitions>  

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchBuyer>Select * from dongan_buyer</searchBuyer> 
+		<searchBuyerByIdBuyer>Select * from dongan_buyer where idBuyer = ?</searchBuyerByIdBuyer> 
+		<searchBuyerByNameLike>Select * from dongan_buyer where buyerName like ?</searchBuyerByNameLike> 
+		<buyerDelete>Delete from dongan_buyer where idBuyer = ?</buyerDelete> 
+		<searchBuyerSpecsByIdBuyer>Select * from dongan_buyer_spec where idBuyer= ?</searchBuyerSpecsByIdBuyer> 
+		<listSpecByIdBuyer>Select * from dongan_buyer_spec where idBuyer= ?</listSpecByIdBuyer> 
+</xmlquery>		

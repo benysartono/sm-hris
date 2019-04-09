@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchMenu>Select * from smhris_menu</searchMenu> 
+		<searchMenuP>Select * from smhris_menu where description like ?</searchMenuP> 
+		<menuDelete>Delete from smhris_menu where idMenu = ?</menuDelete> 
+		<menuAdd>Insert into smhris_menu(idMenu,description,href,hasChildren) values(?,?,?,?)</menuAdd>
+		<menuEdit>Update smhris_menu set idMenu=?,description=?,href=?,hasChildren=? where idMenu=?</menuEdit>
+</xmlquery>		
