@@ -63,7 +63,6 @@ public class IndexAction extends SmBaseAction {
 		return "add";
 	}
 
-
 	public Role getRole(){
 		return role;
 	}
