@@ -50,10 +50,7 @@ public class IndexAction extends SmBaseAction {
 		return res;
     }
     
-    public String testGit() {
-    	return "Test Git";
-    }
-    
+  
 	public String roleDelete() throws Exception {
 		RoleDAO roleDAO = new RoleDAO();
 		roleDAO.setArgArray(idRoles);
