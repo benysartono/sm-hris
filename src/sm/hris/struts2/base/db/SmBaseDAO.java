@@ -32,8 +32,33 @@ public class SmBaseDAO {
     	//if (ps != null) ps.close();
     	//if (rs != null) rs.close();
     }
-    
-    
+   
+	public ResultSet runQuery(String queryCommand) throws SQLException{
+        ReadXML myxml = new ReadXML();
+        String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            System.out.println(sql);
+            //con.close();
+        	
+
+        	//ConPool.freeConnection(con);
+         } catch (SQLException e) {
+             System.out.println("Catch SmBaseDAO: "+e);
+             e.printStackTrace();
+             //con.close();
+             return null;
+         } /* finally {
+        	 if (con != null) {
+        		 con.close();
+        	 }
+         } */
+        return rs;
+        
+    }
+
 	public ResultSet runQuery(String queryCommand, ArrayList<String> argArray) throws SQLException{
         ReadXML myxml = new ReadXML();
         String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
@@ -49,6 +74,35 @@ public class SmBaseDAO {
             	int n=i+1;
                 ps.setString(n, argArray.get(i));
             } 
+            rs = ps.executeQuery();
+            //con.close();
+        	return rs;
+
+        	//ConPool.freeConnection(con);
+         } catch (SQLException e) {
+             System.out.println("Catch SmBaseDAO: "+e);
+             e.printStackTrace();
+             //con.close();
+             return null;
+         } /* finally {
+        	 if (con != null) {
+        		 con.close();
+        	 }
+         } */
+
+        
+    }
+
+	public ResultSet runQuery(String queryCommand, String argStr) throws SQLException{
+        ReadXML myxml = new ReadXML();
+        String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
+        Logger logger = Logger.getLogger(SmBaseDAO.class);
+        BasicConfigurator.configure();
+        logger.info("SQL Query : " + sql);
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, argStr);
             rs = ps.executeQuery();
             //con.close();
         	return rs;
@@ -102,62 +156,6 @@ public class SmBaseDAO {
         
     }
 	
-	public ResultSet runQuery(String queryCommand, String argStr) throws SQLException{
-        ReadXML myxml = new ReadXML();
-        String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
-        Logger logger = Logger.getLogger(SmBaseDAO.class);
-        BasicConfigurator.configure();
-        logger.info("SQL Query : " + sql);
-        
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, argStr);
-            rs = ps.executeQuery();
-            //con.close();
-        	return rs;
-
-        	//ConPool.freeConnection(con);
-         } catch (SQLException e) {
-             System.out.println("Catch SmBaseDAO: "+e);
-             e.printStackTrace();
-             //con.close();
-             return null;
-         } /* finally {
-        	 if (con != null) {
-        		 con.close();
-        	 }
-         } */
-
-        
-    }
-
-	
-	public ResultSet runQuery(String queryCommand) throws SQLException{
-        ReadXML myxml = new ReadXML();
-        String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
-
-        try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            System.out.println(sql);
-            //con.close();
-        	
-
-        	//ConPool.freeConnection(con);
-         } catch (SQLException e) {
-             System.out.println("Catch SmBaseDAO: "+e);
-             e.printStackTrace();
-             //con.close();
-             return null;
-         } /* finally {
-        	 if (con != null) {
-        		 con.close();
-        	 }
-         } */
-        return rs;
-        
-    }
-	
 	public void run(String queryCommand, ArrayList<String> argArray) throws SQLException{
 		
 		Connection con = ConPool.getConnection();
@@ -172,7 +170,7 @@ public class SmBaseDAO {
             ps = con.prepareStatement(sql);
             for (int i=0; i<argArray.size(); i++){
                 int n = i+1;
-            	ps.setString(n, argArray.get(i));
+            	ps.setObject(n, argArray.get(i));
                 //System.out.println("Argument: " + argArray.get(i));
             } 
             executeResult = ps.execute();
