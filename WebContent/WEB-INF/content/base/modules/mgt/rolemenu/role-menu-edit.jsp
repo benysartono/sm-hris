@@ -39,43 +39,34 @@
           </div>
           <div class="panel-body">
           
-            <h1>Editing Role</h1>
+            <h1>Editing Role Menu</h1>
 
 			<div class="tab-content responsive">
 			<div class="tab-pane active" id="profile">
 
-            <s:form id="frmRole" action="role-edit" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <s:form id="frmRoleMenu" action="role-menu-edit" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="ID"
-                        	name="role.idRole"
+                        	label="Id Role"
+                        	name="roleMenu.idRole"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter ID"
-                        	value="%{role.idRole}"
+                        	tooltip="Enter Id Role"
+                        	value="%{roleMenu.idRole}"
                         	enable="false"
                         	/>
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Name"
-                        	name="role.roleName"
+                        	label="Id Menu"
+                        	name="roleMenu.idMenu"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Name"
-                        	value="%{role.roleName}"
+                        	tooltip="Enter Id Menu"
+                        	value="%{roleMenu.idMenu}"
                         	/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Description"
-                        	name="role.description"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Description"
-                        	value="%{role.description}"/>
                     </div>
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>

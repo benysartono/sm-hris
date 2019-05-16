@@ -99,7 +99,7 @@ public class SmBaseDAO {
         Logger logger = Logger.getLogger(SmBaseDAO.class);
         BasicConfigurator.configure();
         logger.info("SQL Query : " + sql);
-        
+        logger.info("argStr: " + argStr);
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, argStr);
@@ -170,7 +170,7 @@ public class SmBaseDAO {
             ps = con.prepareStatement(sql);
             for (int i=0; i<argArray.size(); i++){
                 int n = i+1;
-            	ps.setObject(n, argArray.get(i));
+            	ps.setString(n, argArray.get(i));
                 //System.out.println("Argument: " + argArray.get(i));
             } 
             executeResult = ps.execute();

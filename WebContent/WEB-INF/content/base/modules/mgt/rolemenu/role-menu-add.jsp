@@ -37,30 +37,30 @@
         <div class="col-md-9">
       	<div class="panel panel-default">
           <div class="panel-heading">
-            <h1>Adding Role</h1>
+            <h1>Adding Role Menu</h1>
           </div>
           <div class="panel-body">
 			<div class="tab-content responsive">
-            <s:form id="frmRole" action="role-add" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <s:form id="frmRoleMenu" action="role-menu-add" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Name"
-                        	name="role.roleName"
+                        	label="Id Role"
+                        	name="roleMenu.idRole"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Name"
-                        	value="%{role.roleName}"/>
+                        	tooltip="Enter Id Role"
+                        	value="%{roleMenu.idRole}"/>
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Description"
-                        	name="role.description"
+                        	label="Id Menu"
+                        	name="roleMenu.idMenu"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Description"
-                        	value="%{role.description}"
+                        	tooltip="Enter Id Menu"
+                        	value="%{roleMenu.idMenu}"
                         	/>
                     </div>
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>

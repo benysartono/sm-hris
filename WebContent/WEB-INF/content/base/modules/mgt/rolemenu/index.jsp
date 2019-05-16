@@ -35,7 +35,7 @@
 <div class="container">
 <div class="panel panel-default">
 <div class="panel-heading">
-	<h1>Role List</h1>
+	<h1>Role Menu List</h1>
 </div>
 <div class="panel-body">
     <div class="row">
@@ -81,7 +81,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<s:iterator value="roles">
+					<s:iterator value="roleMenus">
 						<tr>
 							<td>       
 								<input type="checkbox" name="idRoles"  value="<s:property value ="idRole"/>"></checkbox>

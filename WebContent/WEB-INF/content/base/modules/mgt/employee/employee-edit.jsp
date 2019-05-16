@@ -35,59 +35,14 @@ dojo.event.topic.publish("show_unitlist");
 
 <body>
             
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">SM - HRIS</a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <s:url var="index_url" action="index"/>
-            <li class="active"><s:a href="%{index_url}">Home</s:a></li>
-            <s:url var="about_url" action="about"/>
-            <li><s:a href="%{about_url}">About</s:a></li>
-        </ul>
-    </div>
-</nav>
-
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">
-                    Menu
-                    </li>
-                	<li><a href="/sm-hris/base/under-construction">Dashboard</a></li>
-                    <li class="active"><a href="/sm-hris/base/modules/mgt/employee/index">Employee Management</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Time Mgt</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Benefit Adm</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Organization Mgt</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Disc. Action Adm</a></li>
-                	<li><a href="/sm-hris/base/under-construction">MIS Report</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Complaint</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Talent</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Learning</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Recruitment Adm</a></li>
-                 </ul>
-            </div>
-        </div>
         <div class="col-md-9">
       	<div class="panel panel-default">
           <div class="panel-heading">
+            <h1>Editing Employee</h1>
           </div>
           <div class="panel-body">
-          
-            <h1>Editing Employee</h1>
-
-            <p>----------------------------------------------</p>
-
-			Welcome <%= session.getAttribute("userId") %>
-			
 			<ul class="nav nav-tabs responsive" id="myTab">
 			  <li class="active"><a href="#profile">Profile</a></li>
 			  <li><a href="#edu">Education History</a></li>

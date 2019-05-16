@@ -3,6 +3,8 @@ package sm.hris.struts2.base.modules.mgt.rolemenu;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import java.util.ArrayList;
+
 
 import sm.hris.struts2.base.db.RoleMenu;
 import sm.hris.struts2.base.db.RoleMenuDAO;
@@ -17,6 +19,7 @@ import sm.hris.struts2.base.SmBaseAction;
 public class RoleMenuAddAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
     private RoleMenu roleMenu = new RoleMenu();
+    private ArrayList<RoleMenu> roleMenus = new ArrayList<RoleMenu>();
     private RoleMenuDAO roleMenuDAO = new RoleMenuDAO();
     private String proc = new String();
 	
@@ -26,6 +29,7 @@ public class RoleMenuAddAction extends SmBaseAction {
 			    roleMenuDAO.roleMenuAdd();
 				return "tolist";
 		} else {
+			roleMenus = roleMenuDAO.searchRoleMenu();
 			return SUCCESS; 
 		}	
 	}

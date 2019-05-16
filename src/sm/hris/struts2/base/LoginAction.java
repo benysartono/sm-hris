@@ -12,7 +12,7 @@ import sm.hris.struts2.base.db.Employee;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ValidationAware;
 import com.opensymphony.xwork2.ValidationAwareSupport;
@@ -29,6 +29,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private ArrayList<Employee> employees;
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
 	private ArrayList<String> argArray = new ArrayList<String>();
+	private Map session = ActionContext.getContext().getSession();
 
 	public String execute() throws Exception {
 		if (uid==null){
@@ -46,8 +47,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				return SUCCESS;
 			}
 			else {
-				sessionAttributes.put("userId", uid);
-				setSession(sessionAttributes);
+				session.put("userId", uid);
+				//sessionAttributes.put("userId", uid);
+				//setSession(sessionAttributes);
 				//addActionMessage("<p>Login Pass</p><p><a href='index'>Click Here to Enter</a></p>");
 				return "pass";
 			}
@@ -70,6 +72,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
         this.uid = uid;
     }
 
+    
     public String getPassword() {
         return password;
     }

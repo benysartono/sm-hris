@@ -5,4 +5,6 @@
 		<roleMenuDelete>Delete from smhris_role_menu where idRole = ? and idMenu = ?</roleMenuDelete> 
 		<roleMenuAdd>Insert into smhris_role_menu(idRole,idMenu) values(?,?)</roleMenuAdd>
 		<roleMenuEdit>Update smhris_role_menu set idRole=?,idMenu=? where idRole=? and idMenu=?</roleMenuEdit>
+		<menuListByIdRole>select a.idMenu, a.description, a.href, if(isnull(b.idRole),"","checked") as idRole from smhris_menu a left join (select * from smhris_role_menu where idRole=?) b on a.idMenu = b.idMenu</menuListByIdRole>
+		<roleMenuDeleteByIdRole>delete from smhris_role_menu where idRole=?</roleMenuDeleteByIdRole>
 </xmlquery>		

@@ -103,6 +103,18 @@
 							<td>       
 								<s:property value ="description"/>
 							</td>
+							<td>       
+								<s:url action="role-users-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="idRole"><s:property value ="idRole"/></s:param>
+								</s:url>
+								<a href="<s:property value="#urlTag" />" >Role Users</a>
+							</td>
+							<td>       
+								<s:url action="role-menus-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="idRole"><s:property value ="idRole"/></s:param>
+								</s:url>
+								<a href="<s:property value="#urlTag" />" >Role Menus</a>
+							</td>
 						</tr>
 					</s:iterator>
 					</tbody>	 

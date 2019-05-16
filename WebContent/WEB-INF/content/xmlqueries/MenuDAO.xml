@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchMenu>Select * from smhris_menu</searchMenu> 
+		<searchMenu>Select a.idMenu, a.description, a.href, a.hasChildren from smhris_menu a inner join smhris_role_menu b on a.idMenu=b.idMenu where b.idRole=?</searchMenu> 
 		<searchMenuP>Select * from smhris_menu where description like ?</searchMenuP> 
 		<menuDelete>Delete from smhris_menu where idMenu = ?</menuDelete> 
 		<menuAdd>Insert into smhris_menu(idMenu,description,href,hasChildren) values(?,?,?,?)</menuAdd>

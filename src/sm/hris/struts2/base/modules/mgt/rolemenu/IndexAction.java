@@ -39,7 +39,7 @@ public class IndexAction extends SmBaseAction {
 	    	if (!searchPrm.equals("")) {
 				formArg.add("%"+searchPrm+"%");
 				roleMenuDAO.setArgArray(formArg);
-				roleMenus = roleMenuDAO.searchRoleMenuByIdRole();
+				roleMenus = roleMenuDAO.menuListByIdRole();
 				res="success";
 			} 
 			else {

@@ -20,39 +20,35 @@
 package sm.hris.struts2.base;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-//import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
-//import org.apache.struts2.convention.annotation.Result;
 
 import sm.hris.struts2.base.db.Menu;
 
-//import sm.hris.struts2.base.SmActionSupport;
 
-//@Result(name="loginx", location="/base/login", type="redirect")
-//@InterceptorRef(value="customStack")
+
 @ParentPackage(value = "hris")
 
 public class IndexAction extends SmBaseAction {
 
     private static final long serialVersionUID = 7353477345330099548L;
-	//private Map<String, Object> sessionAttributes;
+	private String userRole;
+	private ArrayList<Menu> menus = new ArrayList<Menu>();
 
     public String execute() throws Exception {
     	super.listMenu();
+    	menus = super.getMenus();
         //addActionError("A sample Action Error Message!!!");
         //addActionMessage("A sample Action Message.!!!");
         //addFieldError("error", "A sample Field Error!!!");
         return SUCCESS;
     }
 
-	public void setMenus(ArrayList<Menu> menus){
-		super.setMenus(menus);
-	}
 
 	public ArrayList<Menu> getMenus(){
-		return super.getMenus();
+		return menus;
 	}
     
     

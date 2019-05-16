@@ -13,14 +13,14 @@ public class RoleMenuDAO extends SmBaseDAO{
 	private RoleMenu roleMenu = new RoleMenu();
 	private ArrayList<RoleMenu> roleMenus = new ArrayList<RoleMenu>();
     private ArrayList<String> argArray = new ArrayList<String>();
-    private String strSearch = new String();
+    private String strSearch;
 
 	public ArrayList<RoleMenu> searchRoleMenu() throws SQLException{
         ResultSet rs = this.runQuery("searchRoleMenu");
             while (rs.next()) {
             	RoleMenu roleMenu = new RoleMenu();
-            	roleMenu.setIdRole(rs.getInt("idRole"));
-            	roleMenu.setIdMenu(rs.getInt("IdMenu"));
+            	roleMenu.setIdRole(rs.getString("idRole"));
+            	roleMenu.setIdMenu(rs.getString("IdMenu"));
             	roleMenus.add(roleMenu);
                 
             } 
@@ -36,12 +36,14 @@ public class RoleMenuDAO extends SmBaseDAO{
         	return roleMenus;
     }
 
-	public ArrayList<RoleMenu> searchRoleMenuByIdRole() throws SQLException{
-        ResultSet rs = this.runQuery("searchRoleMenuByIdRole", strSearch);
+	public ArrayList<RoleMenu> menuListByIdRole() throws SQLException{
+        ResultSet rs = this.runQuery("menuListByIdRole", strSearch);
             while (rs.next()) {
             	RoleMenu roleMenu = new RoleMenu();
-            	roleMenu.setIdRole(rs.getInt("idRole"));
-            	roleMenu.setIdMenu(rs.getInt("idMenu"));
+            	roleMenu.setIdRole(rs.getString("idRole"));
+            	roleMenu.setIdMenu(rs.getString("idMenu"));
+            	roleMenu.setDescription(rs.getString("description"));
+            	roleMenu.setHref(rs.getString("href"));
             	roleMenus.add(roleMenu);
                 
             } 
@@ -59,6 +61,10 @@ public class RoleMenuDAO extends SmBaseDAO{
         
     }
 
+	public void roleMenuDeleteByIdRole() throws SQLException{
+			this.run("roleMenuDeleteByIdRole", strSearch);
+    }
+
 	public void roleMenuDelete() throws SQLException{
 		for(int i=0;i<argArray.size();i++) {
 			this.run("roleMenuDelete", argArray.get(i));
@@ -68,13 +74,15 @@ public class RoleMenuDAO extends SmBaseDAO{
 	public void roleMenuAdd() throws SQLException{
 			argArray.add(0, String.valueOf(roleMenu.getIdRole()));
 			argArray.add(1, String.valueOf(roleMenu.getIdMenu()));
-			this.run("roleAdd", argArray);
+			this.run("roleMenuAdd", argArray);
 			closeConnection();
     }
 	
 	public void roleMenuEdit() throws SQLException{
 		argArray.add(0, String.valueOf(roleMenu.getIdRole()));
 		argArray.add(1, String.valueOf(roleMenu.getIdMenu()));
+		argArray.add(2, String.valueOf(roleMenu.getIdRole()));
+		argArray.add(3, String.valueOf(roleMenu.getIdMenu()));
 		this.run("roleMenuEdit", argArray);
 		closeConnection();
 	}
@@ -103,7 +111,7 @@ public class RoleMenuDAO extends SmBaseDAO{
 		this.argArray = argArray;
 	}
 
-	public void strSearch(String strSearch){
+	public void setStrSearch(String strSearch){
 		this.strSearch = strSearch;
 	}
 }
