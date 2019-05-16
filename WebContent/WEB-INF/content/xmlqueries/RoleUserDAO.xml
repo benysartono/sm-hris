@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<roleUserAdd>insert into smhris_role_user(idRole,uid) values(?,?)</roleUserAdd>
+		<userListByIdRole>select a.uid, a.name, if(isnull(b.idRole),"","checked") as idRole from smhris_employee a left join (select * from smhris_role_user where idRole=?) b on a.uid = b.uid</userListByIdRole>
+		<roleUserDeleteByIdRole>delete from smhris_role_user where idRole=?</roleUserDeleteByIdRole>
+		<roleListByIdUser>select a.uid, a.name, b.idRole from smhris_employee a inner join smhris_role_user b on a.uid = b.uid where b.uid=?</roleListByIdUser>
+</xmlquery>		
