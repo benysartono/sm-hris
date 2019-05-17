@@ -8,4 +8,6 @@
 		<employeeDelete>Delete from smhris_employee where idEmployee = ?</employeeDelete> 
 		<employeeAdd>Insert into smhris_employee(idEmployee,name,address,dob,idDepartment,idUnit,idPosition,idSite,imgURL,password) values(?,?,?,?,?,?,?,?,?,?)</employeeAdd>
 		<employeeEdit>Update smhris_employee set name=?,address=?,dob=?,idDepartment=?,idUnit=?,idPosition=?,idSite=?,imgURL=? where idEmployee=?</employeeEdit>
+		<employeeEditImg>Update smhris_employee set img=? where idEmployee = ?</employeeEditImg>
+		<getEmployeeImg>select img from smhris_employee where idEmployee = ?</getEmployeeImg>
 </xmlquery>		

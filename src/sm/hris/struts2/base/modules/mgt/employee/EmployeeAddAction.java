@@ -92,7 +92,7 @@ public class EmployeeAddAction extends SmBaseAction {
 			    
 			    String fileURL = "http://127.0.0.1/img/" + filePreffix + "." + fileExtension;
 			    employee.setImgURL(fileURL);
-			    
+			    //employee.setImg(img);
 			    employeeDAO.employeeAdd(employee);
 			    employeeDAO = null;
 			    employee = null;

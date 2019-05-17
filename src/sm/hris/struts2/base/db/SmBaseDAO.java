@@ -132,12 +132,10 @@ public class SmBaseDAO {
         try {
             ps = con.prepareStatement(sql);
             for (int i=0; i<argArray.size(); i++){
-                System.out.println("Prepare Statement = "+sql+" ");
-                System.out.println("Prepare Statement Arg("+i+")= "+argArray.get(i));
             	int n=i+1;
                 ps.setObject(n, argArray.get(i));
             } 
-            rs = ps.executeQuery();
+            ps.executeUpdate();
             //con.close();
         	return rs;
 
@@ -170,7 +168,7 @@ public class SmBaseDAO {
             ps = con.prepareStatement(sql);
             for (int i=0; i<argArray.size(); i++){
                 int n = i+1;
-            	ps.setString(n, argArray.get(i));
+               	ps.setString(n, argArray.get(i));
                 //System.out.println("Argument: " + argArray.get(i));
             } 
             executeResult = ps.execute();
@@ -195,7 +193,7 @@ public class SmBaseDAO {
 
         
     }
-
+	
 	public void run(String queryCommand, String argStr) throws SQLException{
 		
 		Connection con = ConPool.getConnection();

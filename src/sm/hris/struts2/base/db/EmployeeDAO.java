@@ -1,8 +1,12 @@
 package sm.hris.struts2.base.db;
  
 import java.util.ArrayList;
+import java.sql.Blob;
 //import java.util.List;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -17,8 +21,11 @@ public class EmployeeDAO extends SmBaseDAO{
 	private ArrayList<EmployeeFR> employeesfr = new ArrayList<EmployeeFR>();
     private String idEmployee;
     private ArrayList<String> argArray = new ArrayList<String>();
+    private ArrayList<Object> argArrayObj = new ArrayList<Object>();
+    private InputStream inputStream;
+    private Blob bFile;
 
-	public ArrayList<Employee> searchEmployee() throws SQLException{
+    public ArrayList<Employee> searchEmployee() throws SQLException{
 		//List<Employee> employeesList;
         ResultSet rs = this.runQuery("searchEmployee");
  
@@ -191,9 +198,21 @@ public class EmployeeDAO extends SmBaseDAO{
 			argArray.add(5, employee.getIdUnit());
 			argArray.add(6, employee.getIdPosition());
 			argArray.add(7, employee.getIdSite());
+			//InputStream inputStream = new FileInputStream(employee.getImg());
+			//argArray.add(8, inputStream);
 			argArray.add(8, employee.getImgURL());
 			argArray.add(9, employee.getPassword());
 			this.run("employeeAdd", argArray);
+			
+			try {
+				inputStream = new FileInputStream(employee.getImg());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			argArrayObj.add(0,employee.getImg());
+			argArrayObj.add(1,employee.getIdEmployee());
+			this.runQueryObj("employeeEditImg", argArrayObj);
 			closeConnection();
     }
 	
@@ -227,6 +246,11 @@ public class EmployeeDAO extends SmBaseDAO{
 		System.out.println(ex);
 	   }
 	   return dateString;
+	}
+
+	public Blob getEmployeeImg(){
+		
+		return null;
 	}
 	
 	public void setArgArray(ArrayList<String> argArray){

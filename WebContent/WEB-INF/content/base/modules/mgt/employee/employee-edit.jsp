@@ -135,7 +135,11 @@ dojo.event.topic.publish("show_unitlist");
                         	tooltip="Enter site"
                         	value="%{employee.idSite}"/>
                     </div>
-                    <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
+					<!--  <input type="file" name="employee.photo" />  -->
+					<div>
+						<img width="100" height="100" src="<s:url value='employee-edit?prmimg='/><s:property value='%{employee.idEmployee}' />">
+					</div>
+					<s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>
                 </div>
             </s:form>
