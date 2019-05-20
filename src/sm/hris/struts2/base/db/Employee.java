@@ -3,6 +3,8 @@ package sm.hris.struts2.base.db;
 import java.util.Date;
 import java.io.File;
 import org.apache.commons.codec.digest.DigestUtils;
+import java.sql.Blob;
+
 
 public class Employee {
 

@@ -79,7 +79,7 @@ public class EmployeeDaoJson extends ActionSupport {
 	public void employeeAdd(Employee employee) throws SQLException{
 			System.out.println("Ada di dalam EmployeeDAO EmployeeAdd");
 			try {
-
+/*
 			    //Reading the file image into FileInputStream
 			    FileInputStream fis = new FileInputStream(employee.getImg());
 			    byte[] bytesArray = new byte[(int) employee.getImg().length()];
@@ -102,7 +102,7 @@ public class EmployeeDaoJson extends ActionSupport {
 			    
 			    String fileURL = "http://127.0.0.1/img/" + filePreffix + "." + fileExtension;
 			    employee.setImgURL(fileURL);
-			    
+*/			    
 				String sql = "Insert into smhris_employee(idEmployee,name,address,dob,idDepartment,idUnit,idPosition,idSite,imgURL,password) values(?,?,?,?,?,?,?,?,?,?)";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, employee.getIdEmployee());

@@ -22,7 +22,7 @@ public class EmployeeDAO extends SmBaseDAO{
     private String idEmployee;
     private ArrayList<String> argArray = new ArrayList<String>();
     private ArrayList<Object> argArrayObj = new ArrayList<Object>();
-    private InputStream inputStream;
+    private FileInputStream inputStream;
     private Blob bFile;
 
     public ArrayList<Employee> searchEmployee() throws SQLException{
@@ -184,7 +184,7 @@ public class EmployeeDAO extends SmBaseDAO{
 		}
     }
 
-	public void employeeAdd(Employee employee) throws SQLException{
+	public void employeeAdd(Employee employee) throws SQLException, FileNotFoundException{
 			System.out.println("Ada di dalam EmployeeDAO EmployeeAdd");
 			argArray.add(0, employee.getIdEmployee());
 			argArray.add(1, employee.getName());
@@ -198,18 +198,21 @@ public class EmployeeDAO extends SmBaseDAO{
 			argArray.add(5, employee.getIdUnit());
 			argArray.add(6, employee.getIdPosition());
 			argArray.add(7, employee.getIdSite());
-			//InputStream inputStream = new FileInputStream(employee.getImg());
+			//inputStream = new FileInputStream(employee.getImg());
 			//argArray.add(8, inputStream);
 			argArray.add(8, employee.getImgURL());
 			argArray.add(9, employee.getPassword());
 			this.run("employeeAdd", argArray);
-			
+			/*
 			try {
 				inputStream = new FileInputStream(employee.getImg());
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
+			//inputStream = new FileInputStream(employee.getImg());
+			//argArrayObj.add(0,inputStream);
 			argArrayObj.add(0,employee.getImg());
 			argArrayObj.add(1,employee.getIdEmployee());
 			this.runQueryObj("employeeEditImg", argArrayObj);
@@ -248,9 +251,12 @@ public class EmployeeDAO extends SmBaseDAO{
 	   return dateString;
 	}
 
-	public Blob getEmployeeImg(){
-		
-		return null;
+	public Blob getEmployeeImg() throws SQLException{
+		System.out.println("id Pekerja : " + idEmployee);
+		ResultSet rs = this.runQuery("getEmployeeImg",idEmployee);
+		rs.next();
+		bFile = rs.getBlob("img");
+		return bFile;
 	}
 	
 	public void setArgArray(ArrayList<String> argArray){
@@ -258,5 +264,17 @@ public class EmployeeDAO extends SmBaseDAO{
 	}
 	public ArrayList<String> getArgArray(){
 		return argArray;
+	}
+	public String getIdEmployee(){
+		return idEmployee;
+	}
+	public void setIdEmployee(String idEmployee){
+		this.idEmployee = idEmployee;
+	}
+	public Blob getBFile(){
+		return bFile;
+	}
+	public void setBFile(Blob bFile){
+		this.bFile = bFile;
 	}
 }

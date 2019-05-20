@@ -3,10 +3,16 @@ package sm.hris.struts2.base.modules.mgt.employee;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.sql.SQLException;
+import java.io.OutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Blob;
 //import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -31,6 +37,9 @@ public class EmployeeEditAction extends SmBaseAction {
     private DepartmentDAO departmentDAO = new DepartmentDAO();
     private ArrayList<Department> departments = new ArrayList<Department>();
     private String proc = new String();
+    private String prmimg = new String();
+    private Blob bFile;
+    private HttpServletResponse response;
     
 /*	private String idEmployee = new String(); 									
 	private String name = new String(); 				
@@ -45,12 +54,23 @@ public class EmployeeEditAction extends SmBaseAction {
 	public String execute() throws Exception {
 		System.out.println("Passing Id Employee: " + employee.getIdEmployee());
 		System.out.println("Passing Name: " + employee.getName());
+		
+		String filePath = "C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + employee.getIdEmployee();
    	 	try {
 			departments = departmentDAO.searchDepartment();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+   	 	if (prmimg != ""){
+   	 		employeeDAO.setIdEmployee(prmimg);
+   	 		bFile = employeeDAO.getEmployeeImg();
+   	 		byte data[] = bFile.getBytes(1, (int) bFile.length());
+   	 		//OutputStream outputStream = response.getOutputStream();
+   	 		FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
+   	 		fileOutputStream.write(data);
+   	 		fileOutputStream.flush();
+   	 	}
 		if(proc.equals("Submit")){ 
 		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
 			  	 try {
@@ -62,8 +82,6 @@ public class EmployeeEditAction extends SmBaseAction {
 			    addFieldError("employee.name","The name is required");
 			    return SUCCESS;
 			} else {
-				System.out.println("To Be Edited: "+employee.getIdEmployee());
-				System.out.println("DOB value: "+employee.getDob());
 				employeeDAO.employeeEdit(employee);
 				return "tolist";
 			}	
@@ -87,6 +105,14 @@ public class EmployeeEditAction extends SmBaseAction {
 
 	public void setProc(String proc){
 		this.proc = proc;
+	}
+
+	public String getPrmimg(){
+		return prmimg;
+	}
+
+	public void setPrmimg(String prmimg){
+		this.prmimg = prmimg;
 	}
 
 	public List<Department> getDepartments(){

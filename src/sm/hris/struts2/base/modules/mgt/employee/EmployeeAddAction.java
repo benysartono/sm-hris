@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.Blob;
+
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -39,7 +41,7 @@ public class EmployeeAddAction extends SmBaseAction {
     private ArrayList<Department> departments = new ArrayList<Department>();
     private ArrayList<EmployeeEdu> employeeEdus = new ArrayList<EmployeeEdu>();
     private String proc = new String();
-	private File img;
+	private Blob img;
 	private String imgContentType;
 	
 	public String execute() throws Exception {
@@ -69,7 +71,7 @@ public class EmployeeAddAction extends SmBaseAction {
 			} else {
 				System.out.println("To Be Edited: "+employee.getIdEmployee());
 				System.out.println("DOB value: "+employee.getDob());
-
+/*
 			    //Reading the file image into FileInputStream
 			    FileInputStream fis = new FileInputStream(employee.getImg());
 			    byte[] bytesArray = new byte[(int) employee.getImg().length()];
@@ -89,10 +91,10 @@ public class EmployeeAddAction extends SmBaseAction {
 			    fos.close();
 			    
 			    System.out.println("File Content Type nya= "+ getImgContentType());
-			    
 			    String fileURL = "http://127.0.0.1/img/" + filePreffix + "." + fileExtension;
 			    employee.setImgURL(fileURL);
 			    //employee.setImg(img);
+*/
 			    employeeDAO.employeeAdd(employee);
 			    employeeDAO = null;
 			    employee = null;
@@ -150,11 +152,11 @@ public class EmployeeAddAction extends SmBaseAction {
 	} 
 
 	
-	public File getImg() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImg(File img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	}
 
