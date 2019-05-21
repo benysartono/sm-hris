@@ -36,8 +36,8 @@ public class EmployeeEditAction extends SmBaseAction {
     //private ArrayList<Department> departments = new ArrayList<Department>();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
     private ArrayList<Department> departments = new ArrayList<Department>();
-    private String proc = new String();
-    private String prmimg = new String();
+    private String proc;
+    private String prmimg;
     private Blob bFile;
     private HttpServletResponse response;
     
@@ -62,14 +62,15 @@ public class EmployeeEditAction extends SmBaseAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+ 		System.out.println("PRMIMG: " + prmimg);
    	 	if (prmimg != ""){
    	 		employeeDAO.setIdEmployee(prmimg);
    	 		bFile = employeeDAO.getEmployeeImg();
-   	 		byte data[] = bFile.getBytes(1, (int) bFile.length());
+   	 		//byte data[] = bFile.getBytes(1, (int) bFile.length());
    	 		//OutputStream outputStream = response.getOutputStream();
-   	 		FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
-   	 		fileOutputStream.write(data);
-   	 		fileOutputStream.flush();
+   	 		//FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
+   	 		//fileOutputStream.write(data);
+   	 		//fileOutputStream.flush();
    	 	}
 		if(proc.equals("Submit")){ 
 		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
