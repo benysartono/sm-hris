@@ -254,8 +254,10 @@ public class EmployeeDAO extends SmBaseDAO{
 	public Blob getEmployeeImg() throws SQLException{
 		System.out.println("id Pekerja : " + idEmployee);
 		ResultSet rs = this.runQuery("getEmployeeImg",idEmployee);
-		//rs.next();
-		bFile = rs.getBlob("img");
+		while(rs.next()){
+			System.out.print("Masuk dalam while rsnetx");
+			bFile = rs.getBlob("img");
+		}
 		return bFile;
 	}
 	
