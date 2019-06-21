@@ -63,16 +63,16 @@ public class EmployeeEditAction extends SmBaseAction {
 			e.printStackTrace();
 		}
  		System.out.println("PRMIMG: " + prmimg);
-   	 	if (prmimg != ""){
-   	 		employeeDAO.setIdEmployee(prmimg);
-   	 		bFile = employeeDAO.getEmployeeImg();
+   	 	//if (prmimg != ""){
+   	 		//employeeDAO.setIdEmployee(prmimg);
+   	 		//bFile = employeeDAO.getEmployeeImg();
    	 		//byte data[] = bFile.getBytes(1, (int) bFile.length());
    	 		//OutputStream outputStream = response.getOutputStream();
    	 		//FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
    	 		//fileOutputStream.write(data);
    	 		//fileOutputStream.flush();
-   	 	}
-		if(proc.equals("Submit")){ 
+   	 	//}
+		if ((proc != null) && (proc.equals("Submit"))){ 
 		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
 			  	 try {
 			  		departments = departmentDAO.searchDepartment();

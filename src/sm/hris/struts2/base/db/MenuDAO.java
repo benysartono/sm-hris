@@ -20,7 +20,7 @@ import sm.hris.struts2.base.db.RoleUserDAO;
 
 
 public class MenuDAO extends SmBaseDAO{
- 
+	private Menu menu = new Menu();
 	private ArrayList<Menu> menus = new ArrayList<Menu>();
     private String idMenu;
     private ArrayList<String> argArray = new ArrayList<String>();
@@ -33,9 +33,22 @@ public class MenuDAO extends SmBaseDAO{
 	
 	private Integer n;
 
+	public ArrayList<Menu> listMenu() throws SQLException{
+			ResultSet rs = this.runQuery("listMenu");
+            while (rs.next()) {
+                Menu menu = new Menu();
+                menu.setIdMenu(rs.getString("idMenu"));
+                menu.setDescription(rs.getString("description"));
+                menu.setHref(rs.getString("href"));
+                menu.setHasChildren(rs.getString("hasChildren"));
+                menus.add(menu);
+            }
+        	return menus;
+        
+    }
+	
 	public ArrayList<Menu> searchMenu() throws SQLException{
 		//List<Employee> employeesList;
-		System.out.println("Welcome UID: " + String.valueOf(session.get("userId")));
 		roleUserDAO.setStrSearch(String.valueOf(session.get("userId")));
 		try {
 			roleUsers = roleUserDAO.roleListByIdUser();
@@ -104,12 +117,15 @@ public class MenuDAO extends SmBaseDAO{
 		}
     }
 
-	public void menuAdd(Menu menu) throws SQLException{
+	public void menuAdd() throws SQLException{
 		
 			argArray.add(0, menu.getIdMenu());
 			argArray.add(1, menu.getDescription());
 			argArray.add(2, menu.getHref());
 			argArray.add(3, menu.getHasChildren());
+			argArray.add(4, menu.getLvl());
+			argArray.add(5, menu.getOrd());
+			argArray.add(6, menu.getParent());
 			this.run("menuAdd", argArray);
 			//closeConnection();
     }
@@ -124,4 +140,12 @@ public class MenuDAO extends SmBaseDAO{
 		//closeConnection();
 	}
 
+	
+	public void setMenu(Menu menu){
+		this.menu = menu;
+	}
+	
+	public Menu getMenu(){
+		return menu;
+	}
 }

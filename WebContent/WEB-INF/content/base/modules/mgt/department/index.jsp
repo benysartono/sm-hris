@@ -16,58 +16,15 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <sb:head/>
-    <style type="text/css">
-        body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        }
-    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">SM - HRIS</a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <s:url var="index_url" action="index"/>
-            <li class="active"><s:a href="%{index_url}">Home</s:a></li>
-            <s:url var="about_url" action="about"/>
-            <li><s:a href="%{about_url}">About</s:a></li>
-        </ul>
-    </div>
-</nav>
-
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-                <ul class="nav nav-list tree">
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Dashboard</a></label></li>
-                	<li><label class="tree-toggle nav-header">Employee</label>
-						<ul class="nav nav-list tree">
-                    		<li class="active"><a href="/sm-hris/base/modules/mgt/employee/index">Employee Management</a></li>
-                    	</ul>
-                    </li>		
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Time Mgt</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Benefit Adm</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Organization Mgt</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Disc. Action Adm</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">MIS Report</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Complaint</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Talent</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Learning</a></label></li>
-                	<li><label class="tree-toggle nav-header"><a href="/sm-hris/base/under-construction">Recruitment Adm</a></label></li>
-                 </ul>
-        </div>
         <div class="col-md-9">
 		<div class="row">
         <div class="well col-md-9">
-            <strong class="text-left">SM HRIS</strong>
+            <strong class="text-left">Department List</strong>
 			<form id="frmSearchDepartment" method="post" action="index" theme="bootstrap" class="navbar-form navbar-right" label="Department Search">
 			<label for="name" class="text-right">Department Search</label>        	
 			<s:textfield
@@ -127,10 +84,5 @@
         </div>
     </div>
 </div>
-<footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-
-    <p>Created by <a href="http://www.sartono-media.com" target="_blank">PT. SARTONO MEDIA</a>.</p>
-</footer>
 </body>
 </html>

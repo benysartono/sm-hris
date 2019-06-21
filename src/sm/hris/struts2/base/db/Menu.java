@@ -7,6 +7,9 @@ public class Menu {
 	private String description; 		
 	private String href;
 	private String hasChildren;
+	private String lvl;
+	private String ord;
+	private String parent;
 	
 	public String getIdMenu(){
 		return idMenu;
@@ -40,5 +43,28 @@ public class Menu {
 		this.hasChildren = hasChildren;
 	}
 
+	public String getLvl(){
+		return lvl;
+	}
+	
+	public void setLvl(String lvl) {
+		this.lvl = lvl;
+	}
+
+	public String getOrd(){
+		return ord;
+	}
+	
+	public void setOrd(String ord) {
+		this.ord = ord;
+	}
+
+	public String getParent(){
+		return parent;
+	}
+	
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
 
 }

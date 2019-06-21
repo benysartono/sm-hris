@@ -137,7 +137,8 @@ dojo.event.topic.publish("show_unitlist");
                     </div>
 					<!--  <input type="file" name="employee.photo" />  -->
 					<div>
-						<img width="100" height="100" src="<s:url value='employee-edit?prmimg='/><s:property value='%{employee.idEmployee}' />">
+						<!-- <img width="100" height="100" src="<s:url value='employee-edit?prmimg='/><s:property value='%{employee.idEmployee}' />">  -->
+						<img width="100" height="100" src="http://127.0.0.1/img/<s:property value='%{employee.idEmployee}'/>.jpg" />
 					</div>
 					<s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>

@@ -3,6 +3,6 @@
 		<searchDepartment>Select * from smhris_department</searchDepartment> 
 		<searchDepartmentP>Select * from smhris_department where name like ?</searchDepartmentP> 
 		<departmentDelete>Delete from smhris_department where idDepartment = ?</departmentDelete> 
-		<departmentAdd>Insert into smhris_department(idDepartment,name,description) values(?,?,?)</departmentAdd>
-		<departmentEdit>Update smhris_department set id=?,name=?,description=? where idDepartment=?</departmentEdit>
+		<departmentAdd>Insert into smhris_department(idDepartment,name,description,parentDept) values(?,?,?,?)</departmentAdd>
+		<departmentEdit>Update smhris_department set id=?,name=?,description=?,parentDept=? where idDepartment=?</departmentEdit>
 </xmlquery>		

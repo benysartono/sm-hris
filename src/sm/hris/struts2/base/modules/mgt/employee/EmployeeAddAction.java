@@ -71,7 +71,7 @@ public class EmployeeAddAction extends SmBaseAction {
 			} else {
 				System.out.println("To Be Edited: "+employee.getIdEmployee());
 				System.out.println("DOB value: "+employee.getDob());
-/*
+
 			    //Reading the file image into FileInputStream
 			    FileInputStream fis = new FileInputStream(employee.getImg());
 			    byte[] bytesArray = new byte[(int) employee.getImg().length()];
@@ -94,7 +94,7 @@ public class EmployeeAddAction extends SmBaseAction {
 			    String fileURL = "http://127.0.0.1/img/" + filePreffix + "." + fileExtension;
 			    employee.setImgURL(fileURL);
 			    //employee.setImg(img);
-*/
+
 			    employeeDAO.employeeAdd(employee);
 			    employeeDAO = null;
 			    employee = null;
