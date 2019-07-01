@@ -1,0 +1,172 @@
+package sm.hris.struts2.base.modules.order;
+
+
+import java.util.ArrayList;
+
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import sm.hris.struts2.base.SmBaseAction;
+import sm.hris.struts2.base.db.Order;
+import sm.hris.struts2.base.db.OrderItem;
+import sm.hris.struts2.base.db.OrderDAO;
+import sm.hris.struts2.base.db.OrderItemDAO;
+
+@Results({
+	@Result(name="tolist", location="/base/modules/order", type="redirect"),
+	})
+@ParentPackage(value = "hris")
+
+public class IndexEditTestAction extends SmBaseAction {
+    private static final long serialVersionUID = 7353477345330099548L;
+	private Order order = new Order();
+	private OrderItem orderItem = new OrderItem();
+    private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+	private OrderDAO orderDAO = new OrderDAO();
+	private OrderItemDAO orderItemDAO = new OrderItemDAO();
+	private ArrayList<String> argArray = new ArrayList<String>();
+	private ArrayList<String> idItemsCheck = new ArrayList<String>();
+	private String proc = new String();
+	
+	private ArrayList<String> orderItemIdPO = new ArrayList<String>();
+	private ArrayList<String> orderItemIdItem = new ArrayList<String>();
+	private ArrayList<String> orderItemIdColor = new ArrayList<String>();
+	private ArrayList<Integer> orderItemQty = new ArrayList<Integer>();
+	private ArrayList<String> orderItemDescription = new ArrayList<String>();
+	private ArrayList<Integer> orderItemUnitPrice = new ArrayList<Integer>();
+	private ArrayList<Integer> orderItemExtendedPrice = new ArrayList<Integer>();
+	
+	
+    //private OrderItem 
+	//private OrderItem orderItem;
+    
+    public String execute() throws Exception{
+    	System.out.println("Sudah ada di dalam IndexEditAction");
+    	if (proc.equals("Save")){
+    		order.setOrderItems(orderItems);
+    		orderDAO.orderEdit();
+	   		order = orderDAO.searchOrderByIdPO().get(0);
+    	} 
+    	else if (proc.equals("Delete")){
+    		orderDAO.setArgArray(idItemsCheck);
+    		orderDAO.orderItemDelete();
+    		argArray = new ArrayList<String>();
+	   		argArray.add(0,order.getIdPO());
+	   		orderDAO.setArgArray(argArray);
+	   		order = orderDAO.searchOrderByIdPO().get(0);
+    	}
+    	else if (proc.equals("Add")){
+    		argArray = new ArrayList<String>();
+	   		argArray.add(0,order.getIdPO());
+	   		orderDAO.setArgArray(argArray);
+	   		order = orderDAO.searchOrderByIdPO().get(0);
+    		return "add";
+    	}
+    	else {
+	   		//orderDAO.setArgArray(null);
+	   		argArray.add(0,order.getIdPO());
+	   		orderDAO.setArgArray(argArray);
+	   		order = orderDAO.searchOrderByIdPO().get(0);
+    	}
+   		return SUCCESS;
+    }
+    /*
+	public ArrayList<OrderItem> getOrderItems(){
+			//return orderItems;
+		}
+			
+	public void setOrderItems(ArrayList<OrderItem> orderItems){
+			//this.orderItems=orderItems;
+		}
+	*/
+	public Order getOrder(){
+		return order;
+	}
+	
+	public void setOrder(Order order){
+		this.order = order;
+	}
+	
+	public void setProc(String proc) {
+        this.proc = proc;
+    }
+	
+	public OrderItem getOrderItem(){
+		return orderItem;
+	} 
+	
+	public void setOrderItem (OrderItem orderItem){
+		this.orderItem = orderItem;
+	}
+
+	
+	public ArrayList<OrderItem> getOrderItems(){
+		return orderItems;
+	} 
+	
+	public void setOrderItems (ArrayList<OrderItem> orderItems){
+		this.orderItems = orderItems;
+	}
+
+	public ArrayList<String> getOrderItemIdPO(){
+		return orderItemIdPO;
+	}
+	public void setOrderItemIdPO(ArrayList<String> orderItemIdPO){
+		this.orderItemIdPO = orderItemIdPO;
+	}
+
+	
+	public ArrayList<String> getOrderItemIdItem(){
+		return orderItemIdItem;
+	}
+	public void setOrderItemIdItem(ArrayList<String> orderItemIdItem){
+		this.orderItemIdItem = orderItemIdItem;	
+	}
+	
+	
+	public ArrayList<String> getOrderItemIdColor(){
+		return orderItemIdColor;
+	}
+	public void setOrderItemIdColor(ArrayList<String> orderItemIdColor){
+		this.orderItemIdColor = orderItemIdColor;
+	}
+	
+	public ArrayList<Integer> getOrderItemQty(){
+		return orderItemQty;
+	}
+	public void setOrderItemQty(ArrayList<Integer> orderItemQty){
+		this.orderItemQty = orderItemQty;
+	}
+
+	public ArrayList<String> getOrderItemDescription(){
+		return orderItemDescription;
+	}
+	public void setOrderItemDescription(ArrayList<String> orderItemDescription){
+		this.orderItemDescription = orderItemDescription;
+	}
+
+	public ArrayList<Integer> getOrderItemUnitPrice(){
+		return orderItemUnitPrice;
+	}
+	public void setOrderItemUnitPrice(ArrayList<Integer> orderItemUnitPrice){
+		this.orderItemUnitPrice = orderItemUnitPrice;
+	}
+
+	public ArrayList<Integer> getOrderItemExtendedPrice(){
+		return orderItemExtendedPrice;
+	}
+	
+	public void setOrderItemExtendedPrice(ArrayList<Integer> orderItemExtendedPrice){
+		this.orderItemExtendedPrice = orderItemExtendedPrice;
+	}
+
+	public ArrayList<String> getIdItemsCheck(){
+		return idItemsCheck;
+	}
+	public void setIdItemsCheck(ArrayList<String> idItemsCheck){
+		this.idItemsCheck = idItemsCheck;
+	}
+
+
+}
