@@ -93,7 +93,7 @@
 								<input type="checkbox" name="idPOs"  value="<s:property value ="idPO"/>"><s:property value ="idPO"/></checkbox>
 							</td>
 							<td>       
-								<s:url action="index-edit" var="urlTag" escapeAmp="false">
+								<s:url action="index-edit-test" var="urlTag" escapeAmp="false">
     								<s:param name="order.idPO"><s:property value ="idPO"/></s:param>
     								<s:param name="order.idBuyer"><s:property value ="idBuyer"/></s:param>
     								<s:param name="order.idSpec"><s:property value ="idSpec"/></s:param>
