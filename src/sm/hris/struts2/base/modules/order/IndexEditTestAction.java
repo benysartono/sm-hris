@@ -44,9 +44,11 @@ public class IndexEditTestAction extends SmBaseAction {
     public String execute() throws Exception{
     	System.out.println("Sudah ada di dalam IndexEditAction");
     	if (proc.equals("Save")){
-    		order.setOrderItems(orderItems);
+    		//order.setOrderItems(orderItems);
+    		orderDAO.setOrder(order);
     		orderDAO.orderEdit();
-	   		order = orderDAO.searchOrderByIdPO().get(0);
+    		return SUCCESS;
+	   		//order = orderDAO.searchOrderByIdPO().get(0);
     	} 
     	else if (proc.equals("Delete")){
     		orderDAO.setArgArray(idItemsCheck);

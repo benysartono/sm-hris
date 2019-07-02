@@ -298,7 +298,8 @@
                 </div>
                 <div class="form-group">
                 <div class="row">
-                	<table class="table table-striped" ng-init="tableInit()">
+                	<!-- <table class="table table-striped" ng-init="tableInit()">  -->
+                	<table class="table table-striped">
 						<thead>
 					      <tr>
 					        <th>Mark</th>
@@ -313,17 +314,26 @@
 					    </thead>
 						<tbody>
 						
- 					    <tr ng-repeat="x in returnOrderItems">
-					        <th></th>
-					        <th><s:textfield name="orderItemIdItem" size="5" value="{{x.idItem}}" /></th>
-					        <th><s:textfield name="orderItemIdPO" size="15" value="{{x.idPO}}" /></th>
-					        <th><s:textfield name="orderItemIdColor" size="8" value="{{x.idColor}}" /></th>
-					        <th><s:textfield name="orderItemQty" size="10" value="{{x.qty}}" /></th>
-					        <th><s:textfield name="orderItemDescription" size="10" value="{{x.description}}" /></th>
-					        <th><s:textfield name="orderItemUnitPrice" size="7" value="{{x.unitPrice}}" /></th>
-					        <th><s:textfield name="orderItemExtendedPrice" size="8" value="{{x.extendedPrice}}" /></th>
+						<s:iterator value="order.orderItems" status="n">
+ 					     <tr>
+					        <td><s:property value="%{#n.index}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].idItems" value="%{idItem}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].idPO" value="%{idPO}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].idColor" value="%{idColor}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].qty" value="%{qty}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].description" value="%{description}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].unitPrice" value="%{unitPrice}" /></td>
+					        <td><s:textfield name="order.orderItems[%{#n.index}].extendedPrice" value="%{extendedPrice}" /></td>
+							<!-- 
+					        <td><s:textfield name="orderItems{{$index}}.IdPO" size="15" value="{{x.idPO}}" /></td>
+					        <td><s:textfield name="orderItems{{$index}}.IdColor" size="8" value="{{x.idColor}}" /></td>
+					        <td><s:textfield name="orderItems{{$index}}.Qty" size="10" value="{{x.qty}}" /></td>
+					        <td><s:textfield name="orderItems{{$index}}.Description" size="10" value="{{x.description}}" /></td>
+					        <td><s:textfield name="orderItems{{$index}}.UnitPrice" size="7" value="{{x.unitPrice}}" /></td>
+					        <td><s:textfield name="orderItems{{$index}}.ExtendedPrice" size="8" value="{{x.extendedPrice}}" /></td>
+					     	 -->
 					     </tr>
-					        
+					    </s:iterator>    
 					    </tbody>
 						<tfoot>
 					      <tr>
