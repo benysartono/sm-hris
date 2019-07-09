@@ -317,13 +317,13 @@
 						<s:iterator value="order.orderItems" status="n">
  					     <tr>
 					        <td><s:property value="%{#n.index}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].idItems" value="%{idItem}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].idPO" value="%{idPO}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].idColor" value="%{idColor}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].qty" value="%{qty}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].description" value="%{description}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].unitPrice" value="%{unitPrice}" /></td>
-					        <td><s:textfield name="order.orderItems[%{#n.index}].extendedPrice" value="%{extendedPrice}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].idItem" value="%{idItem}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].idPO" value="%{idPO}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].idColor" value="%{idColor}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].qty" value="%{qty}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].description" value="%{description}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].unitPrice" value="%{unitPrice}" /></td>
+					        <td><s:textfield name="orderItems[%{#n.index}].extendedPrice" value="%{extendedPrice}" /></td>
 							<!-- 
 					        <td><s:textfield name="orderItems{{$index}}.IdPO" size="15" value="{{x.idPO}}" /></td>
 					        <td><s:textfield name="orderItems{{$index}}.IdColor" size="8" value="{{x.idColor}}" /></td>
