@@ -77,7 +77,8 @@
 					</tbody>	 
 				</table>
 			</div>
-			<s:submit cssClass="btn btn-primary" name="proc" value="Add"/><s:submit cssClass="btn btn-primary" name="proc" value="Delete"/>	
+			<s:submit cssClass="btn btn-primary" name="proc" value="Add"/>
+			<s:submit cssClass="btn btn-primary" name="proc" value="Delete"/>	
 			</form>
         </div>
         </div>
