@@ -24,6 +24,7 @@ public class DepartmentDAO extends SmBaseDAO{
                 department.setIdDepartment(rs.getString("idDepartment"));
                 department.setName(rs.getString("name"));
                 department.setDescription(rs.getString("description"));
+                department.setParentDepartment(rs.getString("parentDepartment"));
                 departments.add(department);
                 
             } 
@@ -43,6 +44,34 @@ public class DepartmentDAO extends SmBaseDAO{
         
     }
 
+	public ArrayList<Department> searchDepartmentNotEqualTo() throws SQLException{
+        ResultSet rs = this.runQuery("searchDepartmentNotEqualTo", argArray.get(0));
+ 
+            while (rs.next()) {
+                Department department = new Department();
+                department.setIdDepartment(rs.getString("idDepartment"));
+                department.setName(rs.getString("name"));
+                department.setDescription(rs.getString("description"));
+                department.setParentDepartment(rs.getString("parentDepartment"));
+                departments.add(department);
+                
+            } 
+        	/*
+            if(rs != null){
+      		   try {
+      		   rs.close();
+      		   } catch (SQLException e) {
+      		        System.out.println("Exception while closing result set: " + e);
+      		   }
+      		}
+            closeConnection(); 
+        	*/
+            //rs.close();
+        	return departments;
+
+        
+    }
+	
 	public ArrayList<Department> searchDepartment(ArrayList<String> searchArg) throws SQLException{
         ResultSet rs = this.runQuery("searchDepartmentP",searchArg);
  
@@ -51,6 +80,7 @@ public class DepartmentDAO extends SmBaseDAO{
                 department.setIdDepartment(rs.getString("idDepartment"));
                 department.setName(rs.getString("name"));
                 department.setDescription(rs.getString("description"));
+                department.setParentDepartment(rs.getString("parentDepartment"));
                 departments.add(department);
                 
             }
@@ -88,12 +118,23 @@ public class DepartmentDAO extends SmBaseDAO{
     }
 	
 	public void departmentEdit(Department department) throws SQLException{
+		System.out.println("Inside DepartmentDAO: argArray.add(0, department.getIdDepartment());");
+		System.out.println(department.getIdDepartment());
+		System.out.println(department.getName());
+		System.out.println(department.getDescription());
+		System.out.println(department.getParentDepartment());
+		System.out.println(department.getIdDepartment());
 		
-		argArray.add(0, department.getIdDepartment());
-		argArray.add(1, department.getName());
-		argArray.add(2, department.getDescription());
+		
+		argArray.add(0, department.getName());
+		argArray.add(1, department.getDescription());
+		argArray.add(2, department.getParentDepartment());
+		argArray.add(3, department.getIdDepartment());
 		this.run("departmentEdit", argArray);
         //closeConnection();
 	}
 
+	public void setArgArray(ArrayList<String> argArray) {
+		this.argArray = argArray;
+	}
 }

@@ -169,7 +169,7 @@ public class SmBaseDAO {
             for (int i=0; i<argArray.size(); i++){
                 int n = i+1;
                	ps.setString(n, argArray.get(i));
-                //System.out.println("Argument: " + argArray.get(i));
+                System.out.println("Argument " +  i + ": " + argArray.get(i));
             } 
             executeResult = ps.execute();
         	if(ps != null){

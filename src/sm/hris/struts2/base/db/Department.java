@@ -5,7 +5,8 @@ public class Department {
 
 	private String idDepartment; 									
 	private String name; 				
-	private String description; 			
+	private String description; 
+	private String parentDepartment;
 	
 	public String getIdDepartment(){
 		return idDepartment;
@@ -31,4 +32,13 @@ public class Department {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getParentDepartment(){
+		return parentDepartment;
+	}
+	
+	public void setParentDepartment(String parentDepartment) {
+		this.parentDepartment = parentDepartment;
+	}
+
 }

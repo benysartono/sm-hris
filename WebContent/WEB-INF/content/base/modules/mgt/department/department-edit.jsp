@@ -35,158 +35,63 @@ dojo.event.topic.publish("show_unitlist");
 
 <body>
             
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">SM - HRIS</a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <s:url var="index_url" action="index"/>
-            <li class="active"><s:a href="%{index_url}">Home</s:a></li>
-            <s:url var="about_url" action="about"/>
-            <li><s:a href="%{about_url}">About</s:a></li>
-        </ul>
-    </div>
-</nav>
-
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">
-                    Menu
-                    </li>
-                	<li><a href="/sm-hris/base/under-construction">Dashboard</a></li>
-                    <li class="active"><a href="/sm-hris/base/modules/mgt/employee/index">Employee Management</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Time Mgt</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Benefit Adm</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Organization Mgt</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Disc. Action Adm</a></li>
-                	<li><a href="/sm-hris/base/under-construction">MIS Report</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Complaint</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Talent</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Learning</a></li>
-                	<li><a href="/sm-hris/base/under-construction">Recruitment Adm</a></li>
-                 </ul>
-            </div>
-        </div>
         <div class="col-md-9">
       	<div class="panel panel-default">
           <div class="panel-heading">
+            <h1>Editing Department</h1>
           </div>
           <div class="panel-body">
-          
-            <h1>Editing Employee</h1>
-
-            <p>----------------------------------------------</p>
-
-			Welcome <%= session.getAttribute("userId") %>
-			
-			<ul class="nav nav-tabs responsive" id="myTab">
-			  <li class="active"><a href="#profile">Profile</a></li>
-			  <li><a href="#edu">Education History</a></li>
-			  <li><a href="#career">Career History</a></li>
-			</ul>
-
-			<div class="tab-content responsive">
-			<div class="tab-pane active" id="profile">
-
-            <s:form id="frmEmployee" action="employee-edit" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <s:form id="frmDepartment" action="department-edit" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="ID"
-                        	name="employee.idEmployee"
+                        	name="department.idDepartment"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter ID"
-                        	value="%{employee.idEmployee}"/>
+                        	value="%{department.idDepartment}"/>
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Name"
-                        	name="employee.name"
+                        	name="department.name"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Name"
-                        	value="%{employee.name}"
+                        	value="%{department.name}"
                         	/>
                     </div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Address"
-                        	name="employee.address"
+                        	label="Description"
+                        	name="department.description"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Address"
-                        	value="%{employee.address}"/>
+                        	tooltip="Enter Description"
+                        	value="%{department.description}"/>
                     </div>
-                    <div class="col-md-9">
-						<sj:datepicker
-                                id="datepicker"
-                                parentTheme="bootstrap"
-                                name="employee.dob"
-                                label="Datepicker"
-                                tooltip="Enter DOB"
-                                cssClass="form-control"
-                                elementCssClass="col-sm-3"
-                                showOn="focus"
-                                inputAppendIcon="calendar"
-                                dateFormat="yy-m-d"
-                                />
-					</div>
                     <div class="col-md-9">
                 		<s:select
                         	list="departments"
-                        	listKey="idDept"
+                        	listKey="idDepartment"
                         	listValue ="name"
-                        	label="Department"
-                        	name="employee.idDept"
+                        	label="Parent Department"
+                        	name="department.parentDepartment"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Department"
-                        	value="%{employee.idDept}"
-                        	onchange="javascript:show_unitlist();return false"/>
+                        	tooltip="Enter Parent Department"
+                        	value="%{department.parentDepartment}"
+                        	/>
                     </div>
-						<s:url id="d_url" action="unit-list" /> 
-						<sx:div 
-							id="unitlist" href="%{d_url}" 
-							listenTopics="show_unitlist" 
-							theme="ajax"
-							formId="frmEmployee" 
-							/>                    
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Position"
-                        	name="employee.idPosition"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Position"
-                        	value="%{employee.idPosition}"/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Site"
-                        	name="employee.idSite"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter site"
-                        	value="%{employee.idSite}"/>
-                    </div>
+
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>
                 </div>
             </s:form>
-        </div>
-		<div class="tab-pane"  id="edu"><p>Under Construction</p></div>
-		<div class="tab-pane" id="career"><p>Under Construction</p></div>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$('.nav-tabs > li > a').click(function(event){

@@ -15,12 +15,10 @@ import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.db.Department;
 import sm.hris.struts2.base.db.DepartmentDAO;
 
+
 @Results({
-	@Result(name="loginx", location="/base/login", type="redirect"),
 	@Result(name="tolist", location="/base/modules/mgt/department/index", type="redirect"),
 })
-
-@InterceptorRef(value="customStack")
 @ParentPackage(value = "hris")
 
 public class DepartmentEditAction extends ActionSupport {
@@ -29,6 +27,7 @@ public class DepartmentEditAction extends ActionSupport {
     //private ArrayList<Department> departments = new ArrayList<Department>();
     private ArrayList<Department> departments = new ArrayList<Department>();
     private String proc = new String();
+    private ArrayList<String> argArray = new ArrayList<String>();
     
 /*	private String idEmployee = new String(); 									
 	private String name = new String(); 				
@@ -41,30 +40,19 @@ public class DepartmentEditAction extends ActionSupport {
 */
     
 	public String execute() throws Exception {
-		System.out.println("Passing Id Department: " + department.getIdDepartment());
-		System.out.println("Passing Name: " + department.getName());
-   	 	try {
-			departments = departmentDAO.searchDepartment();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if(proc.equals("Submit")){ 
-		    if (getDepartment().getIdDepartment() == null || getDepartment().getIdDepartment().trim().equals("")||getDepartment().getName() == null || getDepartment().getName().trim().equals("")){
-			  	 try {
-			  		departments = departmentDAO.searchDepartment();
-			  	 } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		    if (department.getIdDepartment() == null || department.getIdDepartment().trim().equals("") || department.getName() == null || department.getName().trim().equals("")){
 			    addFieldError("department.name","The name is required");
 			    return SUCCESS;
 			} else {
-				System.out.println("To Be Edited: "+department.getIdDepartment());
+				System.out.println("Calling DepartmentDAO.DepartmentEdit");
 				departmentDAO.departmentEdit(department);
 				return "tolist";
 			}	
 		} else {
+			argArray.add(department.getIdDepartment());
+			departmentDAO.setArgArray(argArray);
+			departments = departmentDAO.searchDepartmentNotEqualTo();
 			return SUCCESS; 
 		}	
 	}
