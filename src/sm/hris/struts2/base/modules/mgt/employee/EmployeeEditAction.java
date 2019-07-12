@@ -52,9 +52,6 @@ public class EmployeeEditAction extends SmBaseAction {
 */
     
 	public String execute() throws Exception {
-		System.out.println("Passing Id Employee: " + employee.getIdEmployee());
-		System.out.println("Passing Name: " + employee.getName());
-		
 		String filePath = "C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + employee.getIdEmployee();
    	 	try {
 			departments = departmentDAO.searchDepartment();
@@ -74,12 +71,6 @@ public class EmployeeEditAction extends SmBaseAction {
    	 	//}
 		if ((proc != null) && (proc.equals("Submit"))){ 
 		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
-			  	 try {
-			  		departments = departmentDAO.searchDepartment();
-			  	 } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			    addFieldError("employee.name","The name is required");
 			    return SUCCESS;
 			} else {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployeeCareer>Select * from smhris_employee_career where idEmployee = ?</searchEmployeeCareer> 
+		<searchEmployeeCareerLike>Select * from smhris_employee_career where company like ?</searchEmployeeCareerLike> 
+		<employeeCareerDelete>Delete from smhris_employee_career where idCareer = ? and idEmployee = ?</employeeCareerDelete> 
+		<employeeCareerAdd>Insert into smhris_employee_career(idCareer,idEmployee,company,lastPosition,description,yearFrom,yearTo) values(?,?,?,?,?,?,?)</employeeCareerAdd>
+		<employeeCareerEdit>Update smhris_employee_career set company=?, lastPosition=?, description=?, yearFrom=?, yearTo=? where idEmployee=?  and idCareer=?</employeeCareerEdit>
+</xmlquery>		

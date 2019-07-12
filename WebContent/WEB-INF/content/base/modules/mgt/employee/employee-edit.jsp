@@ -22,12 +22,11 @@
         }
     </style>
 	<sx:head />
+
 <script>
 function show_unitlist() {
 dojo.event.topic.publish("show_unitlist");
 }
-
-
 </script>
 
 </head>
@@ -145,8 +144,118 @@ dojo.event.topic.publish("show_unitlist");
                 </div>
             </s:form>
         </div>
-		<div class="tab-pane"  id="edu"><p>Under Construction</p></div>
-		<div class="tab-pane" id="career"><p>Under Construction</p></div>
+		<div class="tab-pane"  id="edu">
+			<table width="100%" Class="table-responsive table-striped table-bordered">
+					<thead>
+						<tr>
+							<td>
+								ID
+							</td>
+							<td>
+								School Name
+							</td>
+							<td>
+								Institution
+							</td>
+							<td>
+								Year From
+							</td>
+							<td>
+								Year To
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+					<s:iterator value="educations">
+						<tr>
+							<td>       
+								<input type="checkbox" name="idEducation"  value="<s:property value ="idEducation"/>"><s:property value ="idEducation"/></checkbox>
+							</td>
+							<td>       
+								<s:url action="education-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="education.idEducation"><s:property value ="idEducation"/></s:param>
+    								<s:param name="education.idEmployee"><s:property value ="idEmployee"/></s:param>
+    								<s:param name="education.schoolName"><s:property value ="schoolName"/></s:param>
+    								<s:param name="education.institution"><s:property value ="institution"/></s:param>
+    								<s:param name="education.description"><s:property value ="description"/></s:param>
+    								<s:param name="education.yearFrom"><s:property value ="yearFrom"/></s:param>
+    								<s:param name="education.yearTo"><s:property value ="yearTo"/></s:param>
+								</s:url>
+								<a href="<s:property value="#urlTag" />" ><s:property value ="schoolName"/></a>
+							</td>
+							<td>       
+								<s:property value ="institution"/>
+							</td>
+							<td>       
+								<s:property value ="yearFrom"/>
+							</td>
+							<td>       
+								<s:property value ="yearTo"/>
+							</td>
+						</tr>
+					</s:iterator>
+					</tbody>	 
+				</table>
+		</div>
+		<div class="tab-pane" id="career">
+			<table width="100%" Class="table-responsive table-striped table-bordered">
+					<thead>
+						<tr>
+							<td>
+								ID
+							</td>
+							<td>
+								Company
+							</td>
+							<td>
+								Last Position
+							</td>
+							<td>
+								Description
+							</td>
+							<td>
+								Year From
+							</td>
+							<td>
+								Year To
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+					<s:iterator value="careers">
+						<tr>
+							<td>       
+								<input type="checkbox" name="idCareer"  value="<s:property value ="idCareer"/>"><s:property value ="idCareer"/></checkbox>
+							</td>
+							<td>       
+								<s:url action="career-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="career.idCareer"><s:property value ="idEducation"/></s:param>
+    								<s:param name="career.idEmployee"><s:property value ="idEmployee"/></s:param>
+    								<s:param name="career.company"><s:property value ="schoolName"/></s:param>
+    								<s:param name="career.lastPosition"><s:property value ="institution"/></s:param>
+    								<s:param name="career.description"><s:property value ="description"/></s:param>
+    								<s:param name="career.yearFrom"><s:property value ="yearFrom"/></s:param>
+    								<s:param name="career.yearTo"><s:property value ="yearTo"/></s:param>
+								</s:url>
+								<a href="<s:property value="#urlTag" />" ><s:property value ="company"/></a>
+							</td>
+							<td>       
+								<s:property value ="lastPosition"/>
+							</td>
+							<td>       
+								<s:property value ="description"/>
+							</td>
+							<td>       
+								<s:property value ="yearFrom"/>
+							</td>
+							<td>       
+								<s:property value ="yearTo"/>
+							</td>
+						</tr>
+					</s:iterator>
+					</tbody>	 
+				</table>
+		</div>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$('.nav-tabs > li > a').click(function(event){
