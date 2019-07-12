@@ -32,30 +32,16 @@ public class DepartmentAddAction extends ActionSupport {
     
    
 	public String execute() throws Exception {
-		System.out.println("Passing Id Department: " + department.getIdDepartment());
-		System.out.println("Passing Name: " + department.getName());
-   	 	try {
-			departments = departmentDAO.searchDepartment();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if(proc.equals("Submit")){ 
-		    if (getDepartment().getIdDepartment() == null || getDepartment().getIdDepartment().trim().equals("")||getDepartment().getName() == null || getDepartment().getName().trim().equals("")){
-			  	 try {
-			  		departments = departmentDAO.searchDepartment();
-			  	 } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		    if (department.getIdDepartment() == null || department.getIdDepartment().trim().equals("")||department.getName() == null || department.getName().trim().equals("")){
 			    addFieldError("department.name","The name is required");
 			    return SUCCESS;
 			} else {
-				System.out.println("To Be Edited: "+department.getIdDepartment());
 				departmentDAO.departmentAdd(department);
 				return "tolist";
 			}	
 		} else {
+			departments = departmentDAO.searchDepartment();
 			return SUCCESS; 
 		}	
 	}

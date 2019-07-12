@@ -53,7 +53,7 @@
                 	cssClass="input-sm"
                 	elementCssClass="col-sm-3"
                 	tooltip="Enter Name"
-                	class="text-right"/><s:submit cssClass="btn btn-primary" name="proc" value="search"/>
+                	class="text-right"/><s:submit cssClass="btn btn-primary" name="proc" value="Search"/>
 			</td>
 			</tr>
 			</table>

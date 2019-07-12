@@ -22,22 +22,34 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-		<div class="row">
-        <div class="well col-md-9">
-            <strong class="text-left">Department List</strong>
-			<form id="frmSearchDepartment" method="post" action="index" theme="bootstrap" class="navbar-form navbar-right" label="Department Search">
-			<label for="name" class="text-right">Department Search</label>        	
-			<s:textfield
-        			id="name"
-                	name="name"
-                	cssClass="input-sm"
-                	elementCssClass="col-sm-3"
-                	tooltip="Enter Name"
-                	class="text-right"/><s:submit cssClass="btn btn-primary" name="proc" value="search"/>
-            </form>
-		</div>
-		</div>
-		<div class="row">
+      	<div class="panel panel-default">
+          <div class="panel-heading">
+            <h1>Department List</h1>
+          </div>
+          <div class="panel-Body">
+		    <div class="row">
+		        <div class="col-md-9">
+					<form id="frmSearchDepartment" method="post" action="index" theme="bootstrap" class="navbar-form navbar-right" label="Department Search">
+					<table width="100%" Class="table-responsive table-striped table-bordered">
+					<tr>
+					<td>
+					<label for="name" class="text-right">Department Search</label>        	
+					</td>
+					<td>
+					<s:textfield
+		        			id="name"
+		                	name="name"
+		                	cssClass="input-sm"
+		                	elementCssClass="col-sm-3"
+		                	tooltip="Enter Name"
+		                	class="text-right"/><s:submit cssClass="btn btn-primary" name="proc" value="Search"/>
+					</td>
+					</tr>
+					</table>
+		            </form>
+				</div>
+			</div>	
+			<div class="row">
         <div class="col-md-9">
 			<form id="frmIdDepartment" method="post" action="index" theme="bootstrap" cssClass="form-horizontal" label="Department Delete">
 			<div elementCssClass = "table-responsive">
@@ -81,6 +93,8 @@
 			<s:submit cssClass="btn btn-primary" name="proc" value="Delete"/>	
 			</form>
         </div>
+        </div>
+		  </div>	
         </div>
         </div>
     </div>

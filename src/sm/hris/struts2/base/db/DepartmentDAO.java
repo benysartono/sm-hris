@@ -113,19 +113,12 @@ public class DepartmentDAO extends SmBaseDAO{
 			argArray.add(0, department.getIdDepartment());
 			argArray.add(1, department.getName());
 			argArray.add(2, department.getDescription());
+			argArray.add(3, department.getParentDepartment());
 			this.run("departmentAdd", argArray);
             //closeConnection();
     }
 	
 	public void departmentEdit(Department department) throws SQLException{
-		System.out.println("Inside DepartmentDAO: argArray.add(0, department.getIdDepartment());");
-		System.out.println(department.getIdDepartment());
-		System.out.println(department.getName());
-		System.out.println(department.getDescription());
-		System.out.println(department.getParentDepartment());
-		System.out.println(department.getIdDepartment());
-		
-		
 		argArray.add(0, department.getName());
 		argArray.add(1, department.getDescription());
 		argArray.add(2, department.getParentDepartment());
