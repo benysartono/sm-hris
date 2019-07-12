@@ -24,6 +24,10 @@ import sm.hris.struts2.base.db.Department;
 import sm.hris.struts2.base.db.DepartmentDAO;
 import sm.hris.struts2.base.db.Employee;
 import sm.hris.struts2.base.db.EmployeeDAO;
+import sm.hris.struts2.base.db.EmployeeEdu;
+import sm.hris.struts2.base.db.EmployeeEduDAO;
+import sm.hris.struts2.base.db.EmployeeCareer;
+import sm.hris.struts2.base.db.EmployeeCareerDAO;
 
 @Results({
 	@Result(name="tolist", location="/base/modules/mgt/employee/index", type="redirect"),
@@ -33,9 +37,20 @@ import sm.hris.struts2.base.db.EmployeeDAO;
 public class EmployeeEditAction extends SmBaseAction {
     private Employee employee = new Employee();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
-    //private ArrayList<Department> departments = new ArrayList<Department>();
+
+    private EmployeeEdu employeeEdu = new EmployeeEdu();
+    private EmployeeEduDAO employeeEduDAO = new EmployeeEduDAO();
+
+    private EmployeeCareer employeeCareer = new EmployeeCareer();
+    private EmployeeCareerDAO employeeCareerDAO = new EmployeeCareerDAO();
+
+    private Department department = new Department();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
+
+    private ArrayList<EmployeeEdu> employeeEdus = new ArrayList<EmployeeEdu>();
+    private ArrayList<EmployeeCareer> employeeCareers = new ArrayList<EmployeeCareer>();
     private ArrayList<Department> departments = new ArrayList<Department>();
+
     private String proc;
     private String prmimg;
     private Blob bFile;
@@ -78,6 +93,8 @@ public class EmployeeEditAction extends SmBaseAction {
 				return "tolist";
 			}	
 		} else {
+			employeeCareers = employeeCareerDAO.searchEmployeeCareer(employee.getIdEmployee());
+			employeeEdus = employeeEduDAO.searchEmployeeEdu(employee.getIdEmployee());
 			return SUCCESS; 
 		}	
 	}
