@@ -39,6 +39,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		} else {
 			argArray.add(uid);
 			argArray.add(password);
+			System.out.println("Passworde: " + password);
 			employeeDAO.setArgArray(argArray);
 			employees = employeeDAO.searchEmployeeLogin();
 

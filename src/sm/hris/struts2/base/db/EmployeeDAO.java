@@ -58,7 +58,6 @@ public class EmployeeDAO extends SmBaseDAO{
 
 	public ArrayList<Employee> searchEmployeeLogin() throws SQLException{
 		ResultSet rs = this.runQuery("searchEmployeeLogin", argArray);
- 
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setIdEmployee(rs.getString("idEmployee"));
@@ -70,7 +69,6 @@ public class EmployeeDAO extends SmBaseDAO{
                 employee.setIdUnit(rs.getString("idUnit"));
                 employee.setIdPosition(rs.getString("idPosition"));
                 employees.add(employee);
-                
             } 
         	
             if(rs != null){
@@ -255,7 +253,7 @@ public class EmployeeDAO extends SmBaseDAO{
 		System.out.println("id Pekerja : " + idEmployee);
 		ResultSet rs = this.runQuery("getEmployeeImg",idEmployee);
 		while(rs.next()){
-			System.out.print("Masuk dalam while rsnetx");
+			System.out.print("Masuk dalam while renext");
 			bFile = rs.getBlob("img");
 		}
 		return bFile;

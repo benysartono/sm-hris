@@ -108,6 +108,22 @@ public class EmployeeEditAction extends SmBaseAction {
 		this.employee = employee;
 	}
 	
+	public void setEmployeeCareers(ArrayList<EmployeeCareer> employeeCareers){
+		this.employeeCareers = employeeCareers;
+	}
+	
+	public ArrayList<EmployeeCareer> getEmployeeCareers(){
+		return employeeCareers;
+	}
+
+	public void setEmployeeEdus(ArrayList<EmployeeEdu> employeeEdus){
+		this.employeeEdus = employeeEdus;
+	}
+	
+	public ArrayList<EmployeeEdu> getEmployeeEdus(){
+		return employeeEdus;
+	}
+
 	public String getProc(){
 		return proc;
 	}

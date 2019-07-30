@@ -11,7 +11,8 @@ public class EmployeeCareer {
 	private String lastPosition; 				
 	private String description; 				
 	private Date yearFrom; 				
-	private Date yearTo; 				
+	private Date yearTo; 
+	private String imgPath;
 
 
 	public String getIdCareer(){
@@ -70,4 +71,11 @@ public class EmployeeCareer {
 		this.yearTo = yearTo;
 	}
 
+	public String getImgPath(){
+		return imgPath;
+	}
+	
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 }

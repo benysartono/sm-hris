@@ -18,8 +18,7 @@ public class EmployeeCareerDAO extends SmBaseDAO{
 
 	public ArrayList<EmployeeCareer> searchEmployeeCareer(String idEmployee) throws SQLException{
 		//List<Employee> employeesList;
-        ResultSet rs = this.runQuery("searchEmployeeEdu", idEmployee);
- 
+        ResultSet rs = this.runQuery("searchEmployeeCareer", idEmployee);
             while (rs.next()) {
                 EmployeeCareer employeeCareer = new EmployeeCareer();
                 employeeCareer.setIdCareer(rs.getString("idCareer"));
@@ -38,6 +37,7 @@ public class EmployeeCareerDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
+        
         	//closeConnection();
         	return employeeCareers;
         

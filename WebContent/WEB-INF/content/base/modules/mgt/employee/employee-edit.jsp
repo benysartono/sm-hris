@@ -50,7 +50,6 @@ dojo.event.topic.publish("show_unitlist");
 
 			<div class="tab-content responsive">
 			<div class="tab-pane active" id="profile">
-
             <s:form id="frmEmployee" action="employee-edit" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
@@ -198,6 +197,8 @@ dojo.event.topic.publish("show_unitlist");
 				</table>
 		</div>
 		<div class="tab-pane" id="career">
+          <s:form id="frmEmployeeCareer" action="employee-career-add" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <div class="form-group">
 			<table width="100%" Class="table-responsive table-striped table-bordered">
 					<thead>
 						<tr>
@@ -222,17 +223,17 @@ dojo.event.topic.publish("show_unitlist");
 						</tr>
 					</thead>
 					<tbody>
-					<s:iterator value="careers">
+					<s:iterator value="employeeCareers">
 						<tr>
 							<td>       
-								<input type="checkbox" name="idCareer"  value="<s:property value ="idCareer"/>"><s:property value ="idCareer"/></checkbox>
+								<input type="checkbox" name="career.idCareer"  value="<s:property value ="idCareer"/>"><s:property value ="idCareer"/></checkbox>
 							</td>
 							<td>       
-								<s:url action="career-edit" var="urlTag" escapeAmp="false">
-    								<s:param name="career.idCareer"><s:property value ="idEducation"/></s:param>
+								<s:url action="employee-career-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="career.idCareer"><s:property value ="idCareer"/></s:param>
     								<s:param name="career.idEmployee"><s:property value ="idEmployee"/></s:param>
-    								<s:param name="career.company"><s:property value ="schoolName"/></s:param>
-    								<s:param name="career.lastPosition"><s:property value ="institution"/></s:param>
+    								<s:param name="career.company"><s:property value ="company"/></s:param>
+    								<s:param name="career.lastPosition"><s:property value ="lastPosition"/></s:param>
     								<s:param name="career.description"><s:property value ="description"/></s:param>
     								<s:param name="career.yearFrom"><s:property value ="yearFrom"/></s:param>
     								<s:param name="career.yearTo"><s:property value ="yearTo"/></s:param>
@@ -255,6 +256,10 @@ dojo.event.topic.publish("show_unitlist");
 					</s:iterator>
 					</tbody>	 
 				</table>
+			<s:submit cssClass="btn btn-primary" name="proc" value="Add"/>
+			<s:submit cssClass="btn btn-primary" name="proc" value="Delete"/>
+			</div>
+		  </s:form>	
 		</div>
 		<script type="text/javascript">
 		$(document).ready(function() {
