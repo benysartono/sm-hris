@@ -31,6 +31,7 @@ import sm.hris.struts2.base.db.EmployeeCareerDAO;
 
 @Results({
 	@Result(name="tolist", location="/base/modules/mgt/employee/index", type="redirect"),
+	@Result(name="employee-career-add", location="/base/modules/mgt/employee/employee-career-add", type="redirect"),
 })
 @ParentPackage(value = "hris")
 
@@ -84,19 +85,29 @@ public class EmployeeEditAction extends SmBaseAction {
    	 		//fileOutputStream.write(data);
    	 		//fileOutputStream.flush();
    	 	//}
-		if ((proc != null) && (proc.equals("Submit"))){ 
-		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
-			    addFieldError("employee.name","The name is required");
-			    return SUCCESS;
-			} else {
-				employeeDAO.employeeEdit(employee);
-				return "tolist";
-			}	
+		if ((proc != null)){
+			if (proc.equals("Submit")){
+			    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
+				    addFieldError("employee.name","The name is required");
+				    return SUCCESS;
+			    }
+				if (proc.equals("AddCareer")){
+					return "employee-career-add";
+				}
+				if (proc.equals("DeleteCareer")){
+					return SUCCESS;
+			    } else {
+					employeeDAO.employeeEdit(employee);
+					return "tolist";
+				}	
+			} 
 		} else {
-			employeeCareers = employeeCareerDAO.searchEmployeeCareer(employee.getIdEmployee());
-			employeeEdus = employeeEduDAO.searchEmployeeEdu(employee.getIdEmployee());
-			return SUCCESS; 
-		}	
+				employeeCareers = employeeCareerDAO.searchEmployeeCareer(employee.getIdEmployee());
+				employeeEdus = employeeEduDAO.searchEmployeeEdu(employee.getIdEmployee());
+				return SUCCESS; 
+		}
+
+		return SUCCESS;
 	}
 
 	      

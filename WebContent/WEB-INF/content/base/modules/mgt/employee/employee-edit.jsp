@@ -256,8 +256,11 @@ dojo.event.topic.publish("show_unitlist");
 					</s:iterator>
 					</tbody>	 
 				</table>
-			<s:submit cssClass="btn btn-primary" name="proc" value="Add"/>
-			<s:submit cssClass="btn btn-primary" name="proc" value="Delete"/>
+			<div style="display: none;" id="hiddenIdEmployee">
+				<s:textfield id="idEmployee" name="employee.idEmployee" value="%{employee.idEmployee}"/>
+			</div>							
+			<s:submit cssClass="btn btn-primary" name="proc" value="AddCareer"/>
+			<s:submit cssClass="btn btn-primary" name="proc" value="DeleteCareer"/>
 			</div>
 		  </s:form>	
 		</div>
