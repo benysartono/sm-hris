@@ -12,6 +12,7 @@ public class EmployeeCareer {
 	private String description; 				
 	private Date yearFrom; 				
 	private Date yearTo; 
+	private File img;
 	private String imgPath;
 
 
@@ -77,5 +78,13 @@ public class EmployeeCareer {
 	
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+
+	public File getImg(){
+		return img;
+	}
+	
+	public void setImg(File img) {
+		this.img = img;
 	}
 }

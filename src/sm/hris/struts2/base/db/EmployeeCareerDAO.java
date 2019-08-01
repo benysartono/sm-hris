@@ -64,7 +64,7 @@ public class EmployeeCareerDAO extends SmBaseDAO{
 			argArray.add(5, cvtDate);
 			cvtDate = formatter.format(employeeCareer.getYearTo());
 			argArray.add(6, cvtDate);
-			this.run("employeeEduAdd", argArray);
+			this.run("employeeCareerAdd", argArray);
 			//closeConnection();
 			argArray = null;
     }

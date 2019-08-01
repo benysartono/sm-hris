@@ -46,8 +46,6 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 	private String imgContentType;
 	
 	public String execute() throws Exception {
-		//super.getMenus(); 
-   	 	
 		try {
 			departments = departmentDAO.searchDepartment();
 		} catch (SQLException e) {
@@ -57,6 +55,7 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 		
 		if(proc.equals("Submit")){ 
 		    if (employeeCareer.getIdEmployee().trim().equals("") || employeeCareer.getIdCareer().trim().equals("")){
+				System.out.println("Dalam if...");
 			  	 
 		    	try {
 			  		departments = departmentDAO.searchDepartment();
@@ -68,16 +67,20 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    addFieldError("employee.name","The name is required");
 			    return SUCCESS;
 			} else {
-			    FileInputStream fis = new FileInputStream(employee.getImg());
-			    byte[] bytesArray = new byte[(int) employee.getImg().length()];
+				System.out.println("Dalam else...");
+				
+			    FileInputStream fis = new FileInputStream(employeeCareer.getImg());
+			    byte[] bytesArray = new byte[(int) employeeCareer.getImg().length()];
 			    fis.read(bytesArray); //read file into bytes[]
 			    fis.close();
 			    
 			    
 			    //Creating New Empty File
-				String fileExtension = getFileExtension(employee.getImg());
-			    String filePreffix = employee.getIdEmployee();
-			    File imgFile = new File("C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + filePreffix + "." + fileExtension);
+				String fileExtension = getFileExtension(employeeCareer.getImg());
+			    String filePreffix1 = employeeCareer.getIdEmployee();
+			    String filePreffix2 = employeeCareer.getIdCareer();
+			    
+			    File imgFile = new File("C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + filePreffix1 + "." + filePreffix1 + "." + fileExtension);
 			    
 			    //Writing into the new empty file
 			    FileOutputStream fos = new FileOutputStream(imgFile);
@@ -85,8 +88,8 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    fos.flush();
 			    fos.close();
 			    
-			    String fileURL = "http://127.0.0.1/img/" + filePreffix + "." + fileExtension;
-			    employee.setImgURL(fileURL);
+			    String fileURL = "http://127.0.0.1/img/" + filePreffix1 + "." + filePreffix2 + "."  + fileExtension;
+			    employeeCareer.setImgPath(fileURL);
 			    //employee.setImg(img);
 
 			    employeeCareerDAO.employeeCareerAdd(employeeCareer);
