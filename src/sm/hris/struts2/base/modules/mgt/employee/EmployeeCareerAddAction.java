@@ -92,6 +92,8 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    employeeCareer.setImgPath(fileURL);
 			    //employee.setImg(img);
 
+			    System.out.println("Doi idEmployee: " + employeeCareer.getIdEmployee());
+			    System.out.println("Doi idCareer: " + employeeCareer.getIdCareer());
 			    employeeCareerDAO.employeeCareerAdd(employeeCareer);
 
 			    departmentDAO = null;
@@ -116,6 +118,10 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 		return employee;
 	}
 
+	public void setEmployee(Employee employee){
+		this.employee = employee;
+	}
+
 	public void setEmployeeCareer(EmployeeCareer employeeCareer){
 		this.employeeCareer = employeeCareer;
 	}
@@ -124,9 +130,6 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 		return employeeCareer;
 	}
 
-	public void setEmployee(Employee employee){
-		this.employee = employee;
-	}
 
 	public String getProc(){
 		return proc;

@@ -148,12 +148,12 @@
                     <div class="col-md-9">
                 		<s:file
                         	label="Upload File"
-                        	name="employeeCareer.imgPath"
-                        	id="imgPath"
+                        	name="employeeCareer.img"
+                        	id="img"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Image"
-                        	value="%{employeeCareer.imgPath}"/>
+                        	value="%{employeeCareer.img}"/>
                     </div>
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>
