@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.EmployeeEdu;
 import sm.hris.struts2.base.db.SmBaseDAO;
+import sm.hris.struts2.base.db.EmployeeCareer;
 
 public class EmployeeCareerDAO extends SmBaseDAO{
  

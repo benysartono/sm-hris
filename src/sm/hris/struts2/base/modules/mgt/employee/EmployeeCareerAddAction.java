@@ -28,7 +28,7 @@ import sm.hris.struts2.base.db.EmployeeCareerDAO;
 import sm.hris.struts2.base.SmBaseAction;
 
 @Results({
-	@Result(name="tolist", location="/base/modules/mgt/employee/employee-edit", type="redirect"),
+	@Result(name="tolist", location="/base/modules/mgt/employee/", type="redirect"),
 })
 @ParentPackage(value = "hris")
 
@@ -46,6 +46,8 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 	private String imgContentType;
 	
 	public String execute() throws Exception {
+		System.out.println("Dalam Employee Career Add Execute");
+		System.out.println("Nilai Proc:" + proc);
 		try {
 			departments = departmentDAO.searchDepartment();
 		} catch (SQLException e) {
@@ -53,8 +55,8 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			e.printStackTrace();
 		}
 		
-		if(proc.equals("Submit")){ 
-		    if (employeeCareer.getIdEmployee().trim().equals("") || employeeCareer.getIdCareer().trim().equals("")){
+		if(proc.equals("Submit")){
+		    if (employeeCareer.getIdEmployee().equals(null) || employeeCareer.getIdCareer().equals(null)){
 				System.out.println("Dalam if...");
 			  	 
 		    	try {
@@ -68,7 +70,7 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    return SUCCESS;
 			} else {
 				System.out.println("Dalam else...");
-				
+				/*
 			    FileInputStream fis = new FileInputStream(employeeCareer.getImg());
 			    byte[] bytesArray = new byte[(int) employeeCareer.getImg().length()];
 			    fis.read(bytesArray); //read file into bytes[]
@@ -91,7 +93,7 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    String fileURL = "http://127.0.0.1/img/" + filePreffix1 + "." + filePreffix2 + "."  + fileExtension;
 			    employeeCareer.setImgPath(fileURL);
 			    //employee.setImg(img);
-
+				*/
 			    System.out.println("Doi idEmployee: " + employeeCareer.getIdEmployee());
 			    System.out.println("Doi idCareer: " + employeeCareer.getIdCareer());
 			    employeeCareerDAO.employeeCareerAdd(employeeCareer);
