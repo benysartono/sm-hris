@@ -70,7 +70,7 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    return SUCCESS;
 			} else {
 				System.out.println("Dalam else...");
-				/*
+				
 			    FileInputStream fis = new FileInputStream(employeeCareer.getImg());
 			    byte[] bytesArray = new byte[(int) employeeCareer.getImg().length()];
 			    fis.read(bytesArray); //read file into bytes[]
@@ -82,7 +82,7 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    String filePreffix1 = employeeCareer.getIdEmployee();
 			    String filePreffix2 = employeeCareer.getIdCareer();
 			    
-			    File imgFile = new File("C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + filePreffix1 + "." + filePreffix1 + "." + fileExtension);
+			    File imgFile = new File("C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/emp/" + filePreffix1 + "." + filePreffix1 + "." + fileExtension);
 			    
 			    //Writing into the new empty file
 			    FileOutputStream fos = new FileOutputStream(imgFile);
@@ -90,10 +90,11 @@ public class EmployeeCareerAddAction extends SmBaseAction {
 			    fos.flush();
 			    fos.close();
 			    
-			    String fileURL = "http://127.0.0.1/img/" + filePreffix1 + "." + filePreffix2 + "."  + fileExtension;
+			    String fileURL = "http://127.0.0.1/emp/" + filePreffix1 + "." + filePreffix2 + "."  + fileExtension;
+			    
 			    employeeCareer.setImgPath(fileURL);
 			    //employee.setImg(img);
-				*/
+				
 			    System.out.println("Doi idEmployee: " + employeeCareer.getIdEmployee());
 			    System.out.println("Doi idCareer: " + employeeCareer.getIdCareer());
 			    employeeCareerDAO.employeeCareerAdd(employeeCareer);

@@ -15,7 +15,7 @@ import sm.hris.struts2.base.db.EmployeeCareer;
 public class EmployeeCareerDAO extends SmBaseDAO{
  
 	private ArrayList<EmployeeCareer> employeeCareers = new ArrayList<EmployeeCareer>();
-    private ArrayList<String> argArray;
+    private ArrayList<String> argArray = new ArrayList<String>();
 
 	public ArrayList<EmployeeCareer> searchEmployeeCareer(String idEmployee) throws SQLException{
 		//List<Employee> employeesList;
@@ -55,6 +55,9 @@ public class EmployeeCareerDAO extends SmBaseDAO{
     }
 
 	public void employeeCareerAdd(EmployeeCareer employeeCareer) throws SQLException{
+			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getIdCareer());
+			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getIdEmployee());
+			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getCompany());
 			argArray.add(0, employeeCareer.getIdCareer());
 			argArray.add(1, employeeCareer.getIdEmployee());
 			argArray.add(2, employeeCareer.getCompany());
@@ -65,6 +68,7 @@ public class EmployeeCareerDAO extends SmBaseDAO{
 			argArray.add(5, cvtDate);
 			cvtDate = formatter.format(employeeCareer.getYearTo());
 			argArray.add(6, cvtDate);
+			argArray.add(7,employeeCareer.getImgPath());
 			this.run("employeeCareerAdd", argArray);
 			//closeConnection();
 			argArray = null;
