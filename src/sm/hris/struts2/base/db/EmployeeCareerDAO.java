@@ -55,9 +55,6 @@ public class EmployeeCareerDAO extends SmBaseDAO{
     }
 
 	public void employeeCareerAdd(EmployeeCareer employeeCareer) throws SQLException{
-			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getIdCareer());
-			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getIdEmployee());
-			System.out.println("EmployeeCareerDAO_ :" + employeeCareer.getCompany());
 			argArray.add(0, employeeCareer.getIdCareer());
 			argArray.add(1, employeeCareer.getIdEmployee());
 			argArray.add(2, employeeCareer.getCompany());

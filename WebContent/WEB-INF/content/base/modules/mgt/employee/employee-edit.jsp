@@ -60,7 +60,8 @@ dojo.event.topic.publish("show_unitlist");
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter ID"
-                        	value="%{employee.idEmployee}"/>
+                        	value="%{employee.idEmployee}"
+                        	disabled="true" />
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
@@ -226,17 +227,17 @@ dojo.event.topic.publish("show_unitlist");
 					<s:iterator value="employeeCareers">
 						<tr>
 							<td>       
-								<input type="checkbox" name="career.idCareer"  value="<s:property value ="idCareer"/>"><s:property value ="idCareer"/></checkbox>
+								<input type="checkbox" name="employeeCareer.idCareer"  value="<s:property value ="idCareer"/>"><s:property value ="idCareer"/></checkbox>
 							</td>
 							<td>       
 								<s:url action="employee-career-edit" var="urlTag" escapeAmp="false">
-    								<s:param name="career.idCareer"><s:property value ="idCareer"/></s:param>
-    								<s:param name="career.idEmployee"><s:property value ="idEmployee"/></s:param>
-    								<s:param name="career.company"><s:property value ="company"/></s:param>
-    								<s:param name="career.lastPosition"><s:property value ="lastPosition"/></s:param>
-    								<s:param name="career.description"><s:property value ="description"/></s:param>
-    								<s:param name="career.yearFrom"><s:property value ="yearFrom"/></s:param>
-    								<s:param name="career.yearTo"><s:property value ="yearTo"/></s:param>
+    								<s:param name="employeeCareer.idCareer"><s:property value ="idCareer"/></s:param>
+    								<s:param name="employeeCareer.idEmployee"><s:property value ="idEmployee"/></s:param>
+    								<s:param name="employeeCareer.company"><s:property value ="company"/></s:param>
+    								<s:param name="employeeCareer.lastPosition"><s:property value ="lastPosition"/></s:param>
+    								<s:param name="employeeCareer.description"><s:property value ="description"/></s:param>
+    								<s:param name="employeeCareer.yearFrom"><s:property value ="yearFrom"/></s:param>
+    								<s:param name="employeeCareer.yearTo"><s:property value ="yearTo"/></s:param>
 								</s:url>
 								<a href="<s:property value="#urlTag" />" ><s:property value ="company"/></a>
 							</td>
