@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchKPI>Select * from smhris_kpi</searchKPI> 
+		<searchKPIByIdKPI>Select * from smhris_kpi where idKPI=?</searchKPIByIdKPI> 
+		<searchKPIByDescriptionLike>Select * from smhris_kpi where description like ?</searchKPIByDescriptionLike> 
+		<deleteKPI>Delete from smhris_KPI where idKPI = ?</deleteKPI> 
+		<addKPI>Insert into smhris_kpi(idKPI,description,unitMeasure) values(?,?,?)</addKPI>
+		<editKPI>Update smhris_KPI set idKPI=?,description=?,unitMeasure=? where idKPI=?</editKPI>
+</xmlquery>		
