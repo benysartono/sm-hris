@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployeeKPI>Select * from smhris_employee_kpi where idEmployee = ?</searchEmployeeKPI> 
+		<searchEmployeeKPILike>Select * from smhris_employee_kpi where idEmployee like ?</searchEmployeeKPILike> 
+		<deleteEmployeeKPId>Delete from smhris_employee_kpi where idKPI = ? and idEmployee = ?</deleteEmployeeKPId> 
+		<addEmployeeKPI>Insert into smhris_employee_kpi(idEmployee,idKPI,KPIValue) values(?,?,?)</addEmployeeKPI>
+		<editEmployeeKPI>Update smhris_employee_kpi set idEmployee=?, idKPI=?, KPIValue=? where idEmployee=? and idKPI=? </editEmployeeKPI>
+</xmlquery>		
