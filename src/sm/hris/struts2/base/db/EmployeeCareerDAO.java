@@ -87,7 +87,7 @@ public class EmployeeCareerDAO extends SmBaseDAO{
 			argArray = null;
 	}
 
-	public String convertStringToDate(Date indate)
+	public String convertDateToString(Date indate)
 	{
 	   String dateString = null;
 	   SimpleDateFormat sdfr = new SimpleDateFormat("yyyy-mm-dd");

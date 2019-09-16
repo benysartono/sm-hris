@@ -3,6 +3,6 @@
 		<searchEmployeeKPI>Select * from smhris_employee_kpi where idEmployee = ?</searchEmployeeKPI> 
 		<searchEmployeeKPILike>Select * from smhris_employee_kpi where idEmployee like ?</searchEmployeeKPILike> 
 		<deleteEmployeeKPId>Delete from smhris_employee_kpi where idKPI = ? and idEmployee = ?</deleteEmployeeKPId> 
-		<addEmployeeKPI>Insert into smhris_employee_kpi(idEmployee,idKPI,KPIValue) values(?,?,?)</addEmployeeKPI>
-		<editEmployeeKPI>Update smhris_employee_kpi set idEmployee=?, idKPI=?, KPIValue=? where idEmployee=? and idKPI=? </editEmployeeKPI>
+		<addEmployeeKPI>Insert into smhris_employee_kpi(idEmployee,idKPI,targetKPI,targetDate,achievedKPI,achievedDate, startingDate) values(?,?,?,?,?,?,?)</addEmployeeKPI>
+		<editEmployeeKPI>Update smhris_employee_kpi set idEmployee=?, idKPI=?, targetKPI=?, targetDate=?, achievedKPI=?, achievedDate=?, startingDate=? where idEmployee=? and idKPI=? </editEmployeeKPI>
 </xmlquery>		

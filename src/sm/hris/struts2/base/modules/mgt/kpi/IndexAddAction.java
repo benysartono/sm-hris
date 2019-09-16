@@ -10,7 +10,7 @@ import sm.hris.struts2.base.db.KPIDAO;
 import sm.hris.struts2.base.SmBaseAction;
 
 @Results({
-	@Result(name="tolist", location="/base/modules/mgt/role/index", type="redirect"),
+	@Result(name="tolist", location="/base/modules/mgt/kpi/index", type="redirect"),
 })
 @ParentPackage(value = "hris")
 
