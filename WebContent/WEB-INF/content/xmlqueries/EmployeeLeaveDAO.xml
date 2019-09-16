@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployeeeLeave>Select * from smhris_employee_leave</searchEmployeeeLeave> 
+		<searchEmployeeLeaveLike>Select * from smhris_employee_leave where idEmployee like ?</searchEmployeeLeaveLike> 
+		<deleteEmployeeLeave>Delete from smhris_employee_leave where idEmployee = ? and idLeaveType = ?</deleteEmployeeLeave> 
+		<addEmployeeLeave>Insert into smhris_employee_leave(idEmployee,idLeaveType, ceiling, periodYear) values(?,?,?,?)</addEmployeeLeave>
+		<editEmployeeLeave>Update smhris_employee_leave set idEmployee=?,idLeaveType=?, ceiling=?, periodYear=?  where idEmployee=? and idLeaveType=?</editEmployeeLeave>
+</xmlquery>		

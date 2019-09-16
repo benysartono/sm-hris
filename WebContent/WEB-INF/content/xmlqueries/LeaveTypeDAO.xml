@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchLeaveType>Select * from smhris_leave_type</searchLeaveType> 
+		<searchLeaveTypeByIdLeaveType>Select * from smhris_leave_type where idLeaveType=?</searchLeaveTypeByIdLeaveType> 
+		<searchLeaveTypeByDescriptionLike>Select * from smhris_leave_type where description like ?</searchLeaveTypeByDescriptionLike> 
+		<deleteLeaveType>Delete from smhris_leave_type where idLeaveType = ?</deleteLeaveType> 
+		<addLeaveType>Insert into smhris_leave_type(idLeaveType,description) values(?,?)</addLeaveType>
+		<editLeaveType>Update smhris_leave_type set idLeaveType=?,description=? where idLeaveType=?</editLeaveType>
+</xmlquery>		
