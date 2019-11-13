@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchEmployeeLeaveLodge>Select * from smhris_employee_leave_lodge</searchEmployeeLeaveLodge> 
+		<searchEmployeeLeaveLodgeByIdEmployee>Select * from smhris_employee_leave_lodge where idEmployee=?</searchEmployeeLeaveLodgeByIdEmployee> 
+		<searchEmployeeLeaveLodgeByEmployeeLike>Select * from smhris_employee_leave_lodge where idEmployee in (select idEmployee from smhris_emploee where name like ?)</searchEmployeeLeaveLodgeByEmployeeLike> 
+		<deleteEmployeeLeaveLodge>Delete from smhris_employee_leave_lodge where idLeaveLodge = ? and idEmployee = ?</deleteEmployeeLeaveLodge> 
+		<addEmployeeLeaveLodge>Insert into smhris_employee_leave_lodge(idLeaveLodge,idEmployee,idLeaveType,daysLodge,startDate,endDate,approvedBy) values(?,?,?,?,?,?,?)</addEmployeeLeaveLodge>
+		<editEmployeeLeaveLodge>Update smhris_employee_leave_lodge set idLeaveLodge=?,idEmployee=?,idLeaveType=?,daysLodge=?,startDate=?,endDate=?,approvedBy=? where idLeaveLodge=? and idEmployee=?</editEmployeeLeaveLodge>
+</xmlquery>		

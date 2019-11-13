@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchCategory>Select * from smpos_mcategory</searchCategory> 
+		<searchCategoryByDescription>Select * from smpos_mcategory where description like ?</searchCategoryByDescription> 
+		<searchCategoryById>Select * from smpos_mcategory where idCategory = ?</searchCategoryById> 
+		<categoryDelete>Delete from smpos_mcategory where idCategory = ?</categoryDelete> 
+		<categoryAdd>Insert into smpos_mcategory(idCategory,description) values(?,?)</categoryAdd>
+		<categoryEdit>Update smpos_mcategory set idCategory=?,description=? where idCategory=?</categoryEdit>
+</xmlquery>		

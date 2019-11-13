@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchSupplier>Select * from smpos_msupplier</searchSupplier> 
+		<searchSupplierById>Select * from smpos_msupplier where idSupplier = ?</searchSupplierById> 
+		<searchSupplierByAnyLike>Select * from smpos_msupplier where nmSupplier like ? or address like ? or phone like ? or email like ? or fax like ? or npwp like ? or bankAccount like ?</searchSupplierByAnyLike> 
+		<supplierDelete>Delete from smpos_msupplier where idSupplier = ?</supplierDelete> 
+		<supplierAdd>Insert into smpos_msupplier(idSupplier,nmSupplier,address,phone,email,fax,npwp,bankAccount) values(?,?,?,?,?,?,?,?)</supplierAdd>
+		<supplierEdit>Update smpos_msupplier set idSupplier=?,nmSupplier=?,address=?,phone=?,email=?,fax=?,npwp=?,bankAccount=? where idSupplier=?</supplierEdit>
+</xmlquery>		
