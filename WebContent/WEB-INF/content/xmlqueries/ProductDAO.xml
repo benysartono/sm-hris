@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchProduct>Select * from smpos_mproduct</searchProduct> 
+		<searchProductById>Select * from smpos_mproduct where idProduct = ?</searchProductById> 
+		<searchProductByAnyLike>Select * from smpos_mproduct where nmProduct like ? or description like ? or unit like ? or unitPrice like ? or idCategory like ?</searchProductByAnyLike> 
+		<productDelete>Delete from smpos_mproduct where idProduct = ?</productDelete> 
+		<productAdd>Insert into smpos_mproduct(idProduct,nmProduct,description,unit,unitPrice,idCategory) values(?,?,?,?,?,?)</productAdd>
+		<productEdit>Update smpos_mproduct set idProduct=?,nmProduct=?,description=?,unit=?,unitPrice=?,idCategory=?,imgUrl=? where idProduct=?</productEdit>
+</xmlquery>		

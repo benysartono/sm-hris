@@ -1,0 +1,14 @@
+<s:property...: order/index-edit.jsp
+<s:iterator ...: order/index-edit.jsp
+form validation : sm.hris.struts2.base.LoginAction-validation.xml
+angular: order/index-edit-add.jsp
+Delete confirmation: menu/index.jsp
+Checking "Submit" button di edit action (sering masalah kalau ga exactly spt ini) : if((proc != null)&&(proc.equals("Submit")))
+Penulisan query, string harus dalam "".
+Contoh iteration:
+					<s:iterator value="categories" var="category">
+    					<s:textfield value="%{idCategory}"/>
+    					<s:textfield value="%{description}"/>
+    				</s:iterator>
+Saving file and making file url: employee/EmployeeAddAction.java
+

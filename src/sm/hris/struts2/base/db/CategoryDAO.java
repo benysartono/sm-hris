@@ -82,7 +82,7 @@ public class CategoryDAO extends SmBaseDAO{
 		}
     }
 
-	public void CategoryAdd() throws SQLException{
+	public void categoryAdd() throws SQLException{
 		argArray.add(0, category.getIdCategory());
 		argArray.add(1, category.getDescription());
 		this.run("categoryAdd", argArray);
@@ -105,4 +105,11 @@ public class CategoryDAO extends SmBaseDAO{
 		this.category = category;
 	}
 
+	public ArrayList<String> getArgArray(){
+		return argArray;
+	}
+	
+	public void setArgArray(ArrayList<String> argArray){
+		this.argArray = argArray;
+	}
 }
