@@ -11,4 +11,5 @@ Contoh iteration:
     					<s:textfield value="%{description}"/>
     				</s:iterator>
 Saving file and making file url: employee/EmployeeAddAction.java
+Mengambil file name db/Product.java
 
