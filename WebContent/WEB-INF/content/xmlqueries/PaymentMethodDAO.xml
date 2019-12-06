@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchPaymentMethod>Select * from smpos_mpayment_method</searchPaymentMethod> 
+		<searchPaymentMethodById>Select * from smpos_mpayment_method where idPaymentMethod = ?</searchPaymentMethodById> 
+		<searchPaymentMethodByAnyLike>Select * from smpos_mpayment_method where nmPaymentMethod like ? or description like ? or unit like ? or unitPrice like ? or idCategory like ?</searchPaymentMethodByAnyLike> 
+		<paymentMethodDelete>Delete from smpos_mpayment_method where idPaymentMethod = ?</paymentMethodDelete> 
+		<paymentMethodAdd>Insert into smpos_mpayment_method(idPaymentMethod,nmPaymentMethod) values(?,?)</paymentMethodAdd>
+		<paymentMethodEdit>Update smpos_mpayment_method set idPaymentMethod=?,nmPaymentMethod=? where idPaymentMethod=?</paymentMethodEdit>
+</xmlquery>		
