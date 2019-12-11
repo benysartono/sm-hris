@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchOrder>Select * from dongan_order</searchOrder> 
+		<searchOrderByIdPO>Select * from dongan_order where idPO = ?</searchOrderByIdPO> 
+		<searchOrderByIdPOLike>Select * from dongan_order where idPO like ?</searchOrderByIdPOLike> 
+		<searchOrderByIdBuyer>Select * from dongan_order where idBuyer like ?</searchOrderByIdBuyer> 
+		<orderDelete>Delete from dongan_order where idPO = ?</orderDelete> 
+		<orderItemDeletePerOrder>Delete from dongan_order_item where idPO = ?</orderItemDeletePerOrder> 
+		<orderItemDelete>Delete from dongan_order_item where idItem = ?</orderItemDelete> 
+		<orderItemAdd>Insert into dongan_order_item(idPO,idColor,qty,description,unitPrice,extPrice) values(?,?,?,?,?,?)</orderItemAdd>
+		<orderItemEdit>Update dongan_order_item set idPO=?,idItem=?,idColor=?,qty=?,description=?,unitPrice=?,extPrice=? where idPO=? and idItem=?</orderItemEdit>
+		<orderAdd>Insert into dongan_order(idPO,idBuyer,idSpec,idProduction,date,terms,idShipVia,shipDate,FOB,inWarehouse,cancelation) values(?,?,?,?,?,?,?,?,?,?,?)</orderAdd>
+		<orderEdit>Update dongan_order set idPO=?,idBuyer=?,idSpec=?,idProduction=?,date=?,terms=?,idShipVia=?,shipDate=?,FOB=?,inWarehouse=?,cancelation=?  where idPO=?</orderEdit>
+		<searchOrderItem>Select * from dongan_order_item where idPO=?</searchOrderItem> 
+		<searchOrderItemByIdItem>Select * from dongan_order_item where idPO=? and idItem=?</searchOrderItemByIdItem> 
+		<orderItemEdit>Update dongan_order_item set idPO=?,idItem=?,idColor=?,qty=?,description=?,unitPrice=?,extPrice=?  where idPO=? and idItem=?</orderItemEdit>
+
+</xmlquery>		

@@ -4,71 +4,71 @@ import java.util.Date;
 import java.io.File;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class OrderItem {
+public class OrderDetail {
 
-	private String idPO; 									
-	private String idColor; 				
-	private Integer qty; 									
-	private String description; 				
-	private Integer unitPrice; 									
-	private Integer extendedPrice; 									
-	private Integer idItem; 				
+	private String idOrder; 									
+	private String idProduct; 				
+	private Float amount; 									
+	private String unit; 				
+	private Float unitPrice; 									
+	private Float subTotal; 									
+	private String idOrderDetail; 				
 	
-	public String getIdPO(){
-		return idPO;
-	}
-	
-	public void setIdPO(String idPO) {
-		this.idPO = idPO;
-	}
-
-	public Integer getIdItem(){
-		return idItem;
+	public String getIdOrder(){
+		return idOrder;
 	}
 	
-	public void setIdItem(Integer idItem) {
-		this.idItem = idItem;
+	public void setIdOrder(String idOrder) {
+		this.idOrder = idOrder;
 	}
 
-	public Integer getQty(){
-		return qty;
+	public String getIdProduct(){
+		return idProduct;
 	}
 	
-	public void setQty(Integer qty) {
-		this.qty = qty;
+	public void setIdProduct(String idProduct) {
+		this.idProduct = idProduct;
 	}
 
-	public String getDescription(){
-		return description;
+	public Float getAmount(){
+		return amount;
 	}
 	
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
-	public String getIdColor(){
-		return idColor;
+	public String getUnit(){
+		return unit;
 	}
 	
-	public void setIdColor(String idColor) {
-		this.idColor = idColor;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
-	public Integer getUnitPrice(){
+	public Float getUnitPrice(){
 		return unitPrice;
 	}
 	
-	public void setUnitPrice(Integer unitPrice) {
+	public void setUnitPrice(Float unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
-	public Integer getExtendedPrice(){
-		return extendedPrice;
+
+	public Float getSubTotal(){
+		return subTotal;
 	}
 	
-	public void setExtendedPrice(Integer extendedPrice) {
-		this.extendedPrice = extendedPrice;
+	public void setSubTotal(Float subTotal) {
+		this.subTotal = subTotal;
 	}
 
+	public String getIdOrderDetail(){
+		return idOrderDetail;
+	}
 	
+	public void setIdOrderDetail(String idOrderDetail) {
+		this.idOrderDetail = idOrderDetail;
+	}
+
 }

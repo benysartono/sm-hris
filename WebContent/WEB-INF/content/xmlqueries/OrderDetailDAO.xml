@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchOrderItem>Select * from dongan_order_item where idPO=?</searchOrderItem> 
-		<searchOrderItemByIdPOnPage>Select * from dongan_order_item where idPO=? order by idItem limit ?,2</searchOrderItemByIdPOnPage> 
-		<orderItemDelete>Delete from dongan_order_item where idPO = ? and idItem=?</orderItemDelete> 
-		<orderItemDeleteByIdPO>Delete from dongan_order_item where idPO = ?</orderItemDeleteByIdPO> 
-		<orderItemAdd>Insert into dongan_order_item(idPO,idItem,idColor; qty,description,unitPrice,extendedPrice) values(?,?,?,?,?,?,?)</orderItemAdd>
-		<orderItemEdit>Update dongan_order_item set idPO=?,idItem=?,qty=?,description=?,unitPrice=?,extendedPrice=? where idPO=? and idItem=?</orderItemEdit>
+		<searchOrderDetail>Select * from smpos_order_detail where idOrder=?</searchOrderDetail> 
+		<searchOrderDetailByIdOrderDetail>Select * from smpos_order_detail where idOrder=? and idOrderDetail=?</searchOrderDetailByIdOrderDetail> 
+		<searchOrderDetailByIdOrder>Select * from smpos_order_detail where idOrder=? order by idOrderDetail limit ?,2</searchOrderDetailByIdOrder> 
+		<orderDetailDelete>Delete from smpos_order_detail where idOrder = ? and idOrderDetail=?</orderDetailDelete> 
+		<orderDetailDeleteByIdOrder>Delete from smpos_order_detail where idOrder = ?</orderDetailDeleteByIdOrder> 
+		<orderDetailAdd>Insert into smpos_order_detail(idOrder,idOrderDetail,idProduct,amount,unit,unitPrice,subTotal) values(?,?,?,?,?,?,?)</orderDetailAdd>
+		<orderDetailEdit>Update smpos_order_detail set idOrder=?,idOrderDetail=?,idProduct=?,amount=?,unit=?,unitPrice=?, subTotal=? where idOrder=? and idOrderDetail=?</orderDetailEdit>
 </xmlquery>		

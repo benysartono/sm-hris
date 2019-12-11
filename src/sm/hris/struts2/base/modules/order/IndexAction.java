@@ -22,9 +22,10 @@ public class IndexAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private OrderDAO orderDAO = new OrderDAO();
     private ArrayList<Order> orders;
-    private String idPO = new String();
+    private String idOrder = new String();
+    private String searchKey = new String();
     private ArrayList<String> formArg = new ArrayList<String>();
-    private ArrayList<String> idPOs = new ArrayList<String>();
+    private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc = new String();
     private String res = new String();
     
@@ -38,10 +39,10 @@ public class IndexAction extends SmBaseAction {
     		res = orderDelete();
     	}
 		if(!(proc.equals("Add")||proc.equals("Delete"))){
-	    	if (!idPO.equals("")) {
-				formArg.add("%"+idPO+"%");
+	    	if (!searchKey.equals("")) {
+				formArg.add("%"+searchKey+"%");
 				orderDAO.setArgArray(formArg);
-				orders = orderDAO.searchOrderByIdPOLike();
+				orders = orderDAO.searchOrderByAnyLike();
 				res="success";
 			} 
 			else {
@@ -53,7 +54,7 @@ public class IndexAction extends SmBaseAction {
     }
     
 	public String orderDelete() throws Exception {
-		orderDAO.setArgArray(idPOs);
+		orderDAO.setArgArray(idOrders);
 		orderDAO.orderDelete(); 
 		return "success";
 	}
@@ -63,20 +64,28 @@ public class IndexAction extends SmBaseAction {
 	}
 
 
-	public String getIdPO(){
-		return idPO;
+	public String getIdOrder(){
+		return idOrder;
 	}
 		
-	public void setIdPO(String idPO){
-		this.idPO=idPO;
+	public void setIdOrder(String idOrder){
+		this.idOrder=idOrder;
 	}
 
-	public ArrayList<String> getIdPOs(){
-			return idPOs;
+	public String getSearchKey(){
+		return searchKey;
+	}
+		
+	public void setSearchKey(String searchKey){
+		this.searchKey=searchKey;
+	}
+
+	public ArrayList<String> getIdOrders(){
+			return idOrders;
 		}
 			
-	public void setIdPOs(ArrayList<String> idPOs){
-			this.idPOs=idPOs;
+	public void setIdOrders(ArrayList<String> idOrders){
+			this.idOrders=idOrders;
 		}
 	
 	public ArrayList<Order> getOrders(){

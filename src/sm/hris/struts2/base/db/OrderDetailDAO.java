@@ -10,32 +10,32 @@ import java.util.Iterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
-import sm.hris.struts2.base.db.OrderItem;
+import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.SmBaseDAO;
 
-public class OrderItemDAO extends SmBaseDAO{
+public class OrderDetailDAO extends SmBaseDAO{
  
 	private Order order = new Order();
-	private OrderItem orderItem = new OrderItem();
+	private OrderDetail orderDetail = new OrderDetail();
 	private ArrayList<Order> orders = new ArrayList<Order>();
-	private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
     private ArrayList<String> argArray = new ArrayList<String>();
     private ArrayList<Object> argArrayObj = new ArrayList<Object>();
     private ArrayList<ArrayList<String>> rowArray = new ArrayList<ArrayList<String>>();
 
-	public ArrayList<OrderItem> searchOrderItem() throws SQLException{
-        ResultSet rs = this.runQuery("searchOrderItem",argArray);
+	public ArrayList<OrderDetail> searchOrderDetail() throws SQLException{
+        ResultSet rs = this.runQuery("searchOrderDetail");
  
             while (rs.next()) {
-            	OrderItem orderItem = new OrderItem();
-            	orderItem.setIdItem(rs.getInt("idItem"));
-            	orderItem.setIdPO(rs.getString("idPO"));
-            	orderItem.setIdColor(rs.getString("idColor"));
-            	orderItem.setQty(rs.getInt("qty"));
-            	orderItem.setDescription(rs.getString("description"));
-            	orderItem.setUnitPrice(rs.getInt("UnitPrice"));
-            	orderItem.setExtendedPrice(rs.getInt("extPrice"));
-            	orderItems.add(orderItem);
+            	OrderDetail orderDetail = new OrderDetail();
+            	orderDetail.setIdOrderDetail(rs.getString("idOrderDetail"));
+            	orderDetail.setIdOrder(rs.getString("idOrder"));
+            	orderDetail.setIdProduct(rs.getString("idProduct"));
+            	orderDetail.setAmount(rs.getFloat("amount"));
+            	orderDetail.setUnit(rs.getString("unit"));
+            	orderDetail.setUnitPrice(rs.getFloat("UnitPrice"));
+            	orderDetail.setSubTotal(rs.getFloat("subTotal"));
+            	orderDetails.add(orderDetail);
                 
             } 
         	
@@ -47,50 +47,74 @@ public class OrderItemDAO extends SmBaseDAO{
      		   }
      		}
         	closeConnection();
-        	
-        	return orderItems;
+        	return orderDetails;
         
     }
 
-	public ArrayList<OrderItem> searchOrderItemByIdPOnPage() throws SQLException{
-        ResultSet rs = this.runQueryObj("searchOrderItemByIdPOnPage",argArrayObj);
+	public ArrayList<OrderDetail> searchOrderDetailByIdOrder() throws SQLException{
+        ResultSet rs = this.runQuery("searchOrderDetail",argArray);
  
-            while (rs.next()) {
-            	OrderItem orderItem = new OrderItem();
-            	orderItem.setIdItem(rs.getInt("idItem"));
-            	orderItem.setIdPO(rs.getString("idPO"));
-            	orderItem.setIdColor(rs.getString("idColor"));
-            	orderItem.setQty(rs.getInt("qty"));
-            	orderItem.setDescription(rs.getString("description"));
-            	orderItem.setUnitPrice(rs.getInt("UnitPrice"));
-            	orderItem.setExtendedPrice(rs.getInt("extPrice"));
-            	orderItems.add(orderItem);
-                
-            } 
-        	
-            if(rs != null){
-     		   try {
-     		   rs.close();
-     		   } catch (SQLException e) {
-     		        System.out.println("Exception while closing result set: " + e);
-     		   }
-     		}
-        	closeConnection();
-        	
-        	return orderItems;
-        
+        while (rs.next()) {
+        	OrderDetail orderDetail = new OrderDetail();
+        	orderDetail.setIdOrderDetail(rs.getString("idOrderDetail"));
+        	orderDetail.setIdOrder(rs.getString("idOrder"));
+        	orderDetail.setIdProduct(rs.getString("idProduct"));
+        	orderDetail.setAmount(rs.getFloat("amount"));
+        	orderDetail.setUnit(rs.getString("unit"));
+        	orderDetail.setUnitPrice(rs.getFloat("unitPrice"));
+        	orderDetail.setSubTotal(rs.getFloat("subTotal"));
+        	orderDetails.add(orderDetail);
+            
+        } 
+    	
+        if(rs != null){
+ 		   try {
+ 		   rs.close();
+ 		   } catch (SQLException e) {
+ 		        System.out.println("Exception while closing result set: " + e);
+ 		   }
+ 		}
+    	closeConnection();
+    	return orderDetails;
+    
     }
 
-	public void orderItemDelete() throws SQLException{
+	public void orderDetailAdd() throws SQLException{
+		argArray.add(0, orderDetail.getIdOrder());
+		argArray.add(1, orderDetail.getIdOrderDetail());
+		argArray.add(2, orderDetail.getIdProduct());
+		argArray.add(3, String.valueOf(orderDetail.getAmount()));
+		argArray.add(4, orderDetail.getUnit());
+		argArray.add(5, String.valueOf(orderDetail.getUnitPrice()));
+		argArray.add(6, String.valueOf(orderDetail.getSubTotal()));
+		this.run("orderDetailAdd", argArray);
+		//closeConnection();
+	}
+
+	public void orderDetailEdit() throws SQLException{
+		argArray.add(0, orderDetail.getIdOrder());
+		argArray.add(1, orderDetail.getIdOrderDetail());
+		argArray.add(2, orderDetail.getIdProduct());
+		argArray.add(3, String.valueOf(orderDetail.getAmount()));
+		argArray.add(4, orderDetail.getUnit());
+		argArray.add(5, String.valueOf(orderDetail.getUnitPrice()));
+		argArray.add(6, String.valueOf(orderDetail.getSubTotal()));
+		argArray.add(7, orderDetail.getIdOrder());
+		argArray.add(8, orderDetail.getIdOrderDetail());
+		this.run("orderDetailEdit", argArray);
+		//closeConnection();
+	}
+
+	public void orderDetailDelete() throws SQLException{
 		for(int i=0;i<rowArray.size();i++) {
 			this.run("orderItemDelete", rowArray.get(i));
 		}
 		closeConnection();
     }
 	
-	public void orderItemDeleteByIdPO() throws SQLException{
+	public void orderDetailDeleteByIdOrder() throws SQLException{
 		for(int i=0;i<argArray.size();i++) {
-			this.run("orderItemDeleteByIdPO", argArray.get(i));
+			this.run("orderItemDeleteByIdOrder", argArray.get(i));
 		}
 		closeConnection();
     }
@@ -119,19 +143,19 @@ public class OrderItemDAO extends SmBaseDAO{
 		this.rowArray = rowArray;
 	}
 
-	public ArrayList<OrderItem> getOrderItems(){
-		return orderItems;
+	public ArrayList<OrderDetail> getOrderDetails(){
+		return orderDetails;
 	} 
 	
-	public void setOrderItems (ArrayList<OrderItem> orderItems){
-		this.orderItems = orderItems;
+	public void setOrderDetails (ArrayList<OrderDetail> orderDetails){
+		this.orderDetails = orderDetails;
 	}
 
-	public OrderItem getOrderItem(){
-		return orderItem;
+	public OrderDetail getOrderDetail(){
+		return orderDetail;
 	} 
 	
-	public void setOrderItem (OrderItem orderItem){
-		this.orderItem = orderItem;
+	public void setOrderDetail (OrderDetail orderDetail){
+		this.orderDetail = orderDetail;
 	}
 }

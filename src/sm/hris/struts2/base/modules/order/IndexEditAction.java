@@ -9,9 +9,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Order;
-import sm.hris.struts2.base.db.OrderItem;
+import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.OrderDAO;
-import sm.hris.struts2.base.db.OrderItemDAO;
+import sm.hris.struts2.base.db.OrderDetailDAO;
 
 @Results({
 	@Result(name="tolist", location="/base/modules/order", type="redirect"),
@@ -21,10 +21,10 @@ import sm.hris.struts2.base.db.OrderItemDAO;
 public class IndexEditAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private Order order = new Order();
-	private OrderItem orderItem = new OrderItem();
-    private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+	private OrderDetail orderItem = new OrderDetail();
+    private ArrayList<OrderDetail> orderItems = new ArrayList<OrderDetail>();
 	private OrderDAO orderDAO = new OrderDAO();
-	private OrderItemDAO orderItemDAO = new OrderItemDAO();
+	private OrderDetailDAO orderItemDAO = new OrderDetailDAO();
 	private ArrayList<String> argArray = new ArrayList<String>();
 	private ArrayList<String> idItemsCheck = new ArrayList<String>();
 	private String proc = new String();
@@ -38,15 +38,15 @@ public class IndexEditAction extends SmBaseAction {
 	private ArrayList<Integer> orderItemExtendedPrice = new ArrayList<Integer>();
 	
 	
-    //private OrderItem 
-	//private OrderItem orderItem;
+    //private OrderDetail 
+	//private OrderDetail orderItem;
     
     public String execute() throws Exception{
     	System.out.println("Sudah ada di dalam IndexEditAction");
     	if (proc.equals("Save")){
     		System.out.println("Nilai Proc :::: " + proc);
     		for(int n=0;n<orderItemIdPO.size();n++){
-    			OrderItem orderItem = new OrderItem(); 
+    			OrderDetail orderItem = new OrderDetail(); 
     			orderItem.setIdPO(orderItemIdPO.get(n));
     			orderItem.setIdItem(Integer.parseInt(orderItemIdItem.get(n)));
     			orderItem.setIdColor(orderItemIdColor.get(n));
@@ -96,11 +96,11 @@ public class IndexEditAction extends SmBaseAction {
    		return SUCCESS;
     }
     /*
-	public ArrayList<OrderItem> getOrderItems(){
+	public ArrayList<OrderDetail> getOrderItems(){
 			//return orderItems;
 		}
 			
-	public void setOrderItems(ArrayList<OrderItem> orderItems){
+	public void setOrderItems(ArrayList<OrderDetail> orderItems){
 			//this.orderItems=orderItems;
 		}
 	*/
@@ -116,20 +116,20 @@ public class IndexEditAction extends SmBaseAction {
         this.proc = proc;
     }
 	
-	public OrderItem getOrderItem(){
+	public OrderDetail getOrderItem(){
 		return orderItem;
 	} 
 	
-	public void setOrderItem (OrderItem orderItem){
+	public void setOrderItem (OrderDetail orderItem){
 		this.orderItem = orderItem;
 	}
 
 	
-	public ArrayList<OrderItem> getOrderItems(){
+	public ArrayList<OrderDetail> getOrderItems(){
 		return orderItems;
 	} 
 	
-	public void setOrderItems (ArrayList<OrderItem> orderItems){
+	public void setOrderItems (ArrayList<OrderDetail> orderItems){
 		this.orderItems = orderItems;
 	}
 

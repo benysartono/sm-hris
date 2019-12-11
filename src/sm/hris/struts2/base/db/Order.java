@@ -4,117 +4,99 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.io.File;
 import org.apache.commons.codec.digest.DigestUtils;
-import sm.hris.struts2.base.db.OrderItem;
+import sm.hris.struts2.base.db.OrderDetail;
 
 public class Order {
 
-	private String idPO; 									
-	private String idBuyer; 				
-	private String idSpec; 									
-	private String idProduction; 				
-	private Date date; 									
-	private String terms; 	
-	private String idShipVia; 									
-	private Date shipDate; 	
-	private String FOB;
-	private Date inWarehouse;
-	private Date cancelation;
-	private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+	private String idOrder; 									
+	private Float total; 				
+	private Float totalDiscount; 									
+	private Float vat; 				
+	private Float cash; 									
+	private Float changes; 	
+	private String idPaymentMethod; 									
+	private String paymentRemark; 	
+	private Date orderDate;
+	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
 	
-	public String getIdPO(){
-		return idPO;
+	public String getIdOrder(){
+		return idOrder;
 	}
 	
-	public void setIdPO(String idPO) {
-		this.idPO = idPO;
+	public void setIdOrder(String idOrder) {
+		this.idOrder = idOrder;
 	}
 
-	public String getIdBuyer(){
-		return idBuyer;
+	public Float getTotal(){
+		return total;
 	}
 	
-	public void setIdBuyer(String idBuyer) {
-		this.idBuyer = idBuyer;
+	public void setTotal(Float total) {
+		this.total = total;
 	}
 
-	public String getIdSpec(){
-		return idSpec;
+	public Float getTotalDiscount(){
+		return totalDiscount;
 	}
 	
-	public void setIdSpec(String idSpec) {
-		this.idSpec = idSpec;
+	public void setTotalDiscount(Float totalDiscount) {
+		this.totalDiscount = totalDiscount;
 	}
 
-	public String getIdProduction(){
-		return idProduction;
+	public Float getVat(){
+		return vat;
 	}
 	
-	public void setIdProduction(String idProduction) {
-		this.idProduction = idProduction;
+	public void setVat(Float vat) {
+		this.vat = vat;
+	}
+	
+	public Float getCash(){
+		return cash;
+	}
+	
+	public void setCash(Float cash) {
+		this.cash = cash;
+	}
+	
+	public Float getChanges(){
+		return changes;
+	}
+	
+	public void setChanges(Float changes) {
+		this.changes = changes;
+	}
+	
+	public String getIdPaymentMethod(){
+		return idPaymentMethod;
+	}
+	
+	public void setIdPaymentMethod(String idPaymentMethod) {
+		this.idPaymentMethod = idPaymentMethod;
 	}
 
-	public Date getDate(){
-		return date;
+	public String getPaymentRemark(){
+		return paymentRemark;
 	}
 	
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPaymentRemark(String paymentRemark) {
+		this.paymentRemark = paymentRemark;
 	}
 
-	public String getTerms(){
-		return terms;
+	public Date getOrderDate(){
+		return orderDate;
 	}
 	
-	public void setTerms(String terms) {
-		this.terms = terms;
-	}
-	
-	public String getIdShipVia(){
-		return idShipVia;
-	}
-	
-	public void setIdShipVia(String idShipVia) {
-		this.idShipVia = idShipVia;
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
-	public Date getShipDate(){
-		return shipDate;
-	}
-	
-	public void setShipDate(Date shipDate) {
-		this.shipDate = shipDate;
-	}
-
-	public String getFOB(){
-		return FOB;
-	}
-	
-	public void setFOB(String FOB) {
-		this.FOB = FOB;
-	}
-
-	public Date getInWarehouse(){
-		return inWarehouse;
-	}
-	
-	public void setInWarehouse(Date inWarehouse) {
-		this.inWarehouse = inWarehouse;
-	}
-	
-	public Date getCancelation(){
-		return cancelation;
-	}
-	
-	public void setCancelation(Date cancelation) {
-		this.cancelation = cancelation;
-	}
-	
-	public ArrayList<OrderItem> getOrderItems(){
-		return orderItems;
+	public ArrayList<OrderDetail> getOrderDetails(){
+		return orderDetails;
 	} 
 	
-	public void setOrderItems(ArrayList<OrderItem> orderItems){
-		this.orderItems = orderItems;
+	public void setOrderDetails(ArrayList<OrderDetail> orderDetails){
+		this.orderDetails = orderDetails;
 	}
 }
