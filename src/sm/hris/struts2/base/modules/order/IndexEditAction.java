@@ -21,50 +21,37 @@ import sm.hris.struts2.base.db.OrderDetailDAO;
 public class IndexEditAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private Order order = new Order();
-	private OrderDetail orderItem = new OrderDetail();
-    private ArrayList<OrderDetail> orderItems = new ArrayList<OrderDetail>();
+	private OrderDetail orderDetail = new OrderDetail();
+    private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private OrderDAO orderDAO = new OrderDAO();
-	private OrderDetailDAO orderItemDAO = new OrderDetailDAO();
+	private OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
 	private ArrayList<String> argArray = new ArrayList<String>();
 	private ArrayList<String> idItemsCheck = new ArrayList<String>();
 	private String proc = new String();
 	
-	private ArrayList<String> orderItemIdPO = new ArrayList<String>();
-	private ArrayList<String> orderItemIdItem = new ArrayList<String>();
-	private ArrayList<String> orderItemIdColor = new ArrayList<String>();
-	private ArrayList<Integer> orderItemQty = new ArrayList<Integer>();
-	private ArrayList<String> orderItemDescription = new ArrayList<String>();
-	private ArrayList<Integer> orderItemUnitPrice = new ArrayList<Integer>();
-	private ArrayList<Integer> orderItemExtendedPrice = new ArrayList<Integer>();
+	private ArrayList<String> orderDetailIdPO = new ArrayList<String>();
+	private ArrayList<String> orderDetailIdItem = new ArrayList<String>();
+	private ArrayList<String> orderDetailIdColor = new ArrayList<String>();
+	private ArrayList<Integer> orderDetailQty = new ArrayList<Integer>();
+	private ArrayList<String> orderDetailDescription = new ArrayList<String>();
+	private ArrayList<Integer> orderDetailUnitPrice = new ArrayList<Integer>();
+	private ArrayList<Integer> orderDetailExtendedPrice = new ArrayList<Integer>();
 	
 	
     //private OrderDetail 
-	//private OrderDetail orderItem;
+	//private OrderDetail orderDetail;
     
     public String execute() throws Exception{
-    	System.out.println("Sudah ada di dalam IndexEditAction");
     	if (proc.equals("Save")){
-    		System.out.println("Nilai Proc :::: " + proc);
-    		for(int n=0;n<orderItemIdPO.size();n++){
-    			OrderDetail orderItem = new OrderDetail(); 
-    			orderItem.setIdPO(orderItemIdPO.get(n));
-    			orderItem.setIdItem(Integer.parseInt(orderItemIdItem.get(n)));
-    			orderItem.setIdColor(orderItemIdColor.get(n));
-    			orderItem.setQty(orderItemQty.get(n));
-    			orderItem.setDescription(orderItemDescription.get(n));
-    			orderItem.setUnitPrice(orderItemUnitPrice.get(n));
-    			orderItem.setExtendedPrice(orderItemExtendedPrice.get(n));
-    			orderItems.add(orderItem);
-    		}	
-    		order.setOrderItems(orderItems);
-    		System.out.println("PrintOut OrderItems: " + orderItems);
     		orderDAO.setOrder(order);
-    		System.out.println("PrintOut Order: " + order);
     		orderDAO.orderEdit();
-    	} 
+    	}
+    	return SUCCESS;
+    } 
+/*    	
     	else if (proc.equals("Delete")){
     		orderDAO.setArgArray(idItemsCheck);
-    		orderDAO.orderItemDelete();
+    		orderDAO.orderDetailDelete();
     		argArray = new ArrayList<String>();
 	   		argArray.add(0,order.getIdPO());
 	   		orderDAO.setArgArray(argArray);
@@ -78,12 +65,12 @@ public class IndexEditAction extends SmBaseAction {
     		return "add";
     	}
     	else if (proc.equals("SaveItem")){
-    		System.out.println("Anda berada di SaveItem: " + orderItem.getIdPO());
-    		orderDAO.setOrderItem(orderItem);
-    		orderDAO.orderItemAdd();
+    		System.out.println("Anda berada di SaveItem: " + orderDetail.getIdPO());
+    		orderDAO.setOrderDetail(orderDetail);
+    		orderDAO.orderDetailAdd();
     		argArray = new ArrayList<String>();
-    		System.out.println("orderItem.getIdPO() nya: " + orderItem.getIdPO());
-	   		argArray.add(0,orderItem.getIdPO());
+    		System.out.println("orderDetail.getIdPO() nya: " + orderDetail.getIdPO());
+	   		argArray.add(0,orderDetail.getIdPO());
 	   		orderDAO.setArgArray(argArray);
 	   		order = orderDAO.searchOrderByIdPO().get(0);
     	}
@@ -95,15 +82,15 @@ public class IndexEditAction extends SmBaseAction {
     	}
    		return SUCCESS;
     }
-    /*
-	public ArrayList<OrderDetail> getOrderItems(){
-			//return orderItems;
+	public ArrayList<OrderDetail> getOrderDetails(){
+			//return orderDetails;
 		}
 			
-	public void setOrderItems(ArrayList<OrderDetail> orderItems){
-			//this.orderItems=orderItems;
+	public void setOrderDetails(ArrayList<OrderDetail> orderDetails){
+			//this.orderDetails=orderDetails;
 		}
-	*/
+*/
+    	
 	public Order getOrder(){
 		return order;
 	}
@@ -116,73 +103,73 @@ public class IndexEditAction extends SmBaseAction {
         this.proc = proc;
     }
 	
-	public OrderDetail getOrderItem(){
-		return orderItem;
+	public OrderDetail getOrderDetail(){
+		return orderDetail;
 	} 
 	
-	public void setOrderItem (OrderDetail orderItem){
-		this.orderItem = orderItem;
+	public void setOrderDetail (OrderDetail orderDetail){
+		this.orderDetail = orderDetail;
 	}
 
 	
-	public ArrayList<OrderDetail> getOrderItems(){
-		return orderItems;
+	public ArrayList<OrderDetail> getOrderDetails(){
+		return orderDetails;
 	} 
 	
-	public void setOrderItems (ArrayList<OrderDetail> orderItems){
-		this.orderItems = orderItems;
+	public void setOrderDetails (ArrayList<OrderDetail> orderDetails){
+		this.orderDetails = orderDetails;
 	}
 
-	public ArrayList<String> getOrderItemIdPO(){
-		return orderItemIdPO;
+	public ArrayList<String> getOrderDetailIdPO(){
+		return orderDetailIdPO;
 	}
-	public void setOrderItemIdPO(ArrayList<String> orderItemIdPO){
-		this.orderItemIdPO = orderItemIdPO;
+	public void setOrderDetailIdPO(ArrayList<String> orderDetailIdPO){
+		this.orderDetailIdPO = orderDetailIdPO;
 	}
 
 	
-	public ArrayList<String> getOrderItemIdItem(){
-		return orderItemIdItem;
+	public ArrayList<String> getOrderDetailIdItem(){
+		return orderDetailIdItem;
 	}
-	public void setOrderItemIdItem(ArrayList<String> orderItemIdItem){
-		this.orderItemIdItem = orderItemIdItem;	
-	}
-	
-	
-	public ArrayList<String> getOrderItemIdColor(){
-		return orderItemIdColor;
-	}
-	public void setOrderItemIdColor(ArrayList<String> orderItemIdColor){
-		this.orderItemIdColor = orderItemIdColor;
+	public void setOrderDetailIdItem(ArrayList<String> orderDetailIdItem){
+		this.orderDetailIdItem = orderDetailIdItem;	
 	}
 	
-	public ArrayList<Integer> getOrderItemQty(){
-		return orderItemQty;
+	
+	public ArrayList<String> getOrderDetailIdColor(){
+		return orderDetailIdColor;
 	}
-	public void setOrderItemQty(ArrayList<Integer> orderItemQty){
-		this.orderItemQty = orderItemQty;
+	public void setOrderDetailIdColor(ArrayList<String> orderDetailIdColor){
+		this.orderDetailIdColor = orderDetailIdColor;
+	}
+	
+	public ArrayList<Integer> getOrderDetailQty(){
+		return orderDetailQty;
+	}
+	public void setOrderDetailQty(ArrayList<Integer> orderDetailQty){
+		this.orderDetailQty = orderDetailQty;
 	}
 
-	public ArrayList<String> getOrderItemDescription(){
-		return orderItemDescription;
+	public ArrayList<String> getOrderDetailDescription(){
+		return orderDetailDescription;
 	}
-	public void setOrderItemDescription(ArrayList<String> orderItemDescription){
-		this.orderItemDescription = orderItemDescription;
-	}
-
-	public ArrayList<Integer> getOrderItemUnitPrice(){
-		return orderItemUnitPrice;
-	}
-	public void setOrderItemUnitPrice(ArrayList<Integer> orderItemUnitPrice){
-		this.orderItemUnitPrice = orderItemUnitPrice;
+	public void setOrderDetailDescription(ArrayList<String> orderDetailDescription){
+		this.orderDetailDescription = orderDetailDescription;
 	}
 
-	public ArrayList<Integer> getOrderItemExtendedPrice(){
-		return orderItemExtendedPrice;
+	public ArrayList<Integer> getOrderDetailUnitPrice(){
+		return orderDetailUnitPrice;
+	}
+	public void setOrderDetailUnitPrice(ArrayList<Integer> orderDetailUnitPrice){
+		this.orderDetailUnitPrice = orderDetailUnitPrice;
+	}
+
+	public ArrayList<Integer> getOrderDetailExtendedPrice(){
+		return orderDetailExtendedPrice;
 	}
 	
-	public void setOrderItemExtendedPrice(ArrayList<Integer> orderItemExtendedPrice){
-		this.orderItemExtendedPrice = orderItemExtendedPrice;
+	public void setOrderDetailExtendedPrice(ArrayList<Integer> orderDetailExtendedPrice){
+		this.orderDetailExtendedPrice = orderDetailExtendedPrice;
 	}
 
 	public ArrayList<String> getIdItemsCheck(){

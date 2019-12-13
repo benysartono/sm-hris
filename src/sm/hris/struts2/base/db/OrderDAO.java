@@ -11,12 +11,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDetail;
+import sm.hris.struts2.base.db.OrderDetailDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
 
 public class OrderDAO extends SmBaseDAO{
  
 	private Order order = new Order();
 	private OrderDetail orderDetail = new OrderDetail();
+	private OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	//private ArrayList<orderFR> ordersfr = new ArrayList<ordersFR>();
@@ -118,8 +120,11 @@ public class OrderDAO extends SmBaseDAO{
 
 	public void orderDelete() throws SQLException{
 		for(int i=0;i<argArray.size();i++) {
+			ArrayList<String> argArray2 = new ArrayList<String>();
+			argArray2.add(argArray.get(i));
+			orderDetailDAO.setArgArray(argArray2);
+			orderDetailDAO.orderDetailDeleteByIdOrder();
 			this.run("orderDelete", argArray.get(i));
-			this.run("orderItemDeleteByIdPO", argArray.get(i));
 		}
 		closeConnection();
     }
@@ -135,6 +140,10 @@ public class OrderDAO extends SmBaseDAO{
 			argArray.add(7, order.getPaymentRemark());
 			argArray.add(8, convertDateToString(order.getOrderDate()));
 			this.run("orderAdd", argArray);
+			for (int n=0;n<orderDetails.size();n++){
+				orderDetailDAO.setOrderDetail(orderDetails.get(n));
+				orderDetailDAO.orderDetailAdd();
+			}
 			closeConnection();
     }
 	
@@ -150,6 +159,14 @@ public class OrderDAO extends SmBaseDAO{
 		argArray.add(8, convertDateToString(order.getOrderDate()));
 		argArray.add(9, order.getIdOrder());
 		this.run("orderEdit", argArray);
+		ArrayList<String> argArray = new ArrayList<String>();
+		argArray.add(order.getIdOrder());
+		orderDetailDAO.setArgArray(argArray);
+		orderDetailDAO.orderDetailDeleteByIdOrder();
+		for (int n=0;n<orderDetails.size();n++){
+			orderDetailDAO.setOrderDetail(orderDetails.get(n));
+			orderDetailDAO.orderDetailAdd();
+		}
 		closeConnection();
 	}
 

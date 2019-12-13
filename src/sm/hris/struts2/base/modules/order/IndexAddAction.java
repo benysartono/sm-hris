@@ -22,14 +22,14 @@ public class IndexAddAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private OrderDAO orderDAO = new OrderDAO();
     private Order order = new Order();
-    private String idPO = new String();
+    private String idOrder = new String();
     private ArrayList<String> formArg = new ArrayList<String>();
-    private ArrayList<String> idPOs = new ArrayList<String>();
+    private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc = new String();
     private String res = new String();
     
     public String execute() throws Exception{
-    	if(order.getIdPO().isEmpty()) return SUCCESS;
+    	if(order.getIdOrder().isEmpty()) return SUCCESS;
     	else {
     		orderDAO.setOrder(order);
     		orderDAO.orderAdd();
@@ -38,12 +38,12 @@ public class IndexAddAction extends SmBaseAction {
     }
     
 
-	public ArrayList<String> getIdPOs(){
-			return idPOs;
+	public ArrayList<String> getIdOrders(){
+			return idOrders;
 		}
 			
-	public void setIdPOs(ArrayList<String> idPOs){
-			this.idPOs=idPOs;
+	public void setIdOrders(ArrayList<String> idOrders){
+			this.idOrders=idOrders;
 		}
 	
 	public Order getOrder(){

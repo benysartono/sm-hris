@@ -30,7 +30,7 @@ public class OrderItemListJsonAction extends SmBaseAction {
     	argArrayObj.add(rowStart);
     	OrderDetailDAO orderItemDAO = new OrderDetailDAO();
     	orderItemDAO.setArgArrayObj(argArrayObj);
-		orderItems = orderItemDAO.searchOrderItemByIdPOnPage();
+		//orderItems = orderItemDAO.searchOrderItemByIdPOnPage();
 		return SUCCESS;
 	}
 
