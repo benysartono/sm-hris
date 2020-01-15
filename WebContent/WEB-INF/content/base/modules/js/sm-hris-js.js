@@ -4,28 +4,29 @@
  * form fields dynamically
  **/
  
- var app = angular.module("dynamicFieldsPlugin", []);
+ var app = angular.module("orderApp", []);
  
- app.controller("dynamicFields", function($scope) {
+ app.controller("orderAppCtrl", function($scope) {
    
-   $scope.choices = [{id: 'choice1', name: 'choice1'}, {id: 'choice2', name: 'choice2'}, {id: 'choice3', name: 'choice3'}];
+   $scope.orderDetails = [{id: 'orderDetail1', name: 'orderDetail1'}, {id: 'orderDetail2', name: 'orderDetail2'}, {id: 'orderDetail3', name: 'orderDetail3'}];
    
-   $scope.addNewChoice = function() {
-     var newItemNo = $scope.choices.length+1;
-     $scope.choices.push({'id' : 'choice' + newItemNo, 'name' : 'choice' + newItemNo});
+   $scope.addNewOrderDetail = function() {
+     var newItemNo = $scope.orderDetails.length+1;
+     $scope.orderDetails.push({'id' : 'orderDetail' + newItemNo, 'name' : 'orderDetail' + newItemNo});
    };
    
-   $scope.removeNewChoice = function() {
-     var newItemNo = $scope.choices.length-1;
+   $scope.removeNewOrderDetail = function() {
+     var newItemNo = $scope.orderDetails.length-1;
      if ( newItemNo !== 0 ) {
-      $scope.choices.pop();
+      $scope.orderDetails.pop();
      }
    };
    
-   $scope.showAddChoice = function(choice) {
-     return choice.id === $scope.choices[$scope.choices.length-1].id;
+   $scope.showAddOrderDetail = function(orderDetail) {
+     return orderDetail.id === $scope.orderDetails[$scope.orderDetails.length-1].id;
    };
    
- });/**
+ });
+ /**
  * 
  */

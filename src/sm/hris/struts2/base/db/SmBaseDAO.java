@@ -34,7 +34,7 @@ public class SmBaseDAO {
     }
    
 	public ResultSet runQuery(String queryCommand) throws SQLException{
-        ReadXML myxml = new ReadXML();
+		ReadXML myxml = new ReadXML();
         String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
 
         try {
@@ -233,4 +233,42 @@ public class SmBaseDAO {
         
     }
  	
+	public void run(String queryCommand) throws SQLException{
+		
+		Connection con = ConPool.getConnection();
+        System.out.println("Connection succeeded: " + con);
+        PreparedStatement ps;
+        
+        ReadXML myxml = new ReadXML();
+        String sql = myxml.ReadXmlAttribute(xmlQueryFilePath, queryCommand);        
+        System.out.println("Prepared Statement: " + sql);
+
+        try {
+            ps = con.prepareStatement(sql);
+            executeResult = ps.execute();
+        	if(ps != null){
+     		   try {
+     		   ps.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing statement: " + e);
+     		   }
+     		}
+
+            
+ 
+
+        	//ConPool.freeConnection(con);
+         } catch (SQLException e) {
+             System.out.println("Catch SmBaseDAO: "+e);
+             e.printStackTrace();
+             //con.close();
+         } /* finally {
+        	 if (con != null) {
+        		 con.close();
+        	 }
+         } */
+
+        
+    }
+
 }

@@ -2,6 +2,7 @@ package sm.hris.struts2.base.modules.order;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -20,6 +21,7 @@ import sm.hris.struts2.base.db.OrderDAO;
 
 public class IndexAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
+	private Order order = new Order();
 	private OrderDAO orderDAO = new OrderDAO();
     private ArrayList<Order> orders;
     private String idOrder = new String();
@@ -32,7 +34,14 @@ public class IndexAction extends SmBaseAction {
     public String execute() throws Exception{
     	//super.listMenu();
     	if(proc.equals("Add")){
-    		//res = orderAdd();
+    		order.setOrderDate(new Date());
+    		orderDAO.setOrder(order);
+    		String strIdOrderCounter = orderDAO.orderAdd();
+    		ArrayList<String> argArray = new ArrayList<String>();
+    		argArray.add(0,strIdOrderCounter);
+    		orderDAO.setArgArray(argArray);
+    		orders = orderDAO.searchOrderByIdOrder();
+			order = orders.get(0);
     		res = "add";
     	}
     	if(proc.equals("Delete")){
@@ -64,6 +73,8 @@ public class IndexAction extends SmBaseAction {
 	}
 
 
+	//---- Getter Setter ----//	
+	
 	public String getIdOrder(){
 		return idOrder;
 	}
@@ -92,7 +103,17 @@ public class IndexAction extends SmBaseAction {
 		return orders;
 	}
 	
+	public void setOrders(ArrayList<Order> orders){
+		this.orders = orders;
+	}
 
+	public Order getOrder(){
+		return order;
+	}
+	
+	public void setOrder (Order order){
+		this.order = order;
+	}
 
 	public void setProc(String proc) {
         this.proc = proc;

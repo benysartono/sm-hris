@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
@@ -24,79 +25,56 @@
     </style>
 	<sx:head />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+	<!-- 
+    <script data-require="angular.js@1.3.15" data-server="1.3.15" src="https://code.angularjs.org/1.3.15/angular.js"></script>
+	-->
 	<script>
 	//function show_unitlist() {
 	//	dojo.event.topic.publish("show_unitlist");
 	//}
+	</script>
 	
-	var app = angular.module('orderApp', []);
-	app.controller('orderAppCtrl', function($scope, $http, $window) {
-		$scope.buyerIdOnBlur=function(){
-			//$scope.buyerAddress = null;
-			//$scope.buyerPhone = null;
-			//$scope.buyerFax = null;
-			//$scope.buyerEmail = null;
-			//$scope.buyerShippingAddress = null;
-			var murl = "/sm-hris/base/modules/order/buyer-json?idBuyer=" + $scope.idBuyer;
-			//$http.post("unit-list-json", {params {idDept:"200"}}, {headers:{"Content-Type": "multipart/form-data"}})
-			//$http.post("unit-list-json", mdata,{headers:{"Content-Type": "application/x-www-form-urlencoded"}})
-			document.getElementById("fIdSpec").value="";
-			document.getElementById("fIdSpec").setAttribute("AutoComplete","off");
-			$http.get(murl)
-			.then(function(response) {
-				$scope.jsbuyer = response.data.buyers;
-				console.log("The murl :" + murl);
-		    });
-			/*
-			var murl = "/sm-hris/base/modules/order/buyer-spec-json?idBuyer=" + $scope.idBuyer;
-			//$http.post("unit-list-json", {params {idDept:"200"}}, {headers:{"Content-Type": "multipart/form-data"}})
-			//$http.post("unit-list-json", mdata,{headers:{"Content-Type": "application/x-www-form-urlencoded"}})
-			$http.get(murl)
-			.then(function(response) {
-				$scope.speclists = response.data.buyerSpecs;
-				console.log("The murl :" + murl);
-		    });
-			*/
-	    }
+	<script>
+	 
+	 var app = angular.module("orderApp", []);
+	 
+	 app.controller("orderAppCtrl", function($scope) {
+	   
+	   //$scope.orderDetails = [{id: 'orderDetail1', name: 'orderDetail1'}, {id: 'orderDetail2', name: 'orderDetail2'}, {id: 'orderDetail3', name: 'orderDetail3'}];
+	   $scope.orderDetails = [{'id' : 'orderDetail1', 'name' : 'orderDetail1'}];
+	   
+	   $scope.addNewOrderDetail = function() {
+	     newItemNo = $scope.orderDetails.length+1;
+	     $scope.orderDetails.push({'id' : 'orderDetail' + newItemNo, 'name' : 'orderDetail' + newItemNo});
+	   };
+	   
+	   $scope.removeNewOrderDetail = function(nId) {
+		   //var index = $scope.orderDetails.indexOf(item);
+		   //$scope.orderDetails.splice($scope.orderDetails.indexOf(nId), 1); 
+		   	//var oOrderDetail = $scope.orderDetails.filter(orderDetail = function() {return orderDetail.id === nId});
+			//var vIndex = $scope.orderDetails.indexOf(oOrderDetail);
+			//var vIndex = $scope.orderDetails.findIndex(orderDetail=>orderDetail.id === nId);
+			var found = $scope.orderDetails.find(function(orderDetail){return orderDetail.id = nId});
+			var vIndex = $scope.orderDetails.indexOf(found);
+			console.log("nId nya: " + nId);
+			console.log("oOrderDetail nya:" + found);
+			console.log("vIndex nya:" + vIndex);
+		   $scope.orderDetails.splice(vIndex,1);
+		   //$scope.orderDetails.splice(nId,1);     
+	   };
+	   
+	   $scope.showAddOrderDetail = function(orderDetail) {
+	     return orderDetail.id === $scope.orderDetails[$scope.orderDetails.length-1].id;
+	   };
+	   
+	 });
 
-		$scope.buyerIdOnFocus=function(){
-		    $http.post("buyer-list-json")
-		    .then(function(response) {
-		        $scope.buyerlist = response.data.buyers;
-		    });
-	    }
-
-		$scope.orderAddClick=function(){
-			var murl ="";
-			murl = murl + "/sm-hris/base/modules/order/save-order-json?";
-			murl = murl + "order.idBuyer=" + $scope.idBuyer + "&";
-			murl = murl + "order.idSpec=" + $scope.idSpec + "&";
-			murl = murl + "order.idPO=" + $scope.idPO + "&";
-			murl = murl + "order.idProduction=" + $scope.idProduction + "&";
-			murl = murl + "order.date=" + $scope.orderDate + "&";
-			murl = murl + "order.terms=" + $scope.terms + "&";
-			murl = murl + "order.idShipVia=" + $scope.idShipVia + "&";
-			murl = murl + "order.shipDate=" + $scope.shipDate + "&";
-			murl = murl + "order.FOB=" + $scope.FOB + "&";
-			murl = murl + "order.inWarehouse=" + $scope.dateInWarehouse + "&";
-			murl = murl + "order.cancelation=" + $scope.dateCancelation;
-			$http.get(murl)
-			.then(function(response) {
-				$scope.returnOrder = response.data.order;
-				//console.log("The murl :" + murl);
-		    });
-	    }
-		
-	});
-
-	//document.getElementById("buyer.address").value = "";
-
-</script>
+	</script>
 
 </head>
 
 
-<body ng-app="orderApp" ng-controller="orderAppCtrl">
+<body ng-app="orderApp">
             
 <div class="container">
     <div class="row">
@@ -106,195 +84,131 @@
             <h1>Adding Order</h1>
           </div>
           <div class="panel-body">
+	    	<div ng-controller="orderAppCtrl" class="container">
 
-            <s:form id="frmOrder" action="index-add" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal">
+            <!-- <s:form id="frmOrder" action="index-edit" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal"> -->
 
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Buyer ID"
-                        	name="order.idBuyer"
+                        	label="Order ID"
+                        	name="order.idOrder"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter ID Buyer"
-                        	value="{{x.idBuyer}}"
-                        	ng-blur="buyerIdOnBlur()"
-                        	ng-focus="buyerIdOnFocus()"
-                        	ng-model="idBuyer"
-                        	list="buyerlists"
+                        	tooltip="Enter ID Order"
+                        	value="%{order.idOrder}"
+                        	ng-model="idOrder"
+                        	readonly="true"
                         	/>
-						<datalist id="buyerlists">
-						    <option ng-repeat="x in buyerlist" value="{{x.idBuyer}}">{{x.buyerName}}</option>
-						</datalist>
-						
 					</div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Buyer Name: {{x.buyerName}}</h5>
-					</div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Address: {{x.address}}</h5>
-					</div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Phone: {{x.phone}}</h5>
-                    </div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Email: {{x.email}}</h5>
-                    </div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Fax: {{x.fax}}</h5>
-                    </div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="x in jsbuyer">Shipping Address: {{x.shippingAddress}}</h5>
-                    </div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Spec ID"
-                        	name="order.idSpec"
+                        	label="Total"
+                        	name="order.total"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Spec"
-                        	value="%{order.idSpec}"
-                        	list="speclist"
-                        	ng-model="idSpec"
-                        	id="fIdSpec"
+                        	tooltip="Total"
+                        	value="%{order.total}"
+                        	ng-model="total"
+                        	readonly="true"
                         	/>
-						<datalist id="speclist" ng-repeat="x in jsbuyer">
-						    <option ng-repeat="y in x.buyerSpecs" value="{{y.idSpec}}">{{y.idSpec}}</option>
-						</datalist>
-					</div>
-                    <div class="col-md-9">
-						<h5 ng-repeat="y in jsbuyer.buyerSpecs">Specs: {{y.idSpec}}</h5>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="PO Number"
-                        	name="order.idPO"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter PO Number"
-                        	ng-model="idPO"
-                        	value="%{order.idPO}"/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Prod Number"
-                        	name="order.idProduction"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Prod Number"
-                        	ng-model="idProduction"
-                        	value="%{order.idProduction}"/>
-                    </div>
-                    <div class="col-md-9">
-						<sj:datepicker
-                                id="datepicker1"
-                                parentTheme="bootstrap"
-                                name="order.date"
-                                label="Order Date"
-                                tooltip="Enter Order Date"
-                                cssClass="form-control"
-                                elementCssClass="col-sm-3"
-                                showOn="focus"
-                                inputAppendIcon="calendar"
-                                dateFormat="yy-m-d"
-                        		ng-model="orderDate"
-                                />
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Terms"
-                        	name="order.terms"
+                        	label="Total Discount"
+                        	name="order.totalDiscount"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Terms"
-                        	ng-model="terms"
-                        	value="%{order.terms}"/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Ship Via"
-                        	name="order.idShipVia"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter ID Ship Via"
-                        	value="%{order.idShipVia}"
-                        	ng-focus="shipViaIdOnFocus()"
-                        	ng-model="idShipVia"
-                        	list="shipvialist"
+                        	tooltip="Total Discount"
+                        	value="%{order.total}"
+                        	ng-model="totalDiscount"
+                        	readonly="true"
                         	/>
-						<datalist id="shipvialist">
-						    <option ng-repeat="x in shipvialist" value="{{x.idShipVia}}">{{x.ShipViaName}}</option>
-						</datalist>
-					</div>
-                    <div class="col-md-9">
-						<sj:datepicker
-                                id="datepicker2"
-                                parentTheme="bootstrap"
-                                name="order.shipDate"
-                                label="Shipping Date"
-                                tooltip="Enter Ship Date"
-                                cssClass="form-control"
-                                elementCssClass="col-sm-3"
-                                showOn="focus"
-                                inputAppendIcon="calendar"
-                                dateFormat="yy-m-d"
-	                        	ng-model="shipDate"
-                                />
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="FOB"
-                        	name="order.FOB"
+                        	label="VAT"
+                        	name="order.vat"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter FOB"
-                        	value="%{order.FOB}"
-                        	ng-focus="FOBOnFocus()"
-                        	list="FOBlist"
-                        	ng-model="FOB"
+                        	tooltip="VAT"
+                        	value="%{order.vat}"
+                        	ng-model="vat"
+                        	readonly="true"
                         	/>
-						<datalist id="FOBlist">
-						    <option ng-repeat="x in FOBlist" value="{{x.idFOB}}">{{x.FOBName}}</option>
-						</datalist>
 					</div>
                     <div class="col-md-9">
-						<sj:datepicker
-                                id="datepicker3"
-                                parentTheme="bootstrap"
-                                name="order.inWarehouse"
-                                label="In Warehouse"
-                                tooltip="Enter In Warehouse"
-                                cssClass="form-control"
-                                elementCssClass="col-sm-3"
-                                showOn="focus"
-                                inputAppendIcon="calendar"
-                                dateFormat="yy-m-d"
-                        		ng-model="dateInWarehouse"
-                                />
+                		<s:textfield
+                        	label="Cash"
+                        	name="order.cash"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Cash"
+                        	value="%{order.cash}"
+                        	ng-model="cash"
+                        	/>
 					</div>
                     <div class="col-md-9">
-						<sj:datepicker
-                                id="datepicker4"
-                                parentTheme="bootstrap"
-                                name="order.cancelation"
-                                label="Cancelation"
-                                tooltip="Enter Cancelation"
-                                cssClass="form-control"
-                                elementCssClass="col-sm-3"
-                                showOn="focus"
-                                inputAppendIcon="calendar"
-                                dateFormat="yy-m-d"
-	                        	ng-model="dateCancelation"
-                                />
+                		<s:textfield
+                        	label="Changes"
+                        	name="order.changes"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Changes"
+                        	value="%{order.changes}"
+                        	ng-model="changes"
+                        	readonly="true"
+                        	/>
 					</div>
-		        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
-
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Payment Method Id"
+                        	name="order.idPaymentMethod"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Payment Method Id"
+                        	value="%{order.idPaymentMethod}"
+                        	ng-model="idPaymentMethod"
+                        	/>
+					</div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Payment Remark"
+                        	name="order.paymentRemark"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Payment Remark"
+                        	value="%{order.paymentRemark}"
+                        	ng-model="paymentRemark"
+                        	/>
+					</div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Order Date"
+                        	name="order.orderDate"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Order Date"
+                        	value="%{order.orderDate}"
+                        	ng-model="orderDate"
+                        	readonly="true"
+                        	/>
+					</div>
+	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
                     <!--  <button ng-click="orderAddClick()">Add</button> -->
-                </div>
-                </div>
-			</s:form> 
-
+			      <h1>Order Detail</h1>
+			      <div class="form-group" data-ng-repeat="orderDetail in orderDetails">
+			      <div class="row">
+			        <s:textfield type="text" ng-modal="{{orderDetail.id}}" name="orderDetails[].idOrderDetail" placeholder="" value="{{orderDetail.name}}" />
+					<s:submit cssClass="btn btn-primary" id="{{orderDetail.id}}" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" />
+			      </div>
+			      </div>
+			<!-- </s:form>  
+		    <div class="row">
+		        <s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
+			</div>
+		    </div>
 		</div> 
 		</div>
         </div> <!-- -------col-md-9 -->

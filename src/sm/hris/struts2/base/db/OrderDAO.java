@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.OrderDetailDAO;
+import sm.hris.struts2.base.db.CounterDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
 
 public class OrderDAO extends SmBaseDAO{
@@ -23,6 +24,7 @@ public class OrderDAO extends SmBaseDAO{
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	//private ArrayList<orderFR> ordersfr = new ArrayList<ordersFR>();
     private ArrayList<String> argArray = new ArrayList<String>();
+    private CounterDAO counterDAO = new CounterDAO();
 
 	public ArrayList<Order> searchOrder() throws SQLException{
         ResultSet rs = this.runQuery("searchOrder");
@@ -47,8 +49,7 @@ public class OrderDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
-        	
+        	//closeConnection();
         	return orders;
         
     }
@@ -129,22 +130,12 @@ public class OrderDAO extends SmBaseDAO{
 		closeConnection();
     }
 
-	public void orderAdd() throws SQLException{
-			argArray.add(0, order.getIdOrder());
-			argArray.add(1, String.valueOf(order.getTotal()));
-			argArray.add(2, String.valueOf(order.getTotalDiscount()));
-			argArray.add(3, String.valueOf(order.getVat()));
-			argArray.add(4, String.valueOf(order.getCash()));
-			argArray.add(5, String.valueOf(order.getChanges()));
-			argArray.add(6, order.getIdPaymentMethod());
-			argArray.add(7, order.getPaymentRemark());
-			argArray.add(8, convertDateToString(order.getOrderDate()));
-			this.run("orderAdd", argArray);
-			for (int n=0;n<orderDetails.size();n++){
-				orderDetailDAO.setOrderDetail(orderDetails.get(n));
-				orderDetailDAO.orderDetailAdd();
-			}
-			closeConnection();
+	public String orderAdd() throws SQLException{
+		String strIdOrderCounter = counterDAO.selectIdOrderCounter();
+		argArray.add(0, strIdOrderCounter);
+		argArray.add(1, convertDateToString(order.getOrderDate()));
+		this.run("orderAdd", argArray);
+		return strIdOrderCounter;
     }
 	
 	public void orderEdit() throws SQLException{

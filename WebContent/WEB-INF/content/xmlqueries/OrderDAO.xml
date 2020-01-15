@@ -4,6 +4,8 @@
 		<searchOrderByIdOrder>Select * from smpos_order where idOrder = ?</searchOrderByIdOrder> 
 		<searchOrderByAnyLike>Select * from smpos_order where idOrder like ?</searchOrderByAnyLike> 
 		<orderDelete>Delete from smpos_order where idOrder = ?</orderDelete> 
-		<orderAdd>Insert into smpos_order(idOrder,total,totalDiscount,vat,cash,changes,idPaymentMethod,paymentRemark,orderDate) values(?,?,?,?,?,?,?,?,?)</orderAdd>
+		<orderAdd>Insert into smpos_order(idOrder,orderDate) values(?,?)</orderAdd>
 		<orderEdit>Update smpos_order set idOrder=?,total=?,totalDiscount=?,vat=?,cash=?,changes=?,idPaymentMethod=?,paymentRemark=?,orderDate=? where idOrder=?</orderEdit>
+		<updateIdOrderCounter>update smpos_counter set `bigrnd` = (@cur_value := `bigrnd`)+1 where idCounter = 5</updateIdOrderCounter>
+		<selectIdOrderCounter>select concat("ORD",lpad(@cur_value,13,"0")) as idOrderCounter</selectIdOrderCounter>
 </xmlquery>		

@@ -74,7 +74,7 @@ public class OrderDetailDAO extends SmBaseDAO{
  		        System.out.println("Exception while closing result set: " + e);
  		   }
  		}
-    	closeConnection();
+    	//closeConnection();
     	return orderDetails;
     
     }
