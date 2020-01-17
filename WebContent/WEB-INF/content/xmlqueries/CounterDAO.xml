@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
 		<selectIdOrderCounter>select F_GetIdOrder()</selectIdOrderCounter>
+		<selectIdOrderDetailCounter>select F_GetIdOrderDetail()</selectIdOrderDetailCounter>
 </xmlquery>		

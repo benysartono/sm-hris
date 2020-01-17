@@ -11,12 +11,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDetail;
+import sm.hris.struts2.base.db.CounterDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
 
 public class OrderDetailDAO extends SmBaseDAO{
  
 	private Order order = new Order();
 	private OrderDetail orderDetail = new OrderDetail();
+	private CounterDAO counterDAO = new CounterDAO();
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
     private ArrayList<String> argArray = new ArrayList<String>();
@@ -79,6 +81,12 @@ public class OrderDetailDAO extends SmBaseDAO{
     
     }
 
+	public String selectIdOrderDetailCounter() throws SQLException{
+		String strIdOrderDetailCounter = counterDAO.selectIdOrderDetailCounter();
+		return strIdOrderDetailCounter;
+    }
+
+	
 	public void orderDetailAdd() throws SQLException{
 		argArray.add(0, orderDetail.getIdOrder());
 		argArray.add(1, orderDetail.getIdOrderDetail());

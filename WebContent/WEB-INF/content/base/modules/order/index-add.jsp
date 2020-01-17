@@ -38,35 +38,75 @@
 	 
 	 var app = angular.module("orderApp", []);
 	 
-	 app.controller("orderAppCtrl", function($scope) {
+	 app.controller("orderAppCtrl", function($scope,$http,$window) {
 	   
 	   //$scope.orderDetails = [{id: 'orderDetail1', name: 'orderDetail1'}, {id: 'orderDetail2', name: 'orderDetail2'}, {id: 'orderDetail3', name: 'orderDetail3'}];
-	   $scope.orderDetails = [{'id' : 'orderDetail1', 'name' : 'orderDetail1'}];
+
+   	   	$scope.orderDetails = [];
 	   
+	   /*
+		 $scope.addNewOrderDetail=function(){
+				var murl = "/sm-hris/base/modules/order/order-detail-add-json?idOrder=" + $scope.idOrder + "&idProduct=" + $scope.idProduct + "&amount="+ $scope.amount + "&unit=" + $scope.unit + "&unitPrice=" + $scope.unitPrice + "&subTotal=" + $scope.subTotal + "&idOrderDetail=" + $scope.idOrderDetail ;
+				$http.get(murl)
+				.then(function(response) {
+					$scope.orderDetails = response.data.orderDetails;
+			    });
+		    }
+	   */
 	   $scope.addNewOrderDetail = function() {
-	     newItemNo = $scope.orderDetails.length+1;
-	     $scope.orderDetails.push({'id' : 'orderDetail' + newItemNo, 'name' : 'orderDetail' + newItemNo});
+			var murl ="/sm-hris/base/modules/orderdetail/select-id-order-detail-counter-json";
+			$http.get(murl)
+			.then(function(response) {
+				$scope.idOrderDetailCounter = response.data.idOrderDetailCounter;
+		    });
+
+	     
+	     	$scope.orderDetails.push({
+	     		'idOrderDetail' : $scope.idOrderDetailCounter,
+	     		'idOrder'		:'<s:property value="order.idOrder"/>',
+	     		'idProduct'		:'',
+	     		'amount'		:'',
+	     		'unit'			:'',
+	     		'unitPrice'		:'',
+	     		'subTotal'		:''
+			});
 	   };
 	   
+	   
 	   $scope.removeNewOrderDetail = function(nId) {
-		   //var index = $scope.orderDetails.indexOf(item);
-		   //$scope.orderDetails.splice($scope.orderDetails.indexOf(nId), 1); 
+		   	//var index = $scope.orderDetails.indexOf(item);
+		   	//$scope.orderDetails.splice($scope.orderDetails.indexOf(nId), 1); 
 		   	//var oOrderDetail = $scope.orderDetails.filter(orderDetail = function() {return orderDetail.id === nId});
 			//var vIndex = $scope.orderDetails.indexOf(oOrderDetail);
 			//var vIndex = $scope.orderDetails.findIndex(orderDetail=>orderDetail.id === nId);
 			var found = $scope.orderDetails.find(function(orderDetail){return orderDetail.id = nId});
 			var vIndex = $scope.orderDetails.indexOf(found);
-			console.log("nId nya: " + nId);
-			console.log("oOrderDetail nya:" + found);
-			console.log("vIndex nya:" + vIndex);
-		   $scope.orderDetails.splice(vIndex,1);
-		   //$scope.orderDetails.splice(nId,1);     
+		   	$scope.orderDetails.splice(vIndex,1);
+		   	//$scope.orderDetails.splice(nId,1);     
 	   };
 	   
 	   $scope.showAddOrderDetail = function(orderDetail) {
 	     return orderDetail.id === $scope.orderDetails[$scope.orderDetails.length-1].id;
 	   };
 	   
+	   $scope.idProductNgBlur = function (){
+			var murl ="/sm-hris/base/modules/orderdetail/select-product-by-id-json?idProduct="+ + $scope.idProduct;
+			$http.get(murl)
+			.then(function(response) {
+				$scope.products = response.data.products;
+				console.log("$scope.products[0].unitPrice nya1-- : " + response.data.products[0].unitPrice);
+				console.log("$scope.product nya2-- : " + $scope.products[0].unitPrice);
+				//$scope.products.forEach(fFunc);
+				//function fFunc(item){
+				//	$scope.unitPrice = item.unitPrice;
+				//	$scopt.subTotal = item.amount * item.unitPrice;
+				//}
+					$scope.unitPrice = $scope.products[0].unitPrice;
+					$scopt.subTotal = $scope.products[0].amount * $scope.products[0].unitPrice;
+				
+			})   
+	   }
+
 	 });
 
 	</script>
@@ -198,11 +238,18 @@
 	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
                     <!--  <button ng-click="orderAddClick()">Add</button> -->
 			      <h1>Order Detail</h1>
-			      <div class="form-group" data-ng-repeat="orderDetail in orderDetails">
-			      <div class="row">
-			        <s:textfield type="text" ng-modal="{{orderDetail.id}}" name="orderDetails[].idOrderDetail" placeholder="" value="{{orderDetail.name}}" />
-					<s:submit cssClass="btn btn-primary" id="{{orderDetail.id}}" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" />
-			      </div>
+			      <div class="row" data-ng-repeat="orderDetail in orderDetails">
+					<!-- <s:submit cssClass="btn btn-primary" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" /> -->
+			        <div class="col-md-3">
+			        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-modal="{{orderDetail.idOrderDetail}}" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" /></div>
+			        <div class="col-md-3">
+			        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-modal="{{idProduct}}" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur()"/></div>
+			        <div class="col-md-2">
+			        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-modal="{{amount}}" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" /></div>
+			        <div class="col-md-2">
+			        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-modal="{{unitPrice}}" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" /></div>
+			        <div class="col-md-2">
+			        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-modal="{{subTotal}}" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" /></div>
 			      </div>
 			<!-- </s:form>  
 		    <div class="row">

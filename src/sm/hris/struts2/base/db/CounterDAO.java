@@ -15,6 +15,7 @@ public class CounterDAO extends SmBaseDAO{
 	private Counter counter = new Counter();
 	private ArrayList<Counter> counters = new ArrayList<Counter>();
 	private String strIdOrderCounter;
+	private String strIdOrderDetailCounter;
 
 	public String selectIdOrderCounter() throws SQLException{
         ResultSet rs = this.runQuery("selectIdOrderCounter");
@@ -34,6 +35,22 @@ public class CounterDAO extends SmBaseDAO{
         
     }
 
+	public String selectIdOrderDetailCounter() throws SQLException{
+        ResultSet rs = this.runQuery("selectIdOrderDetailCounter");
+            while (rs.next()) {
+            	strIdOrderDetailCounter = rs.getString("F_GetIdOrderDetail()");
+            } 
+            if(rs != null){
+     		   try {
+     		   rs.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing result set: " + e);
+     		   }
+     		}
+        	//closeConnection();
+        	return strIdOrderDetailCounter;
+        
+    }
 
 	public void updateIdOrderCounter() throws SQLException{
 			this.run("updateIdOrderCounter");
