@@ -25,6 +25,7 @@ public class OrderDAO extends SmBaseDAO{
 	//private ArrayList<orderFR> ordersfr = new ArrayList<ordersFR>();
     private ArrayList<String> argArray = new ArrayList<String>();
     private CounterDAO counterDAO = new CounterDAO();
+    private String strIdOrderCounter;
 
 	public ArrayList<Order> searchOrder() throws SQLException{
         ResultSet rs = this.runQuery("searchOrder");
@@ -131,7 +132,7 @@ public class OrderDAO extends SmBaseDAO{
     }
 
 	public String orderAdd() throws SQLException{
-		String strIdOrderCounter = counterDAO.selectIdOrderCounter();
+		setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
 		argArray.add(0, strIdOrderCounter);
 		argArray.add(1, convertDateToString(order.getOrderDate()));
 		this.run("orderAdd", argArray);
@@ -217,5 +218,13 @@ public class OrderDAO extends SmBaseDAO{
 	public void setOrderDetails (ArrayList<OrderDetail> orderDetails){
 		this.orderDetails = orderDetails;
 	}
+	
+	public String getStrIdOrderCounter(){
+		return strIdOrderCounter;
+	} 
+	
+	public void setStrIdOrderCounter(String strIdOrderCounter){
+		this.strIdOrderCounter = strIdOrderCounter;
+	} 
 	
 }

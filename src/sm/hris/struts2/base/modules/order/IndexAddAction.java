@@ -29,12 +29,12 @@ public class IndexAddAction extends SmBaseAction {
     private String res = new String();
     
     public String execute() throws Exception{
-    	if(order.getIdOrder().isEmpty()) return SUCCESS;
-    	else {
-    		orderDAO.setOrder(order);
-    		orderDAO.orderAdd();
-    		return "tolist";
-    	}
+    	//if(order.getIdOrder().isEmpty()) return "tolist";
+    	//else {
+    		//orderDAO.setOrder(order);
+    		//orderDAO.orderAdd();
+    		return SUCCESS;
+    	//}
     }
     
 

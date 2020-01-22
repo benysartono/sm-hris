@@ -12,11 +12,12 @@ import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDAO;
+import sm.hris.struts2.base.modules.order.IndexAddAction;
 
 
-//@Results({
-//	@Result(name="add", location="/base/modules/mgt/employee/employee-add", type="redirect"),
-//	})
+@Results({
+	@Result(name="add", location="/base/modules/order/index-add", type="redirect"),
+	})
 @ParentPackage(value = "hris")
 
 public class IndexAction extends SmBaseAction {
@@ -30,6 +31,7 @@ public class IndexAction extends SmBaseAction {
     private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc = new String();
     private String res = new String();
+    private IndexAddAction indexAddAction = new IndexAddAction();
     
     public String execute() throws Exception{
     	//super.listMenu();
@@ -42,7 +44,7 @@ public class IndexAction extends SmBaseAction {
     		orderDAO.setArgArray(argArray);
     		orders = orderDAO.searchOrderByIdOrder();
 			order = orders.get(0);
-    		res = "add";
+    		res= "add";
     	}
     	if(proc.equals("Delete")){
     		res = orderDelete();
