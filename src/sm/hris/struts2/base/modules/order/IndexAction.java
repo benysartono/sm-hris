@@ -36,14 +36,6 @@ public class IndexAction extends SmBaseAction {
     public String execute() throws Exception{
     	//super.listMenu();
     	if(proc.equals("Add")){
-    		order.setOrderDate(new Date());
-    		orderDAO.setOrder(order);
-    		String strIdOrderCounter = orderDAO.orderAdd();
-    		ArrayList<String> argArray = new ArrayList<String>();
-    		argArray.add(0,strIdOrderCounter);
-    		orderDAO.setArgArray(argArray);
-    		orders = orderDAO.searchOrderByIdOrder();
-			order = orders.get(0);
     		res= "add";
     	}
     	if(proc.equals("Delete")){

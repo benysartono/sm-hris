@@ -113,15 +113,10 @@
 <body ng-app="orderApp">
             
 <div class="container" ng-controller="orderAppCtrl">
-    <div class="row">
-          <div class="panel-heading">
+        <div class="panel-heading">
             <h1>Adding Order</h1>
-          </div>
-	    	<div class="container">
-
-            <!-- <s:form id="frmOrder" action="index-edit" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal"> -->
-
-                <div class="form-group">
+        </div>
+      	<div class="panel panel-default">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -132,6 +127,18 @@
                         	tooltip="Enter ID Order"
                         	value="%{order.idOrder}"
                         	ng-model="idOrder"
+                        	readonly="true"
+                        	/>
+					</div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Order Date"
+                        	name="order.orderDate"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Order Date"
+                        	value="%{order.orderDate}"
+                        	ng-model="orderDate"
                         	readonly="true"
                         	/>
 					</div>
@@ -217,23 +224,12 @@
                         	/>
 					</div>
                     <div class="col-md-9">
-                		<s:textfield
-                        	label="Order Date"
-                        	name="order.orderDate"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Order Date"
-                        	value="%{order.orderDate}"
-                        	ng-model="orderDate"
-                        	readonly="true"
-                        	/>
-					</div>
-                    <div class="col-md-9">
 	        			<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
                     <!--  <button ng-click="orderAddClick()">Add</button> -->
 	        		</div>
-	        		<div class="row">
-                    <div class="col-md-9">
+	        	</div>	
+	        	<div class="row">
+                   	<div class="col-md-9">
 				      <h1>Order Detail</h1>
 				      <div class="row" ng-repeat="orderDetail in orderDetails">
 						<!-- <s:submit cssClass="btn btn-primary" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" /> -->
@@ -248,16 +244,12 @@
 				        <div class="col-md-2">
 				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" /></div>
 				      </div>
-				     </div>
-				     </div>
-			<!-- </s:form>  --> 
-		    <div class="row">
-		        <s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
-			</div>
-		    </div>
-		</div> 
+				   	</div>
+				</div>
+		    	<div class="row">
+		        	<s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
+				</div>
 		</div>
-    </div>
 </div>
 <div class="container">
     <div class="row">
