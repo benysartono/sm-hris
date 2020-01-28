@@ -103,6 +103,14 @@
 	   $scope.amountNgBlur = function (amount,unitPrice,idx){
 		$scope.orderDetails[idx].subTotal = amount * unitPrice;
 	   }
+	   
+	   $scope.totalCalc = function(){
+		   $scope.order.total=0;
+		   var k;
+		   for(k=0;k<$scope.orderDetails.length();k++){
+			   $scope.order.total+=$scope.orderDetails[k].subTotal;
+		   }
+	   }
 	 });
 
 	</script>
@@ -110,9 +118,9 @@
 </head>
 
 
-<body ng-app="orderApp">
+<body>
             
-<div class="container" ng-controller="orderAppCtrl">
+<div class="container" >
         <div class="panel-heading">
             <h1>Adding Order</h1>
         </div>
@@ -142,6 +150,8 @@
                         	readonly="true"
                         	/>
 					</div>
+                </div>
+                <div class="row"  ng-app="orderApp" ng-controller="orderAppCtrl">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Total"
@@ -150,7 +160,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Total"
                         	value="%{order.total}"
-                        	ng-model="total"
+                        	ng-model="order.total"
                         	readonly="true"
                         	/>
 					</div>
@@ -162,7 +172,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Total Discount"
                         	value="%{order.total}"
-                        	ng-model="totalDiscount"
+                        	ng-model="order.totalDiscount"
                         	readonly="true"
                         	/>
 					</div>
@@ -174,7 +184,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="VAT"
                         	value="%{order.vat}"
-                        	ng-model="vat"
+                        	ng-model="order.vat"
                         	readonly="true"
                         	/>
 					</div>
@@ -186,7 +196,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Cash"
                         	value="%{order.cash}"
-                        	ng-model="cash"
+                        	ng-model="order.cash"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -197,7 +207,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Changes"
                         	value="%{order.changes}"
-                        	ng-model="changes"
+                        	ng-model="order.changes"
                         	readonly="true"
                         	/>
 					</div>
@@ -209,7 +219,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Payment Method Id"
                         	value="%{order.idPaymentMethod}"
-                        	ng-model="idPaymentMethod"
+                        	ng-model="order.idPaymentMethod"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -220,15 +230,13 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Payment Remark"
                         	value="%{order.paymentRemark}"
-                        	ng-model="paymentRemark"
+                        	ng-model="order.paymentRemark"
                         	/>
 					</div>
                     <div class="col-md-9">
 	        			<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
                     <!--  <button ng-click="orderAddClick()">Add</button> -->
 	        		</div>
-	        	</div>	
-	        	<div class="row">
                    	<div class="col-md-9">
 				      <h1>Order Detail</h1>
 				      <div class="row" ng-repeat="orderDetail in orderDetails">
@@ -242,12 +250,12 @@
 				        <div class="col-md-2">
 				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" /></div>
 				        <div class="col-md-2">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" /></div>
+				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" /></div>
 				      </div>
 				   	</div>
-				</div>
-		    	<div class="row">
+                <div class="col-md-9">
 		        	<s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
+				</div>
 				</div>
 		</div>
 </div>
