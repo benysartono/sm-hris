@@ -40,7 +40,6 @@
 	 app.controller("orderAppCtrl", function($scope,$http,$window,$compile) {
 	   
 	   //$scope.orderDetails = [{id: 'orderDetail1', name: 'orderDetail1'}, {id: 'orderDetail2', name: 'orderDetail2'}, {id: 'orderDetail3', name: 'orderDetail3'}];
-
    	   	$scope.orderDetails = [];
    	   	$scope.orderDetail={
      		'idOrderDetail' :"",
@@ -105,11 +104,14 @@
 	   }
 	   
 	   $scope.totalCalc = function(){
-		   $scope.order.total=0;
 		   var k;
-		   for(k=0;k<$scope.orderDetails.length();k++){
-			   $scope.order.total+=$scope.orderDetails[k].subTotal;
+		   var orderTotal;
+		   $scope.orderDetails.forEach(mFunc);
+		   function mFunc(item,index)
+		   {
+			   orderTotal+=item.subTotal;
 		   }
+		   $scope.total = orderTotal;
 	   }
 	 });
 
@@ -134,7 +136,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter ID Order"
                         	value="%{order.idOrder}"
-                        	ng-model="idOrder"
+                        	ng-model="order.idOrder"
                         	readonly="true"
                         	/>
 					</div>
@@ -146,7 +148,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Order Date"
                         	value="%{order.orderDate}"
-                        	ng-model="orderDate"
+                        	ng-model="order.orderDate"
                         	readonly="true"
                         	/>
 					</div>
@@ -159,8 +161,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Total"
-                        	value="%{order.total}"
-                        	ng-model="order.total"
+                        	value="{{total}}"
+                        	ng-model="total"
                         	readonly="true"
                         	/>
 					</div>
@@ -171,7 +173,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Total Discount"
-                        	value="%{order.total}"
+                        	value="%{order.totalDiscount}"
                         	ng-model="order.totalDiscount"
                         	readonly="true"
                         	/>
