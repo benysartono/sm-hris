@@ -41,7 +41,9 @@
 	   
 	   //$scope.orderDetails = [{id: 'orderDetail1', name: 'orderDetail1'}, {id: 'orderDetail2', name: 'orderDetail2'}, {id: 'orderDetail3', name: 'orderDetail3'}];
    	   	$scope.orderDetails = [];
-   	   	$scope.orderDetail={
+   	 	$scope.orders = [];
+   	   	
+   	 	$scope.orderDetail={
      		'idOrderDetail' :"",
      		'idOrder'		:"",
      		'idProduct'		:"",
@@ -50,24 +52,34 @@
      		'unitPrice'		:"",
      		'subTotal'		:""
    	   	};
-
+		/*
+   	 	$scope.order={
+   	   		'idOrder'			:"",
+   	   		'total'				:0,
+   	   		'totalDiscount'		:0,
+   	   		'vat'				:0,
+   	   		'cash'				:0,
+   	   		'changes'			:0,
+   	   		'idPaymentMethod'	:"",
+   	   		'paymentRemark'		:"",
+   	   		'orderDate'			:""
+   	   	};
+		*/
+		
    	   	$scope.addNewOrderDetail = function() {
 			var murl ="/sm-hris/base/modules/orderdetail/select-id-order-detail-counter-json";
 			$http.get(murl)
 			.then(function(response) {
-				$scope.idOrderDetailCounter = response.data.idOrderDetailCounter;
+		     	$scope.orderDetails.push({
+		     		'idOrderDetail' : response.data.idOrderDetailCounter,
+		     		'idOrder'		:'<s:property value="order.idOrder"/>',
+		     		'idProduct'		:'',
+		     		'amount'		:'',
+		     		'unit'			:'',
+		     		'unitPrice'		:'',
+		     		'subTotal'		:''
+				});
 		    });
-
-	     
-	     	$scope.orderDetails.push({
-	     		'idOrderDetail' : ($scope.idOrderDetailCounter),
-	     		'idOrder'		:'<s:property value="order.idOrder"/>',
-	     		'idProduct'		:'',
-	     		'amount'		:'',
-	     		'unit'			:'',
-	     		'unitPrice'		:'',
-	     		'subTotal'		:''
-			});
 	   };
 	   
 	   
@@ -77,9 +89,9 @@
 		   	//var oOrderDetail = $scope.orderDetails.filter(orderDetail = function() {return orderDetail.id === nId});
 			//var vIndex = $scope.orderDetails.indexOf(oOrderDetail);
 			//var vIndex = $scope.orderDetails.findIndex(orderDetail=>orderDetail.id === nId);
-			var found = $scope.orderDetails.find(function(orderDetail){return orderDetail.id = nId});
-			var vIndex = $scope.orderDetails.indexOf(found);
-		   	$scope.orderDetails.splice(vIndex,1);
+			//var found = $scope.orderDetails.find(function(orderDetail){return orderDetail.id = nId});
+			//var vIndex = $scope.orderDetails.indexOf(found);
+		   	$scope.orderDetails.splice(nId,1);
 		   	//$scope.orderDetails.splice(nId,1);     
 	   };
 	   
@@ -106,12 +118,16 @@
 	   $scope.totalCalc = function(){
 		   var k;
 		   var orderTotal;
+		   orderTotal=parseInt("0");
 		   $scope.orderDetails.forEach(mFunc);
 		   function mFunc(item,index)
 		   {
-			   orderTotal+=item.subTotal;
+			   if(item.subTotal){
+			   orderTotal+=parseInt(item.subTotal);
+			   }
 		   }
 		   $scope.total = orderTotal;
+		   $scope.vat = orderTotal/10;
 	   }
 	 });
 
@@ -123,10 +139,11 @@
 <body>
             
 <div class="container" >
-        <div class="panel-heading">
-            <h1>Adding Order</h1>
-        </div>
-      	<div class="panel panel-default">
+     <div class="panel-heading">
+         <h1>Adding Order</h1>
+     </div>
+     <div class="panel-default">
+     <div class="panel-body">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -136,7 +153,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter ID Order"
                         	value="%{order.idOrder}"
-                        	ng-model="order.idOrder"
+                        	ng-model=""
                         	readonly="true"
                         	/>
 					</div>
@@ -148,7 +165,7 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Order Date"
                         	value="%{order.orderDate}"
-                        	ng-model="order.orderDate"
+                        	ng-model=""
                         	readonly="true"
                         	/>
 					</div>
@@ -173,8 +190,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Total Discount"
-                        	value="%{order.totalDiscount}"
-                        	ng-model="order.totalDiscount"
+                        	value="{{totalDiscount}}"
+                        	ng-model="totalDiscount"
                         	readonly="true"
                         	/>
 					</div>
@@ -185,8 +202,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="VAT"
-                        	value="%{order.vat}"
-                        	ng-model="order.vat"
+                        	value="{{vat}}"
+                        	ng-model="vat"
                         	readonly="true"
                         	/>
 					</div>
@@ -197,8 +214,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Cash"
-                        	value="%{order.cash}"
-                        	ng-model="order.cash"
+                        	value="{{order[0].cash}}"
+                        	ng-model="order[0].cash"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -208,8 +225,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Changes"
-                        	value="%{order.changes}"
-                        	ng-model="order.changes"
+                        	value="{changes}}"
+                        	ng-model="changes"
                         	readonly="true"
                         	/>
 					</div>
@@ -220,8 +237,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Payment Method Id"
-                        	value="%{order.idPaymentMethod}"
-                        	ng-model="order.idPaymentMethod"
+                        	value="{{idPaymentMethod}}"
+                        	ng-model="idPaymentMethod"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -231,8 +248,8 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Payment Remark"
-                        	value="%{order.paymentRemark}"
-                        	ng-model="order.paymentRemark"
+                        	value="{{paymentRemark}}"
+                        	ng-model="paymentRemark"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -241,18 +258,20 @@
 	        		</div>
                    	<div class="col-md-9">
 				      <h1>Order Detail</h1>
-				      <div class="row" ng-repeat="orderDetail in orderDetails">
+				      <div class="row" data-ng-repeat="orderDetail in orderDetails">
 						<!-- <s:submit cssClass="btn btn-primary" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" /> -->
 				        <div class="col-md-3">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.idOrderDetail" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" /></div>
+				        <s:textfield type="text" ng-model="orderDetail.idOrderDetail" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" /></div>
 				        <div class="col-md-3">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)"/></div> 
+				        <s:textfield type="text" ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)"/></div> 
 				        <div class="col-md-2">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.amount" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)"/></div>
+				        <s:textfield type="text" ng-model="orderDetail.amount" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-change="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-focus="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)"/></div>
 				        <div class="col-md-2">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" /></div>
+				        <s:textfield type="text" ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" /></div>
 				        <div class="col-md-2">
-				        <s:textfield type="text" ng-if="orderDetail.idOrderDetail" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" /></div>
+				        <s:textfield type="text" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="totalCalc()" ng-focus="totalCalc()"/></div>
+				        <div class="col-md-2">
+		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" /></div>
 				      </div>
 				   	</div>
                 <div class="col-md-9">
@@ -260,6 +279,7 @@
 				</div>
 				</div>
 		</div>
+	</div>		
 </div>
 <div class="container">
     <div class="row">
