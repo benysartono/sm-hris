@@ -144,6 +144,8 @@
      </div>
      <div class="panel-default">
      <div class="panel-body">
+     <s:form id="frmOrder" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal">
+     
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -225,7 +227,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Changes"
-                        	value="{changes}}"
+                        	value="{{changes}}"
                         	ng-model="changes"
                         	readonly="true"
                         	/>
@@ -278,6 +280,7 @@
 		        	<s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
 				</div>
 				</div>
+			</s:form>
 		</div>
 	</div>		
 </div>
