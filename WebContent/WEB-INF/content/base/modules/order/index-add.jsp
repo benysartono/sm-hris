@@ -84,15 +84,8 @@
 	   
 	   
 	   $scope.removeNewOrderDetail = function(nId) {
-		   	//var index = $scope.orderDetails.indexOf(item);
-		   	//$scope.orderDetails.splice($scope.orderDetails.indexOf(nId), 1); 
-		   	//var oOrderDetail = $scope.orderDetails.filter(orderDetail = function() {return orderDetail.id === nId});
-			//var vIndex = $scope.orderDetails.indexOf(oOrderDetail);
-			//var vIndex = $scope.orderDetails.findIndex(orderDetail=>orderDetail.id === nId);
-			//var found = $scope.orderDetails.find(function(orderDetail){return orderDetail.id = nId});
-			//var vIndex = $scope.orderDetails.indexOf(found);
 		   	$scope.orderDetails.splice(nId,1);
-		   	//$scope.orderDetails.splice(nId,1);     
+		   	$scope.totalCalc();
 	   };
 	   
 	   $scope.showAddOrderDetail = function(orderDetail) {
@@ -113,6 +106,7 @@
 
 	   $scope.amountNgBlur = function (amount,unitPrice,idx){
 		$scope.orderDetails[idx].subTotal = amount * unitPrice;
+		$scope.totalCalc();
 	   }
 	   
 	   $scope.totalCalc = function(){
@@ -144,8 +138,8 @@
      </div>
      <div class="panel-default">
      <div class="panel-body">
-     <s:form id="frmOrder" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal">
      
+             <s:form id="frmOrder" theme="bootstrap" cssClass="form-vertical">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -159,6 +153,8 @@
                         	readonly="true"
                         	/>
 					</div>
+				</div>	
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Order Date"
@@ -173,6 +169,8 @@
 					</div>
                 </div>
                 <div class="row"  ng-app="orderApp" ng-controller="orderAppCtrl">
+                <div class="col-md-12">
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Total"
@@ -185,30 +183,36 @@
                         	readonly="true"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Total Discount"
                         	name="order.totalDiscount"
                         	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
+                        	elementCssClass="col-sm-2"
                         	tooltip="Total Discount"
                         	value="{{totalDiscount}}"
                         	ng-model="totalDiscount"
                         	readonly="true"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="VAT"
                         	name="order.vat"
                         	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
+                        	elementCssClass="col-sm-2"
                         	tooltip="VAT"
                         	value="{{vat}}"
                         	ng-model="vat"
                         	readonly="true"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Cash"
@@ -216,10 +220,12 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Cash"
-                        	value="{{order[0].cash}}"
-                        	ng-model="order[0].cash"
+                        	value="{{cash}}"
+                        	ng-model="cash"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Changes"
@@ -232,55 +238,72 @@
                         	readonly="true"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Payment Method Id"
                         	name="order.idPaymentMethod"
                         	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
+                        	elementCssClass="col-sm-5"
                         	tooltip="Payment Method Id"
                         	value="{{idPaymentMethod}}"
                         	ng-model="idPaymentMethod"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Payment Remark"
                         	name="order.paymentRemark"
                         	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
+                        	elementCssClass="col-sm-5"
                         	tooltip="Payment Remark"
                         	value="{{paymentRemark}}"
                         	ng-model="paymentRemark"
                         	/>
 					</div>
+				</div>
+                <div class="row">
                     <div class="col-md-9">
 	        			<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
                     <!--  <button ng-click="orderAddClick()">Add</button> -->
 	        		</div>
+				</div>
+                <div class="row">
                    	<div class="col-md-9">
 				      <h1>Order Detail</h1>
 				      <div class="row" data-ng-repeat="orderDetail in orderDetails">
 						<!-- <s:submit cssClass="btn btn-primary" ng-click="removeNewOrderDetail('{{orderDetail.id}}')" value="Remove Order Detail" /> -->
-				        <div class="col-md-3">
-				        <s:textfield type="text" ng-model="orderDetail.idOrderDetail" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" /></div>
-				        <div class="col-md-3">
-				        <s:textfield type="text" ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)"/></div> 
-				        <div class="col-md-2">
-				        <s:textfield type="text" ng-model="orderDetail.amount" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-change="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-focus="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)"/></div>
-				        <div class="col-md-2">
-				        <s:textfield type="text" ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" /></div>
-				        <div class="col-md-2">
-				        <s:textfield type="text" ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="totalCalc()" ng-focus="totalCalc()"/></div>
-				        <div class="col-md-2">
-		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" /></div>
+				        <div class="row">
+				        <div class="col-md-12">
+				        <s:textfield ng-model="orderDetail.idOrderDetail" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" readonly="true" elementCssClass="col-sm-4"/>
+				        <s:textfield ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)" elementCssClass="col-sm-2"/>
+				        </div> 
+				        </div>
+				        <div class="row">
+				        <div class="col-md-6">
+				        <s:textfield ng-model="orderDetail.amount" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-change="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-focus="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" elementCssClass="col-sm-3"/>
+				        <s:textfield ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" readonly="true" elementCssClass="col-sm-2"/>
+				        <s:textfield ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="totalCalc()" ng-focus="totalCalc()" readonly="true" elementCssClass="col-sm-2"/>
+						</div>
+				        <div class="col-md-6">
+		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" />
+		        		</div>
+		        		</div>
 				      </div>
 				   	</div>
+				</div>
+                <div class="row">
                 <div class="col-md-9">
-		        	<s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" />
+		        	<!-- <s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" /> -->
+		        	<a href="#" id="addOrderDetail" ng-click="addNewOrderDetail()">Add Order Detail</a>
 				</div>
 				</div>
-			</s:form>
+				</div>
+				</div>
+			</s:form>	
 		</div>
 	</div>		
 </div>
