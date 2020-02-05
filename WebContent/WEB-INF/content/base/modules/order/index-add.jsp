@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -50,7 +51,8 @@
      		'amount'		:"",
      		'unit'			:"",
      		'unitPrice'		:"",
-     		'subTotal'		:""
+     		'subTotal'		:"",
+     		'nmProduct'		:""
    	   	};
 		/*
    	 	$scope.order={
@@ -77,7 +79,8 @@
 		     		'amount'		:'',
 		     		'unit'			:'',
 		     		'unitPrice'		:'',
-		     		'subTotal'		:''
+		     		'subTotal'		:'',
+		     		'nmProduct'		:''
 				});
 		    });
 	   };
@@ -100,9 +103,10 @@
 				var product = response.data.products[0];
 				$scope.orderDetails[idx].unitPrice = product.unitPrice;
 				$scope.orderDetails[idx].subTotal = $scope.orderDetails[idx].amount * $scope.orderDetails[idx].unitPrice;
-				
+				$scope.orderDetails[idx].nmProduct = product.nmProduct;				
 			})   
 	   }
+
 
 	   $scope.amountNgBlur = function (amount,unitPrice,idx){
 		$scope.orderDetails[idx].subTotal = amount * unitPrice;
@@ -178,8 +182,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Total"
-                        	value="{{total}}"
-                        	ng-model="total"
+                        	value="{{total | number}}"
                         	readonly="true"
                         	/>
 					</div>
@@ -192,7 +195,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-2"
                         	tooltip="Total Discount"
-                        	value="{{totalDiscount}}"
+                        	value="{{totalDiscount | number}}"
                         	ng-model="totalDiscount"
                         	readonly="true"
                         	/>
@@ -206,7 +209,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-2"
                         	tooltip="VAT"
-                        	value="{{vat}}"
+                        	value="{{vat | number}}"
                         	ng-model="vat"
                         	readonly="true"
                         	/>
@@ -220,7 +223,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Cash"
-                        	value="{{cash}}"
+                        	value="{{cash | number}}"
                         	ng-model="cash"
                         	/>
 					</div>
@@ -233,7 +236,7 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Changes"
-                        	value="{{changes}}"
+                        	value="{{changes | number}}"
                         	ng-model="changes"
                         	readonly="true"
                         	/>
@@ -279,19 +282,31 @@
 				        <div class="row">
 				        <div class="col-md-12">
 				        <s:textfield ng-model="orderDetail.idOrderDetail" name="orderDetails[{{$index}}].idOrderDetail" id="orderDetails[{{$index}}].idOrderDetail" placeholder="Id Order Detail" value="{{orderDetail.idOrderDetail}}" readonly="true" elementCssClass="col-sm-4"/>
-				        <s:textfield ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)" elementCssClass="col-sm-2"/>
+				        <s:textfield ng-model="orderDetail.idProduct" name="orderDetails[{{$index}}].idProduct" id="orderDetails[{{$index}}].idProduct" placeholder="Id Product" value="{{orderDetail.idProduct}}" ng-blur="idProductNgBlur(orderDetail.idProduct,$index)" elementCssClass="col-sm-4"/>
+				        <s:textfield ng-model="orderDetail.amount" 
+				        	name="orderDetails[{{$index}}].amount" 
+				        	id="orderDetails[{{$index}}].amount" 
+				        	placeholder="Amount" 
+				        	ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" 
+				        	ng-change="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" 
+				        	ng-focus="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" elementCssClass="col-sm-2"/>
+				        <s:textfield ng-model="orderDetail.nmProduct" name="orderDetails[{{$index}}].nmProduct" id="orderDetails[{{$index}}].nmProduct" placeholder="Product Name" value="{{orderDetail.nmProduct}}" readonly="true" elementCssClass="col-sm-4"/>
 				        </div> 
 				        </div>
 				        <div class="row">
-				        <div class="col-md-6">
-				        <s:textfield ng-model="orderDetail.amount" name="orderDetails[{{$index}}].amount" id="orderDetails[{{$index}}].amount" placeholder="Amount" value="{{orderDetail.amount}}" ng-blur="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-change="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" ng-focus="amountNgBlur(orderDetail.amount,orderDetail.unitPrice,$index)" elementCssClass="col-sm-3"/>
+				        <div class="col-md-9">
 				        <s:textfield ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" readonly="true" elementCssClass="col-sm-2"/>
 				        <s:textfield ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="totalCalc()" ng-focus="totalCalc()" readonly="true" elementCssClass="col-sm-2"/>
 						</div>
-				        <div class="col-md-6">
-		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" />
+				        <div class="col-md-3">
+		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" elementCssClass="col-sm-2"/>
 		        		</div>
 		        		</div>
+		                <div class="row">
+		                <div class="col-md-12">
+		                =======================================================================
+						</div>
+						</div>
 				      </div>
 				   	</div>
 				</div>

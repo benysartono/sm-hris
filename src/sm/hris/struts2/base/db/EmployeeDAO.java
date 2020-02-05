@@ -183,7 +183,6 @@ public class EmployeeDAO extends SmBaseDAO{
     }
 
 	public void employeeAdd(Employee employee) throws SQLException, FileNotFoundException{
-			System.out.println("Ada di dalam EmployeeDAO EmployeeAdd");
 			argArray.add(0, employee.getIdEmployee());
 			argArray.add(1, employee.getName());
 			argArray.add(2, employee.getAddress());

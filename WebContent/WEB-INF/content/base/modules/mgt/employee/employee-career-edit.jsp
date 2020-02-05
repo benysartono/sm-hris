@@ -157,7 +157,7 @@
                     </div>
                     
                     <s:url id="fileDownload" namespace="/" action="download" ></s:url>
-					<h2>Download file - <s:a href="%{fileDownload}"><s:property value="%{employeeCareer.idCareer}" /></s:a>
+					<h2>Download file - <s:a href="%{fileDownload}"><s:property value="%{employeeCareer.idCareer}" /></s:a></h2>
 
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>

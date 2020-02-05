@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchDiscount>Select * from smpos_mdiscount</searchDiscount> 
+		<searchDiscountByProductId>Select * from smpos_mdiscount where idProduct = ?</searchDiscountByProductId> 
+		<searchDiscountByAnyLike>Select * from smpos_mdiscount where idProduct like ? or discount like ? or startDate like ? or endDate like ?</searchDiscountByAnyLike> 
+		<discountDelete>Delete from smpos_mdiscount where idProduct = ? and startTime=? and endTime=?</discountDelete> 
+		<discountAdd>Insert into smpos_mdiscount(idProduct,discount,startTime,endTime) values(?,?,?,?)</discountAdd>
+		<discountEdit>Update smpos_mdiscount set idProduct=?,discount=?,startTime=?,endTime=? where idProduct=? and startTime=? and endTime=?</discountEdit>
+</xmlquery>		
