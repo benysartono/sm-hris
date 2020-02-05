@@ -6,34 +6,34 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import sm.hris.struts2.base.SmBaseAction;
-import sm.hris.struts2.base.db.Product;
-import sm.hris.struts2.base.db.ProductDAO;
+import sm.hris.struts2.base.db.Discount;
+import sm.hris.struts2.base.db.DiscountDAO;
 
 @Results({
-	@Result(name="tolist", location="/base/modules/mgt/product", type="redirect"),
+	@Result(name="tolist", location="/base/modules/mgt/discount", type="redirect"),
 	})
 @ParentPackage(value = "hris")
 
 public class IndexAddAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
-	private ProductDAO productDAO = new ProductDAO();
-    private Product product = new Product();
+	private DiscountDAO discountDAO = new DiscountDAO();
+    private Discount discount = new Discount();
     private String proc;
     
     public String execute() throws Exception{
     	if((proc != null)&&(proc.equals("Submit"))) {
-	   		productDAO.setProduct(product);
-	   		productDAO.productAdd();
+	   		discountDAO.setDiscount(discount);
+	   		discountDAO.discountAdd();
     	}
 		return "tolist";
     }
 	
-    public Product getProduct(){
-		return product;
+    public Discount getDiscount(){
+		return discount;
 	}
 	
-	public void setProduct(Product product){
-		this.product = product;
+	public void setDiscount(Discount discount){
+		this.discount = discount;
 	}
 
     public String getProc(){
