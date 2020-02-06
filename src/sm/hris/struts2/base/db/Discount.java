@@ -8,12 +8,21 @@ import sm.hris.struts2.base.db.OrderDetail;
 
 public class Discount {
 
+	private String idDiscount;
 	private String idProduct; 									
 	private Integer discount; 				
 	private Date startTime; 									
 	private Date endTime; 									
 	
 	
+	public String getIdDiscount(){
+		return idDiscount;
+	}
+	
+	public void setIdDiscount(String idDiscount) {
+		this.idDiscount = idDiscount;
+	}
+
 	public String getIdProduct(){
 		return idProduct;
 	}

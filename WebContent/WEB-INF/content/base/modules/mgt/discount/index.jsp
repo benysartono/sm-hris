@@ -56,7 +56,10 @@
 					<thead>
 						<tr>
 							<td>
-								<input type="checkbox" name="checkAll">ID Product</checkbox>
+								<input type="checkbox" name="checkAll">Discount Id</checkbox>
+							</td>
+							<td>
+								Product Id
 							</td>
 							<td>
 								Discount
@@ -70,19 +73,23 @@
 						</tr>
 					</thead>
 					<tbody>
-					<s:iterator value="discounts">
+					<s:iterator value="discounts" status="stat" var="discount">
 						<tr>
-							<td>       
-								<input type="checkbox" name="idProducts"><s:property value ="idProduct"/></checkbox>
+							<td>
+								<input type="checkbox" name="discounts[<s:property value="#stat.index"/>].idDiscount"><s:property value ="idDiscount"/></checkbox>
 							</td>
 							<td>       
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">
+    								<s:param name="discount.idDiscount"><s:property value ="idDiscount"/></s:param>
     								<s:param name="discount.idProduct"><s:property value ="idProduct"/></s:param>
     								<s:param name="discount.discount"><s:property value ="discount"/></s:param>
     								<s:param name="discount.startTime"><s:property value ="startTime"/></s:param>
     								<s:param name="discount.endTime"><s:property value ="endTime"/></s:param>
 								</s:url>
-								<a href="<s:property value="#urlTag" />" ><s:property value ="discount"/></a>
+								<a href="<s:property value="#urlTag" />" ><s:property value ="idProduct"/></a>
+							</td>
+							<td>       
+								<s:property value ="discount"/>
 							</td>
 							<td>       
 								<s:property value ="startTime"/>

@@ -20,6 +20,7 @@ public class DiscountDAO extends SmBaseDAO{
         if(rs != null){
             while (rs.next()) {
             	Discount discount = new Discount();
+            	discount.setIdDiscount(rs.getString("idDiscount"));
             	discount.setIdProduct(rs.getString("idProduct"));
             	discount.setDiscount(rs.getInt("discount"));
             	discount.setStartTime(rs.getDate("startTime"));
@@ -42,6 +43,7 @@ public class DiscountDAO extends SmBaseDAO{
         ResultSet rs = this.runQuery("searchDiscountByIdProduct",argArray.get(0));
             while (rs.next()) {
             	Discount discount = new Discount();
+            	discount.setIdDiscount(rs.getString("idDiscount"));
             	discount.setIdProduct(rs.getString("idProduct"));
             	discount.setDiscount(rs.getInt("discount"));
             	discount.setStartTime(rs.getDate("startTime"));
@@ -67,6 +69,7 @@ public class DiscountDAO extends SmBaseDAO{
  
         while (rs.next()) {
         	Discount discount = new Discount();
+        	discount.setIdDiscount(rs.getString("idDiscount"));
         	discount.setIdProduct(rs.getString("idProduct"));
         	discount.setDiscount(rs.getInt("discount"));
         	discount.setStartTime(rs.getDate("startTime"));
@@ -87,14 +90,10 @@ public class DiscountDAO extends SmBaseDAO{
 
 	public void discountDelete() throws SQLException{
 		for(int i=0;i<discounts.size();i++) {
-			argArray.add(0, discounts.get(i).getIdProduct());
-			String cvtDate = convertDateToString(discounts.get(i).getStartTime());
-			argArray.add(1, cvtDate);
-			cvtDate = convertDateToString(discounts.get(i).getEndTime());
-			argArray.add(2, cvtDate);
+			argArray.add(0, discounts.get(i).getIdDiscount());
+			System.out.println("Id Kue nya : " + discounts.get(i).getIdDiscount());
 			this.run("discountDelete", argArray);
 		}
-		closeConnection();
     }
 
 	public void discountAdd() throws SQLException{
@@ -110,23 +109,12 @@ public class DiscountDAO extends SmBaseDAO{
 	
 	public void discountEdit() throws SQLException{
 		argArray.add(0, discount.getIdProduct());
-		
 		argArray.add(1,String.valueOf(discount.getDiscount()));
-		
 		String cvtDate = convertDateToString(discount.getStartTime());
 		argArray.add(2, cvtDate);
-		
 		cvtDate = convertDateToString(discount.getEndTime());
 		argArray.add(3, cvtDate);
-		
-		argArray.add(4, discount.getIdProduct());
-		
-		cvtDate = convertDateToString(discount.getStartTime());
-		argArray.add(5, cvtDate);
-		
-		cvtDate = convertDateToString(discount.getEndTime());
-		argArray.add(6, cvtDate);
-		
+		argArray.add(4, discount.getIdDiscount());
 		this.run("discountEdit", argArray);
 		closeConnection();
 	}

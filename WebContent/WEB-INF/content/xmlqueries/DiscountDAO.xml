@@ -3,7 +3,7 @@
 		<searchDiscount>Select * from smpos_mdiscount</searchDiscount> 
 		<searchDiscountByProductId>Select * from smpos_mdiscount where idProduct = ?</searchDiscountByProductId> 
 		<searchDiscountByAnyLike>Select * from smpos_mdiscount where idProduct like ? or discount like ? or startDate like ? or endDate like ?</searchDiscountByAnyLike> 
-		<discountDelete>Delete from smpos_mdiscount where idProduct = ? and startTime=? and endTime=?</discountDelete> 
+		<discountDelete>Delete from smpos_mdiscount where idDiscount = ?</discountDelete> 
 		<discountAdd>Insert into smpos_mdiscount(idProduct,discount,startTime,endTime) values(?,?,?,?)</discountAdd>
-		<discountEdit>Update smpos_mdiscount set idProduct=?,discount=?,startTime=?,endTime=? where idProduct=? and startTime=? and endTime=?</discountEdit>
+		<discountEdit>Update smpos_mdiscount set idProduct=?, discount=?,startTime=?,endTime=? where idDiscount=?</discountEdit>
 </xmlquery>		

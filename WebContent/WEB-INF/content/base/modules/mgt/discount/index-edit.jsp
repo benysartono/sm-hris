@@ -46,6 +46,17 @@
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
+                        	label="ID Discount"
+                        	name="discount.idDiscount"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Id"
+                        	value="%{discount.idDiscount}"
+                        	readonly="true"
+                        	/>
+					</div>
+                    <div class="col-md-9">
+                		<s:textfield
                         	label="ID Product"
                         	name="discount.idProduct"
                         	cssClass="input-sm"
