@@ -17,6 +17,7 @@ public class DiscountDAO extends SmBaseDAO{
 
 	public ArrayList<Discount> searchDiscount() throws SQLException{
         ResultSet rs = this.runQuery("searchDiscount");
+        if(rs != null){
             while (rs.next()) {
             	Discount discount = new Discount();
             	discount.setIdProduct(rs.getString("idProduct"));
@@ -26,15 +27,14 @@ public class DiscountDAO extends SmBaseDAO{
             	discounts.add(discount);
             } 
         	
-            if(rs != null){
      		   try {
      		   rs.close();
      		   } catch (SQLException e) {
      		        System.out.println("Exception while closing result set: " + e);
      		   }
-     		}
-        	closeConnection();
-        	return discounts;
+   		}
+        closeConnection();
+        return discounts;
         
     }
 
@@ -89,9 +89,9 @@ public class DiscountDAO extends SmBaseDAO{
 		for(int i=0;i<discounts.size();i++) {
 			argArray.add(0, discounts.get(i).getIdProduct());
 			String cvtDate = convertDateToString(discounts.get(i).getStartTime());
-			argArray.add(2, cvtDate);
+			argArray.add(1, cvtDate);
 			cvtDate = convertDateToString(discounts.get(i).getEndTime());
-			argArray.add(3, cvtDate);
+			argArray.add(2, cvtDate);
 			this.run("discountDelete", argArray);
 		}
 		closeConnection();
@@ -110,17 +110,24 @@ public class DiscountDAO extends SmBaseDAO{
 	
 	public void discountEdit() throws SQLException{
 		argArray.add(0, discount.getIdProduct());
+		
 		argArray.add(1,String.valueOf(discount.getDiscount()));
+		
 		String cvtDate = convertDateToString(discount.getStartTime());
 		argArray.add(2, cvtDate);
+		
 		cvtDate = convertDateToString(discount.getEndTime());
 		argArray.add(3, cvtDate);
+		
 		argArray.add(4, discount.getIdProduct());
+		
 		cvtDate = convertDateToString(discount.getStartTime());
 		argArray.add(5, cvtDate);
+		
 		cvtDate = convertDateToString(discount.getEndTime());
 		argArray.add(6, cvtDate);
-		this.run("discountAdd", argArray);
+		
+		this.run("discountEdit", argArray);
 		closeConnection();
 	}
 

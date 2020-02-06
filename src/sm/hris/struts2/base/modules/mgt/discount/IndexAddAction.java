@@ -9,6 +9,7 @@ import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Discount;
 import sm.hris.struts2.base.db.DiscountDAO;
 
+
 @Results({
 	@Result(name="tolist", location="/base/modules/mgt/discount", type="redirect"),
 	})

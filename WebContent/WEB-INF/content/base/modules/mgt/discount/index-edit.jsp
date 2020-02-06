@@ -41,7 +41,7 @@
           </div>
           <div class="panel-body">
 			<div class="tab-content responsive">
-            <s:form id="frmCategory" action="index-edit" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <s:form id="frmDiscount" action="index-edit" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-9">
 						<sj:datepicker
-                                id="datepicker1"
+                                id="datepicker2"
                                 parentTheme="bootstrap"
                                 name="discount.endTime"
                                 value="%{discount.endTime}"

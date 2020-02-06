@@ -12,17 +12,19 @@ import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Discount;
 import sm.hris.struts2.base.db.DiscountDAO;
-import sm.hris.struts2.base.db.Category;
-import sm.hris.struts2.base.db.CategoryDAO;
+import sm.hris.struts2.base.db.Product;
+import sm.hris.struts2.base.db.ProductDAO;
 
 @ParentPackage(value = "hris")
 
 public class IndexAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private DiscountDAO discountDAO = new DiscountDAO();
-    private ArrayList<Discount> discounts;
+    private ArrayList<Discount> discounts = new ArrayList<Discount>();
     private ArrayList<String> argArray = new ArrayList<String>();
     private ArrayList<ArrayList<String>> argArray2 = new ArrayList<ArrayList<String>>();
+    private ProductDAO productDAO = new ProductDAO();
+    private ArrayList<Product> products = new ArrayList<Product>();
     private String proc;
     private String res;
     private String keyword;
@@ -30,6 +32,7 @@ public class IndexAction extends SmBaseAction {
     public String execute() throws Exception{
     	if (proc != null){
 	    	if(proc.equals("Add")){
+	    		products = productDAO.searchProduct();
 	    		return "add";
 	    	}
 	    	if(proc.equals("Delete")){
@@ -81,6 +84,15 @@ public class IndexAction extends SmBaseAction {
 	public ArrayList<Discount> getDiscounts(){
 		return discounts;
 	}
+
+	public void setProducts(ArrayList<Product> products){
+		this.products = products;
+	}
+	
+	public ArrayList<Product> getProducts(){
+		return products;
+	}
+	
 	public ArrayList<ArrayList<String>> getArgArray2(){
 		return argArray2;
 	}	

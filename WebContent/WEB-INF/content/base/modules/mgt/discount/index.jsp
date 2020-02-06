@@ -35,11 +35,11 @@
 			</td>
 			<td>
 			<s:textfield
-        			id="description"
-                	name="description"
+        			id="keyword"
+                	name="keyword"
                 	cssClass="input-sm"
                 	elementCssClass="col-sm-3"
-                	tooltip="Enter description"
+                	tooltip="Enter keyword"
                 	class="text-right"/><s:submit cssClass="btn btn-primary" name="proc" value="Search"/>
 			</td>
 			</tr>
@@ -56,7 +56,7 @@
 					<thead>
 						<tr>
 							<td>
-								<input type="checkbox" name="checkAll">ID Discount</checkbox>
+								<input type="checkbox" name="checkAll">ID Product</checkbox>
 							</td>
 							<td>
 								Discount
@@ -73,7 +73,7 @@
 					<s:iterator value="discounts">
 						<tr>
 							<td>       
-								<input type="checkbox" name="idProducts"  value="<s:property value ="idProduct"/>"><s:property value ="idProduct"/></checkbox>
+								<input type="checkbox" name="idProducts"><s:property value ="idProduct"/></checkbox>
 							</td>
 							<td>       
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">
@@ -101,7 +101,7 @@
 		    		<s:submit cssClass="btn btn-primary" name="proc" value="Add"/> 
 	        	</div>
 	        	<div  class="col-sm-4">
-	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
+	        		<s:submit cssClass="btn btn-primary" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
 	        	</div>
         	</div>
 			</form>

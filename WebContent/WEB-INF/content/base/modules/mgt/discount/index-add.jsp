@@ -45,19 +45,20 @@
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
-                		<s:textfield
-                        	label="ID Product"
+                		<s:select
+                        	label="Product Id"
                         	name="discount.idProduct"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Id"
-                        	value="%{discount.idProduct}"
-                        	readonly="true"
+                        	tooltip="Enter Product"
+                        	list="products"
+                        	listKey="idProduct"
+                        	listValue="nmProduct"
                         	/>
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Name"
+                        	label="Discount %"
                         	name="discount.discount"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
@@ -81,7 +82,7 @@
                     </div>
                     <div class="col-md-9">
 						<sj:datepicker
-                                id="datepicker1"
+                                id="datepicker2"
                                 parentTheme="bootstrap"
                                 name="discount.endTime"
                                 label="Date End"
