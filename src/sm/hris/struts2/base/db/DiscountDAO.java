@@ -91,7 +91,6 @@ public class DiscountDAO extends SmBaseDAO{
 	public void discountDelete() throws SQLException{
 		for(int i=0;i<discounts.size();i++) {
 			argArray.add(0, discounts.get(i).getIdDiscount());
-			System.out.println("Id Kue nya : " + discounts.get(i).getIdDiscount());
 			this.run("discountDelete", argArray);
 		}
     }
