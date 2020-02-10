@@ -76,9 +76,14 @@
 					<s:iterator value="discounts" status="stat" var="discount">
 						<tr>
 							<td>
-								<input type="checkbox" name="discounts[<s:property value="#stat.index"/>].idDiscount"><s:property value ="idDiscount"/></checkbox>
-							</td>
-							<td>       
+								<s:checkbox 
+									name="discounts[%{#stat.index}].idDiscount" 
+									id="discounts[%{#stat.index}].idDiscount" 
+									value="%{idDiscount}" 
+									><s:property value="idDiscount"/>
+								</s:checkbox>
+							</td>	
+							<td>		
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">
     								<s:param name="discount.idDiscount"><s:property value ="idDiscount"/></s:param>
     								<s:param name="discount.idProduct"><s:property value ="idProduct"/></s:param>

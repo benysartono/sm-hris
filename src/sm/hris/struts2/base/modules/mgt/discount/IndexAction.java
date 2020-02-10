@@ -33,10 +33,15 @@ public class IndexAction extends SmBaseAction {
     	if (proc != null){
 	    	if(proc.equals("Add")){
 	    		products = productDAO.searchProduct();
-	    		return "add";
+	    		res="add";
 	    	}
 	    	if(proc.equals("Delete")){
-	    		res = discountDelete();
+	    		System.out.println("Di dalam proc delete");
+	    		System.out.println("Discounts nya : "+ discounts.get(0).getIdDiscount());
+	    		discountDAO.setDiscounts(discounts);
+	    		discountDAO.discountDelete();
+	    		setDiscounts(discountDAO.searchDiscount());
+	    		res="success";
 	    	}
 			if(!(proc.equals("Add")||proc.equals("Delete"))){
 		    	if (!keyword.equals("")) {
@@ -54,12 +59,6 @@ public class IndexAction extends SmBaseAction {
 		return res;
     }
     
-	public String discountDelete() throws Exception {
-		discountDAO.setDiscounts(discounts);
-		discountDAO.discountDelete();
-		setDiscounts(discountDAO.searchDiscount());
-		return "success";
-	}
 
 	public String discountAdd() throws Exception {
 		return "add";
