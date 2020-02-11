@@ -22,12 +22,15 @@ public class IndexAction extends SmBaseAction {
 	private DiscountDAO discountDAO = new DiscountDAO();
     private ArrayList<Discount> discounts = new ArrayList<Discount>();
     private ArrayList<String> argArray = new ArrayList<String>();
+    private ArrayList<String> idDiscounts = new ArrayList<String>();
     private ArrayList<ArrayList<String>> argArray2 = new ArrayList<ArrayList<String>>();
     private ProductDAO productDAO = new ProductDAO();
     private ArrayList<Product> products = new ArrayList<Product>();
     private String proc;
     private String res;
     private String keyword;
+    private Integer n;
+    private Discount discount;
     
     public String execute() throws Exception{
     	if (proc != null){
@@ -36,9 +39,7 @@ public class IndexAction extends SmBaseAction {
 	    		res="add";
 	    	}
 	    	if(proc.equals("Delete")){
-	    		System.out.println("Di dalam proc delete");
-	    		System.out.println("Discounts nya : "+ discounts.get(0).getIdDiscount());
-	    		discountDAO.setDiscounts(discounts);
+	    		discountDAO.setIdDiscounts(idDiscounts);
 	    		discountDAO.discountDelete();
 	    		setDiscounts(discountDAO.searchDiscount());
 	    		res="success";
@@ -92,12 +93,28 @@ public class IndexAction extends SmBaseAction {
 		return products;
 	}
 	
+	public void setDiscount(Discount discount){
+		this.discount = discount;
+	}
+	
+	public Discount getDiscount(){
+		return discount;
+	}
+
 	public ArrayList<ArrayList<String>> getArgArray2(){
 		return argArray2;
 	}	
 	
 	public void setArgArray2(ArrayList<ArrayList<String>> argArray2){
 		this.argArray2 = argArray2;
+	}
+
+	public ArrayList<String> getIdDiscounts(){
+		return idDiscounts;
+	}	
+	
+	public void setIdDiscounts(ArrayList<String> idDiscounts){
+		this.idDiscounts = idDiscounts;
 	}
 
 	public ArrayList<String> getArgArray(){

@@ -13,6 +13,7 @@ public class DiscountDAO extends SmBaseDAO{
 	private Discount discount = new Discount();
 	private ArrayList<Discount> discounts = new ArrayList<Discount>();
     private ArrayList<String> argArray = new ArrayList<String>();
+    private ArrayList<String> idDiscounts = new ArrayList<String>();
     private ArrayList<ArrayList<String>> argArray2 = new ArrayList<ArrayList<String>>();
 
 	public ArrayList<Discount> searchDiscount() throws SQLException{
@@ -89,8 +90,9 @@ public class DiscountDAO extends SmBaseDAO{
     }
 
 	public void discountDelete() throws SQLException{
-		for(int i=0;i<discounts.size();i++) {
-			argArray.add(0, discounts.get(i).getIdDiscount());
+		for(String idDiscount : idDiscounts) {
+			argArray = new ArrayList<String>();
+			argArray.add(0, idDiscount);
 			this.run("discountDelete", argArray);
 		}
     }
@@ -166,5 +168,13 @@ public class DiscountDAO extends SmBaseDAO{
 	public void setArgArray2(ArrayList<ArrayList<String>> argArray2) {
 		this.argArray2 = argArray2;
 	}
+
+	public ArrayList<String> getIdDiscounts(){
+		return idDiscounts;
+	}	
 	
+	public void setIdDiscounts(ArrayList<String> idDiscounts){
+		this.idDiscounts = idDiscounts;
+	}
+
 }

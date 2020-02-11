@@ -5,6 +5,6 @@
 		<searchOrderDetailByIdOrder>Select * from smpos_order_detail where idOrder=? order by idOrderDetail limit ?,2</searchOrderDetailByIdOrder> 
 		<orderDetailDelete>Delete from smpos_order_detail where idOrder = ? and idOrderDetail=?</orderDetailDelete> 
 		<orderDetailDeleteByIdOrder>Delete from smpos_order_detail where idOrder = ?</orderDetailDeleteByIdOrder> 
-		<orderDetailAdd>Insert into smpos_order_detail(idOrder,idOrderDetail,idProduct,amount,unit,unitPrice,subTotal) values(?,?,?,?,?,?,?)</orderDetailAdd>
-		<orderDetailEdit>Update smpos_order_detail set idOrder=?,idOrderDetail=?,idProduct=?,amount=?,unit=?,unitPrice=?, subTotal=? where idOrder=? and idOrderDetail=?</orderDetailEdit>
+		<orderDetailAdd>Insert into smpos_order_detail(idOrder,idOrderDetail,idProduct,amount,unit,unitPrice,subTotal,subDiscount) values(?,?,?,?,?,?,?,?)</orderDetailAdd>
+		<orderDetailEdit>Update smpos_order_detail set idOrder=?,idOrderDetail=?,idProduct=?,amount=?,unit=?,unitPrice=?, subTotal=?, subDiscount=? where idOrder=? and idOrderDetail=?</orderDetailEdit>
 </xmlquery>		

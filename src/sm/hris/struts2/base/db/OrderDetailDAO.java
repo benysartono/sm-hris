@@ -37,6 +37,7 @@ public class OrderDetailDAO extends SmBaseDAO{
             	orderDetail.setUnit(rs.getString("unit"));
             	orderDetail.setUnitPrice(rs.getFloat("UnitPrice"));
             	orderDetail.setSubTotal(rs.getFloat("subTotal"));
+            	orderDetail.setSubDiscount(rs.getFloat("subDiscount"));
             	orderDetails.add(orderDetail);
                 
             } 
@@ -65,6 +66,7 @@ public class OrderDetailDAO extends SmBaseDAO{
         	orderDetail.setUnit(rs.getString("unit"));
         	orderDetail.setUnitPrice(rs.getFloat("unitPrice"));
         	orderDetail.setSubTotal(rs.getFloat("subTotal"));
+        	orderDetail.setSubDiscount(rs.getFloat("subDiscount"));
         	orderDetails.add(orderDetail);
             
         } 
@@ -95,6 +97,7 @@ public class OrderDetailDAO extends SmBaseDAO{
 		argArray.add(4, orderDetail.getUnit());
 		argArray.add(5, String.valueOf(orderDetail.getUnitPrice()));
 		argArray.add(6, String.valueOf(orderDetail.getSubTotal()));
+		argArray.add(7, String.valueOf(orderDetail.getSubDiscount()));
 		this.run("orderDetailAdd", argArray);
 		//closeConnection();
 	}
@@ -107,8 +110,9 @@ public class OrderDetailDAO extends SmBaseDAO{
 		argArray.add(4, orderDetail.getUnit());
 		argArray.add(5, String.valueOf(orderDetail.getUnitPrice()));
 		argArray.add(6, String.valueOf(orderDetail.getSubTotal()));
-		argArray.add(7, orderDetail.getIdOrder());
-		argArray.add(8, orderDetail.getIdOrderDetail());
+		argArray.add(7, String.valueOf(orderDetail.getSubDiscount()));
+		argArray.add(8, orderDetail.getIdOrder());
+		argArray.add(9, orderDetail.getIdOrderDetail());
 		this.run("orderDetailEdit", argArray);
 		//closeConnection();
 	}

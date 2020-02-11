@@ -80,6 +80,7 @@
 		     		'unit'			:'',
 		     		'unitPrice'		:'',
 		     		'subTotal'		:'',
+		     		'subDiscount'	:'',
 		     		'nmProduct'		:''
 				});
 		    });
@@ -94,6 +95,15 @@
 	   $scope.showAddOrderDetail = function(orderDetail) {
 	     return orderDetail.id === $scope.orderDetails[$scope.orderDetails.length-1].id;
 	   };
+
+	   $scope.subDiscountCalc=function(idProduct,subTotal,idx){
+		   $scope.orderDetails[idx].subDiscount = 0;
+		   var murl ="/sm-hris/base/modules/orderdetail/select-discount-by-product-id-json?idProduct="+ idProduct;
+			$http.get(murl)
+			.then(function(response) {
+				$scope.orderDetails[idx].subDiscount = response.data.discount[0] * subTotal;
+			})   
+	   }
 	   
 	   $scope.idProductNgBlur = function (idProduct,idx){
 		   $scope.orderDetails[idx].unitPrice = 0;
@@ -103,7 +113,7 @@
 				var product = response.data.products[0];
 				$scope.orderDetails[idx].unitPrice = product.unitPrice;
 				$scope.orderDetails[idx].subTotal = $scope.orderDetails[idx].amount * $scope.orderDetails[idx].unitPrice;
-				$scope.orderDetails[idx].nmProduct = product.nmProduct;				
+				$scope.orderDetails[idx].nmProduct = product.nmProduct;
 			})   
 	   }
 
@@ -116,16 +126,20 @@
 	   $scope.totalCalc = function(){
 		   var k;
 		   var orderTotal;
+		   var orderDiscount;
 		   orderTotal=parseInt("0");
+		   orderDiscount=parseInt("0");
 		   $scope.orderDetails.forEach(mFunc);
 		   function mFunc(item,index)
 		   {
 			   if(item.subTotal){
 			   orderTotal+=parseInt(item.subTotal);
+			   orderDiscount+=parseInt(item.subDiscount);
 			   }
 		   }
 		   $scope.total = orderTotal;
-		   $scope.vat = orderTotal/10;
+		   $scope.totalDiscount = orderDiscount;
+		   $scope.vat = (orderTotal-orderDiscount)/10;
 	   }
 	 });
 
@@ -296,7 +310,8 @@
 				        <div class="row">
 				        <div class="col-md-9">
 				        <s:textfield ng-model="orderDetail.unitPrice" name="orderDetails[{{$index}}].unitPrice" id="orderDetails[{{$index}}].unitPrice" placeholder="Unit Price" value="{{orderDetail.unitPrice}}" readonly="true" elementCssClass="col-sm-2"/>
-				        <s:textfield ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="totalCalc()" ng-focus="totalCalc()" readonly="true" elementCssClass="col-sm-2"/>
+				        <s:textfield ng-model="orderDetail.subTotal" name="orderDetails[{{$index}}].subTotal" id="orderDetails[{{$index}}].subTotal" placeholder="Sub Total" value="{{orderDetail.subTotal}}" ng-blur="totalCalc()" ng-change="subDiscountCalc(orderDetail.idProduct,orderDetail.subTotal,$index);totalCalc()" ng-focus="totalCalc()" readonly="true" elementCssClass="col-sm-2"/>
+				        <s:textfield ng-model="orderDetail.subDiscount" name="orderDetails[{{$index}}].subDiscount" id="orderDetails[{{$index}}].subDiscount" placeholder="Sub Total Discount" value="{{orderDetail.subDiscount}}" ng-change="totalCalc()" readonly="true" elementCssClass="col-sm-2"/>
 						</div>
 				        <div class="col-md-3">
 		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" elementCssClass="col-sm-2"/>

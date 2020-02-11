@@ -76,12 +76,11 @@
 					<s:iterator value="discounts" status="stat" var="discount">
 						<tr>
 							<td>
-								<s:checkbox 
-									name="discounts[%{#stat.index}].idDiscount" 
-									id="discounts[%{#stat.index}].idDiscount" 
-									value="%{idDiscount}" 
-									><s:property value="idDiscount"/>
-								</s:checkbox>
+								<input type="checkbox" 
+									name="idDiscounts" 
+									value="<s:property value="idDiscount"/>" >
+								</input>
+								<s:property value="idDiscount"/>
 							</td>	
 							<td>		
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">

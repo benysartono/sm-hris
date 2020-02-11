@@ -12,7 +12,9 @@ public class OrderDetail {
 	private String unit; 				
 	private Float unitPrice; 									
 	private Float subTotal; 									
-	private String idOrderDetail; 				
+	private String idOrderDetail; 
+	private Float subDiscount; 									
+	
 	
 	public String getIdOrder(){
 		return idOrder;
@@ -61,6 +63,14 @@ public class OrderDetail {
 	
 	public void setSubTotal(Float subTotal) {
 		this.subTotal = subTotal;
+	}
+
+	public Float getSubDiscount(){
+		return subDiscount;
+	}
+	
+	public void setSubDiscount(Float subDiscount) {
+		this.subDiscount = subDiscount;
 	}
 
 	public String getIdOrderDetail(){

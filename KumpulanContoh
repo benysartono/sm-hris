@@ -12,3 +12,15 @@ Contoh iteration:
     				</s:iterator>
 Saving file and making file url: employee/EmployeeAddAction.java
 Mengambil file name db/Product.java
+
+Notasi variable Struts2:
+
+<s:property value="idDiscount"> --> untuk mendapatkan value idDiscount di dalam HTML Document.
+%{idDiscount} --> untuk mendapatkan value idDiscount di dalam struts tag dalam HTML Docoument.
+#stat.index --> untuk mendapatkan nilai stat.index (yg adalah variable private dalam struts2 script).
+private variable adalah variable yg tidak dikirim oleh Struts entity/data model (yg biasa disebut property). 
+
+
+Array checkbox dalam HTML, namanya tidak perlu pakai [], otomatis akan membentuk array of string dgn sendirinya dgn nama sesuai nama checkbox. 
+Contoh discount/index.jsp  
+
