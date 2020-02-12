@@ -35,6 +35,7 @@ public class OrderDAO extends SmBaseDAO{
             	order.setTotal(rs.getFloat("total"));
             	order.setTotalDiscount(rs.getFloat("totalDiscount"));
             	order.setVat(rs.getFloat("vat"));
+            	order.setGrandTotal(rs.getFloat("grandTotal"));
             	order.setCash(rs.getFloat("cash"));
             	order.setChanges(rs.getFloat("changes"));
             	order.setIdPaymentMethod(rs.getString("idPaymentMethod"));
@@ -64,6 +65,7 @@ public class OrderDAO extends SmBaseDAO{
             	order.setTotal(rs.getFloat("total"));
             	order.setTotalDiscount(rs.getFloat("totalDiscount"));
             	order.setVat(rs.getFloat("vat"));
+            	order.setGrandTotal(rs.getFloat("grandTotal"));
             	order.setCash(rs.getFloat("cash"));
             	order.setChanges(rs.getFloat("changes"));
             	order.setIdPaymentMethod(rs.getString("idPaymentMethod"));
@@ -99,6 +101,7 @@ public class OrderDAO extends SmBaseDAO{
         	order.setTotal(rs.getFloat("total"));
         	order.setTotalDiscount(rs.getFloat("totalDiscount"));
         	order.setVat(rs.getFloat("vat"));
+        	order.setGrandTotal(rs.getFloat("grandTotal"));
         	order.setCash(rs.getFloat("cash"));
         	order.setChanges(rs.getFloat("changes"));
         	order.setIdPaymentMethod(rs.getString("idPaymentMethod"));
@@ -149,7 +152,8 @@ public class OrderDAO extends SmBaseDAO{
 		argArray.add(6, order.getIdPaymentMethod());
 		argArray.add(7, order.getPaymentRemark());
 		argArray.add(8, convertDateToString(order.getOrderDate()));
-		argArray.add(9, order.getIdOrder());
+		argArray.add(9, String.valueOf(order.getGrandTotal()));
+		argArray.add(10, order.getIdOrder());
 		this.run("orderEdit", argArray);
 		ArrayList<String> argArray = new ArrayList<String>();
 		argArray.add(order.getIdOrder());

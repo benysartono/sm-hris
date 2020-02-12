@@ -17,6 +17,7 @@ public class Order {
 	private String idPaymentMethod; 									
 	private String paymentRemark; 	
 	private Date orderDate;
+	private Float grandTotal;
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
 	
@@ -91,6 +92,15 @@ public class Order {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+
+	public Float getGrandTotal(){
+		return grandTotal;
+	}
+	
+	public void setGrandTotal(Float grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+	
 
 	public ArrayList<OrderDetail> getOrderDetails(){
 		return orderDetails;
