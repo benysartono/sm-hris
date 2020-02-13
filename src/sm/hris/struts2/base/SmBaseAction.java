@@ -4,6 +4,9 @@ package sm.hris.struts2.base;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -27,16 +30,13 @@ public class SmBaseAction extends ActionSupport {
     private ArrayList<Menu> menus;
 	private MenuDAO menuDAO = new MenuDAO();
  
+
 /*
-    public String execute() throws Exception{
-		//try{
-			menus = menuDAO.searchMenu();
-			return "success";
-		//}
-		//catch (SQLException e) {
-			//return "error";
-		//}
-			
+	public String execute() throws Exception{
+        HttpServletRequest request = ServletActionContext.getRequest(); 
+        String url = request.getRequestURI(); 
+        System.out.println("uri nya :" + url);
+    	return super.execute();
     }
 */
 	

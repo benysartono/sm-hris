@@ -167,7 +167,7 @@
      <div class="panel-default">
      <div class="panel-body">
      
-             <s:form id="frmOrder" theme="bootstrap" cssClass="form-vertical" action="index-save">
+             <s:form id="frmOrder" theme="bootstrap" cssClass="form-vertical" action="index-add">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -385,7 +385,7 @@
 				        	elementCssClass="col-sm-2"/>
 						</div>
 				        <div class="col-md-3">
-		        		<s:submit cssClass="btn btn-primary" id="removeOrderDetail[{{$index}}]" ng-click="removeNewOrderDetail($index)" value="Delete" elementCssClass="col-sm-2"/>
+		        		<img id="removeOrderDetail[{{$index}}]" src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail($index)" >Remove</img>
 		        		</div>
 		        		</div>
 		                <div class="row">
@@ -398,8 +398,7 @@
 				</div>
                 <div class="row">
                 <div class="col-md-9">
-		        	<!-- <s:submit cssClass="btn btn-primary" id="addOrderDetail" ng-click="addNewOrderDetail()" value="Add Order Detail" /> -->
-		        	<a href="#" id="addOrderDetail" ng-click="addNewOrderDetail()">Add Order Detail</a>
+		        	<img src="http://127.0.0.1/img/icon/plus.png" width="30" height="30" alt="Add Item" ng-click="addNewOrderDetail()">Add Item</img>
 				</div>
 				</div>
 				</div>

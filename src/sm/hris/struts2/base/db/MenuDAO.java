@@ -32,7 +32,22 @@ public class MenuDAO extends SmBaseDAO{
 	private RoleUserDAO roleUserDAO = new RoleUserDAO();
 	
 	private Integer n;
+	
+	private String url;
+	private String idUser;
 
+	
+	public String checkRoleAccess() throws SQLException{
+		argArray = new ArrayList<String>();
+		argArray.add(0,url);
+		argArray.add(1,idUser);
+        ResultSet rs = this.runQuery("checkRoleAccess",argArray);
+        if (!rs.first()){
+        	return "unAuthorized";
+        }
+        return "Authorized";
+	}
+	
 	public ArrayList<Menu> listMenu() throws SQLException{
 			ResultSet rs = this.runQuery("listMenu");
             while (rs.next()) {
@@ -46,6 +61,7 @@ public class MenuDAO extends SmBaseDAO{
         	return menus;
         
     }
+	
 	
 	public ArrayList<Menu> searchMenu() throws SQLException{
 		//List<Employee> employeesList;
@@ -147,5 +163,21 @@ public class MenuDAO extends SmBaseDAO{
 	
 	public Menu getMenu(){
 		return menu;
+	}
+
+	public void setIdUser(String idUser){
+		this.idUser = idUser;
+	}
+	
+	public String getIdUser(){
+		return idUser;
+	}
+
+	public void setUrl(String url){
+		this.url = url;
+	}
+	
+	public String getUrl(){
+		return url;
 	}
 }
