@@ -35,17 +35,26 @@ public class MenuDAO extends SmBaseDAO{
 	
 	private String url;
 	private String idUser;
+	private String res;
 
 	
 	public String checkRoleAccess() throws SQLException{
 		argArray = new ArrayList<String>();
 		argArray.add(0,url);
 		argArray.add(1,idUser);
+		
+		System.out.println("URL NYA: " + url);
+		System.out.println("ID USER NYA: " + idUser);
+		
         ResultSet rs = this.runQuery("checkRoleAccess",argArray);
-        if (!rs.first()){
-        	return "unAuthorized";
-        }
-        return "Authorized";
+        if(rs.next()){
+            res = "Authorized";
+       	} else {
+            if (url=="/base/index") res = "Authorized";
+            else res = "unAuthorized";
+        } 
+        return res;
+        
 	}
 	
 	public ArrayList<Menu> listMenu() throws SQLException{

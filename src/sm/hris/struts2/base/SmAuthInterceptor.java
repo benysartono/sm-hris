@@ -47,7 +47,6 @@ public class SmAuthInterceptor implements Interceptor, ServletRequestAware{
         //String userid = (String) sessionAttributes.get("USER");
         
         if(session.get("userId") == null){
-        	System.out.println("inside unauth");
         	return "loginx";
         } else {
             HttpServletRequest request = ServletActionContext.getRequest(); 
