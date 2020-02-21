@@ -21,7 +21,7 @@
     <script data-require="angular.js@1.3.15" data-semver="1.3.15" src="https://code.angularjs.org/1.3.15/angular.js"></script>
     <script>
     function fnOrderAdd(){
-    	location.href = "http://127.0.0.1/sm-hris/base/modules/mgt/order/order-add";
+    	location.href = "/sm-hris/base/modules/mgt/order/order-add";
     }
     
     function delConfirm() {

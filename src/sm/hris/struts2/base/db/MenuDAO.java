@@ -43,18 +43,19 @@ public class MenuDAO extends SmBaseDAO{
 		argArray.add(0,url);
 		argArray.add(1,idUser);
 		
-		System.out.println("URL NYA: " + url);
-		System.out.println("ID USER NYA: " + idUser);
-		
         ResultSet rs = this.runQuery("checkRoleAccess",argArray);
-        if(rs.next()){
+        if((rs != null)&&(rs.first())){
             res = "Authorized";
        	} else {
-            if (url=="/base/index") res = "Authorized";
-            else res = "unAuthorized";
+            if ("/sm-hris/base/index".equals(url)) {
+            	res = "Authorized";
+            }
+            else {
+            	res = "unAuthorized";
+            }
         } 
+        //this.con.close();
         return res;
-        
 	}
 	
 	public ArrayList<Menu> listMenu() throws SQLException{
@@ -67,6 +68,7 @@ public class MenuDAO extends SmBaseDAO{
                 menu.setHasChildren(rs.getString("hasChildren"));
                 menus.add(menu);
             }
+            //this.con.close();
         	return menus;
         
     }
@@ -103,6 +105,7 @@ public class MenuDAO extends SmBaseDAO{
      		}
         	closeConnection();
      		*/
+        	//this.con.close();
         	return menus;
         
     }
@@ -129,6 +132,7 @@ public class MenuDAO extends SmBaseDAO{
      		}
         	closeConnection();
         	*/
+            //this.con.close();
         	return menus;
     }
 
@@ -138,6 +142,7 @@ public class MenuDAO extends SmBaseDAO{
 			ArrayList<String> argArray = new ArrayList<String>();
 			argArray.add(0,idMenu);
 			this.run("menuDelete", argArray);
+	        //this.con.close();
 			//closeConnection();
 		}
     }
@@ -152,6 +157,7 @@ public class MenuDAO extends SmBaseDAO{
 			argArray.add(5, menu.getOrd());
 			argArray.add(6, menu.getParent());
 			this.run("menuAdd", argArray);
+	        //this.con.close();
 			//closeConnection();
     }
 	
@@ -162,6 +168,7 @@ public class MenuDAO extends SmBaseDAO{
 		argArray.add(2, menu.getHref());
 		argArray.add(3, menu.getHasChildren());
 		this.run("menuEdit", argArray);
+        //this.con.close();
 		//closeConnection();
 	}
 

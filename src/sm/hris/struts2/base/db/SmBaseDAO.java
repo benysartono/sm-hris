@@ -19,7 +19,7 @@ public class SmBaseDAO {
 	private String queryFolder = smXmlQueryFolder.getXmlpath();
 	private String xmlQueryFilePath = queryFolder + className;
 	private Boolean executeResult = null;
-	private Connection con = ConPool.getConnection();
+	public Connection con = ConPool.getConnection();
     //System.out.println("Connection succeeded: " + con);
     private PreparedStatement ps;
     private ResultSet rs;
