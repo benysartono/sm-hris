@@ -50,7 +50,7 @@ public class EmployeeDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	
         	return employees;
         
@@ -78,7 +78,7 @@ public class EmployeeDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	
         	return employees;
     }
@@ -107,7 +107,7 @@ public class EmployeeDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	
         	return employees;
     }
@@ -136,7 +136,7 @@ public class EmployeeDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	
         	return employeesfr;
     }
@@ -166,7 +166,7 @@ public class EmployeeDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	
         	return employeesfr;
         
@@ -178,7 +178,7 @@ public class EmployeeDAO extends SmBaseDAO{
 			ArrayList<String> argArray = new ArrayList<String>();
 			argArray.add(0,idEmployee);
 			this.run("employeeDelete", argArray);
-			closeConnection();
+			//closeConnection();
 		}
     }
 
@@ -213,7 +213,7 @@ public class EmployeeDAO extends SmBaseDAO{
 			argArrayObj.add(0,employee.getImg());
 			argArrayObj.add(1,employee.getIdEmployee());
 			this.runQueryObj("employeeEditImg", argArrayObj);
-			closeConnection();
+			//closeConnection();
     }
 	
 	public void employeeEdit(Employee employee) throws SQLException{
@@ -230,7 +230,7 @@ public class EmployeeDAO extends SmBaseDAO{
 		argArray.add(6, employee.getIdSite());
 		argArray.add(7, employee.getIdEmployee());
 		this.run("employeeEdit", argArray);
-		closeConnection();
+		//closeConnection();
 	}
 
 	public String convertDateToString(Date indate)

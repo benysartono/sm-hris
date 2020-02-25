@@ -19,18 +19,18 @@ public class CounterDAO extends SmBaseDAO{
 
 	public String selectIdOrderCounter() throws SQLException{
         ResultSet rs = this.runQuery("selectIdOrderCounter");
-            while (rs.next()) {
+            while ((rs!=null) && rs.next()) {
             	strIdOrderCounter = rs.getString("F_GetIdOrder()");
             } 
-        	System.out.println("Dragon Id:" + strIdOrderCounter);
             if(rs != null){
      		   try {
      		   rs.close();
      		   } catch (SQLException e) {
-     		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	//closeConnection();
+        	System.out.println("F_GetIdOrder nya = " + strIdOrderCounter);
+            //closeConnection();
+        	System.out.println("F_GetIdOrder nya after con close = " + strIdOrderCounter);
         	return strIdOrderCounter;
         
     }
@@ -47,7 +47,7 @@ public class CounterDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	//closeConnection();
+        	closeConnection();
         	return strIdOrderDetailCounter;
         
     }

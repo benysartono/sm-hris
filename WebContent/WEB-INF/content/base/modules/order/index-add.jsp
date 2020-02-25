@@ -251,6 +251,7 @@
                         	value="{{grandTotal | number}}"
                         	ng-model="grandTotal"
                         	readonly="true"
+                        	ng-change="changesCalc()"
                         	/>
 					</div>
 				</div>

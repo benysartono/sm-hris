@@ -23,6 +23,7 @@ public class SmBaseDAO {
     //System.out.println("Connection succeeded: " + con);
     private PreparedStatement ps;
     private ResultSet rs;
+    private ResultSet rsReturn;
 
     
     public void closeConnection () throws SQLException{
@@ -40,22 +41,20 @@ public class SmBaseDAO {
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            System.out.println(sql);
+            setRsReturn(rs);
             //con.close();
-        	
-
         	//ConPool.freeConnection(con);
          } catch (SQLException e) {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
              return null;
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
          } */
-        return rs;
+        return rsReturn;
         
     }
 
@@ -75,16 +74,16 @@ public class SmBaseDAO {
                 ps.setString(n, argArray.get(i));
             } 
             rs = ps.executeQuery();
+            setRsReturn(rs);
             //con.close();
-        	return rs;
-
         	//ConPool.freeConnection(con);
+        	return rsReturn;
          } catch (SQLException e) {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
              return null;
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
@@ -104,16 +103,16 @@ public class SmBaseDAO {
             ps = con.prepareStatement(sql);
             ps.setString(1, argStr);
             rs = ps.executeQuery();
+            setRsReturn(rs);
             //con.close();
-        	return rs;
-
         	//ConPool.freeConnection(con);
+        	return rsReturn;
          } catch (SQLException e) {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
              return null;
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
@@ -136,16 +135,17 @@ public class SmBaseDAO {
                 ps.setObject(n, argArray.get(i));
             } 
             ps.executeUpdate();
-            //con.close();
-        	return rs;
-
+            setRsReturn(rs);
         	//ConPool.freeConnection(con);
+            //con.close();
+        	return rsReturn;
+
          } catch (SQLException e) {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
              return null;
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
@@ -185,10 +185,10 @@ public class SmBaseDAO {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
-        	 }
+        	 } 
          } */
 
         
@@ -215,16 +215,12 @@ public class SmBaseDAO {
      		        System.out.println("Exception while closing statement: " + e);
      		   }
      		}
-
-            
- 
-
         	//ConPool.freeConnection(con);
          } catch (SQLException e) {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
@@ -262,7 +258,7 @@ public class SmBaseDAO {
              System.out.println("Catch SmBaseDAO: "+e);
              e.printStackTrace();
              //con.close();
-         } /* finally {
+         }  /* finally {
         	 if (con != null) {
         		 con.close();
         	 }
@@ -270,5 +266,13 @@ public class SmBaseDAO {
 
         
     }
+	
+	public void setRsReturn(ResultSet rsReturn){
+		this.rsReturn = rsReturn;
+	}
+	
+	public ResultSet getRsReturn (){
+		return rsReturn;
+	}
 
 }

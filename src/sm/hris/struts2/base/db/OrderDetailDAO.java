@@ -78,13 +78,14 @@ public class OrderDetailDAO extends SmBaseDAO{
  		        System.out.println("Exception while closing result set: " + e);
  		   }
  		}
-    	//closeConnection();
+    	closeConnection();
     	return orderDetails;
     
     }
 
 	public String selectIdOrderDetailCounter() throws SQLException{
 		String strIdOrderDetailCounter = counterDAO.selectIdOrderDetailCounter();
+		closeConnection();
 		return strIdOrderDetailCounter;
     }
 
@@ -99,7 +100,7 @@ public class OrderDetailDAO extends SmBaseDAO{
 		argArray.add(6, String.valueOf(orderDetail.getSubTotal()));
 		argArray.add(7, String.valueOf(orderDetail.getSubDiscount()));
 		this.run("orderDetailAdd", argArray);
-		//closeConnection();
+		closeConnection();
 	}
 
 	public void orderDetailEdit() throws SQLException{
@@ -114,7 +115,7 @@ public class OrderDetailDAO extends SmBaseDAO{
 		argArray.add(8, orderDetail.getIdOrder());
 		argArray.add(9, orderDetail.getIdOrderDetail());
 		this.run("orderDetailEdit", argArray);
-		//closeConnection();
+		closeConnection();
 	}
 
 	public void orderDetailDelete() throws SQLException{

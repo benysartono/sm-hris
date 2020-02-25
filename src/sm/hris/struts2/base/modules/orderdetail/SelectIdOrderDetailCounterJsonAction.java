@@ -15,7 +15,7 @@ import sm.hris.struts2.base.db.OrderDetailDAO;
 @Result(name="success",type="json")
 @ParentPackage("hris")
 
-public class SelectIdOrderDetailCounterJson extends SmBaseAction {
+public class SelectIdOrderDetailCounterJsonAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
     private String idOrderDetailCounter;
     private OrderDetailDAO orderDetailDAO = new OrderDetailDAO();

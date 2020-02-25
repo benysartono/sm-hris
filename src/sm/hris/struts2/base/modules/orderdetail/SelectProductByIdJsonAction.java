@@ -9,25 +9,25 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import sm.hris.struts2.base.SmBaseAction;
-import sm.hris.struts2.base.db.DiscountDAO;
-import sm.hris.struts2.base.db.Discount;
+import sm.hris.struts2.base.db.ProductDAO;
+import sm.hris.struts2.base.db.Product;
 
 
 @Result(name="success",type="json")
 @ParentPackage("hris")
 
-public class SelectDiscountByIdProductJson extends SmBaseAction {
+public class SelectProductByIdJsonAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
     private String idProduct;
-    private DiscountDAO discountDAO = new DiscountDAO();
-    private Discount discount = new Discount();
+    private ProductDAO productDAO = new ProductDAO();
+    private Product product = new Product();
+    private ArrayList<Product> products = new ArrayList<Product>();
     private ArrayList<String> argArray = new ArrayList<String>();
-    private ArrayList<Discount> discounts = new ArrayList<Discount>();
     
     public String execute() throws Exception{
     	argArray.add(idProduct);
-    	discountDAO.setArgArray(argArray);
-    	discounts = discountDAO.searchDiscountByIdProduct();
+    	productDAO.setArgArray(argArray);
+    	products = productDAO.searchProductById();
     	return "success";
     }
 /*    
@@ -47,8 +47,8 @@ public class SelectDiscountByIdProductJson extends SmBaseAction {
     	this.product = product;
     }
 */
-    public ArrayList<Discount> getDiscounts(){
-    	return this.discounts;
+    public ArrayList<Product> getProducts(){
+    	return this.products;
     } 
 /*    
     public void setProducts(ArrayList<Product> products){

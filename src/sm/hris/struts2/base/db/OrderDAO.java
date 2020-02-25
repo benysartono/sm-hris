@@ -51,12 +51,13 @@ public class OrderDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	//closeConnection();
+        	closeConnection();
         	return orders;
         
     }
 
 	public ArrayList<Order> searchOrderByIdOrder() throws SQLException{
+		System.out.println("Arg Array Get 0 nya:" + argArray.get(0));
         ResultSet rs = this.runQuery("searchOrderByIdOrder",argArray.get(0));
             while (rs.next()) {
             	Order order = new Order();
@@ -139,6 +140,7 @@ public class OrderDAO extends SmBaseDAO{
 		argArray.add(0, strIdOrderCounter);
 		argArray.add(1, convertDateToString(order.getOrderDate()));
 		this.run("orderAdd", argArray);
+		//closeConnection();
 		return strIdOrderCounter;
     }
 	
