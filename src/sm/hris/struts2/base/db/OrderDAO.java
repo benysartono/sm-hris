@@ -88,7 +88,6 @@ public class OrderDAO extends SmBaseDAO{
      		   }
      		}
         	closeConnection();
-        	
         	return orders;
         
     }
@@ -140,7 +139,7 @@ public class OrderDAO extends SmBaseDAO{
 		argArray.add(0, strIdOrderCounter);
 		argArray.add(1, convertDateToString(order.getOrderDate()));
 		this.run("orderAdd", argArray);
-		//closeConnection();
+		closeConnection();
 		return strIdOrderCounter;
     }
 	

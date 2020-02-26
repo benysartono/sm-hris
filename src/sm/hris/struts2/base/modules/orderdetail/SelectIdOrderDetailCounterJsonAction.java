@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.OrderDetailDAO;
 
+import sm.hris.struts2.base.db.CounterDAO;
 
 @Result(name="success",type="json")
 @ParentPackage("hris")
@@ -19,9 +20,11 @@ public class SelectIdOrderDetailCounterJsonAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
     private String idOrderDetailCounter;
     private OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-    
+	private CounterDAO counterDAO = new CounterDAO();
+   
     public String execute() throws Exception{
-    	idOrderDetailCounter = orderDetailDAO.selectIdOrderDetailCounter();
+    	//idOrderDetailCounter = orderDetailDAO.selectIdOrderDetailCounter();
+		setIdOrderDetailCounter(counterDAO.selectIdOrderDetailCounter());
     	return "success";
     }
     

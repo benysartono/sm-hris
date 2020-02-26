@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Results;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDAO;
+import sm.hris.struts2.base.db.CounterDAO;
 
 
 @Results({
@@ -22,6 +23,8 @@ import sm.hris.struts2.base.db.OrderDAO;
 public class IndexAddAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private OrderDAO orderDAO = new OrderDAO();
+	private OrderDAO orderDAO2 = new OrderDAO();
+    private CounterDAO counterDAO = new CounterDAO();
     private Order order = new Order();
     private ArrayList<Order> orders;
     private String idOrder = new String();
@@ -30,16 +33,19 @@ public class IndexAddAction extends SmBaseAction {
     private String proc = new String();
     private String res = new String();
     private String strIdOrder;
+    private String strIdOrderCounter;
     
     public String execute() throws Exception{
+		setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
    		order.setOrderDate(new Date());
-   		orderDAO.setOrder(order);
-   		String strIdOrderCounter = orderDAO.orderAdd();
-   		ArrayList<String> argArray = new ArrayList<String>();
-   		argArray.add(0,strIdOrderCounter);
-   		orderDAO.setArgArray(argArray);
-   		orders = orderDAO.searchOrderByIdOrder();
-		order = orders.get(0);
+   		order.setIdOrder(strIdOrderCounter);
+   		//orderDAO.setOrder(order);
+   		//String strIdOrderCounter = orderDAO.orderAdd();
+   		//ArrayList<String> argArray = new ArrayList<String>();
+   		//argArray.add(0,strIdOrderCounter);
+   		//orderDAO2.setArgArray(argArray);
+   		//orders = orderDAO2.searchOrderByIdOrder();
+		//setOrder(orders.get(0));
    		return SUCCESS;
     }
     
@@ -72,4 +78,11 @@ public class IndexAddAction extends SmBaseAction {
 		this.strIdOrder = strIdOrder;
 	}
 
+	public String getStrIdOrderCounter(){
+		return strIdOrderCounter;
+	}
+	
+	public void setStrIdOrderCounter(String strIdOrderCounter){
+		this.strIdOrderCounter = strIdOrderCounter;
+	}
 }

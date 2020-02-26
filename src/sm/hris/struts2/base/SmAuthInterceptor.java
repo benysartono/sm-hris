@@ -62,6 +62,7 @@ public class SmAuthInterceptor implements Interceptor, ServletRequestAware{
         			return "loginx";
         	}
         }
+        
         return actionInvocation.invoke();
 
     }

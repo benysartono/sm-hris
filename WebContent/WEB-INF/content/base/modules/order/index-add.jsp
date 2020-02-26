@@ -91,6 +91,7 @@
 	   $scope.removeNewOrderDetail = function(nId) {
 		   	$scope.orderDetails.splice(nId,1);
 		   	$scope.totalCalc();
+		   	$scope.changesCalc();
 	   };
 	   
 	   $scope.showAddOrderDetail = function(orderDetail) {
@@ -251,7 +252,6 @@
                         	value="{{grandTotal | number}}"
                         	ng-model="grandTotal"
                         	readonly="true"
-                        	ng-change="changesCalc()"
                         	/>
 					</div>
 				</div>
