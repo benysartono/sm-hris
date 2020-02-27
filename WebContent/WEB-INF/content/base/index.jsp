@@ -25,7 +25,7 @@
 	<script>
 		var app = angular.module("myApp", []); 
 		app.controller('myCtrl', function($scope) {
-		    $scope.nUrl = "http://www.sartono-media.com";
+		    $scope.nUrl = "";
 		});
 	</script>
 </head>
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="col-md-9">
-			<iframe src="http://sartono-media.com" width="900" height="600" name="iframe_a">
+			<iframe src="" width="900" height="600" name="iframe_a">
 			</iframe>
         </div>
     </div>

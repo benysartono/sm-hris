@@ -21,11 +21,11 @@ public class ConPool {
        
  
         try {
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MySQLDS");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            DataSource ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/smhris");
             //DataSource ds = (DataSource) ctx.lookup("java:jboss/datasources/MySQLDS");
             con = ds.getConnection();
-             
         }  
         catch (NamingException ex) {
             Logger.getLogger(ConPool.class.getName()).log(Level.SEVERE, null, ex);

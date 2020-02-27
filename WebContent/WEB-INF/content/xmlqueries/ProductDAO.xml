@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchProduct>Select * from smpos_mproduct</searchProduct> 
+		<searchProduct>Select idProduct,nmProduct,description,unit,IFNULL(unitPrice,0) as unitPrice,idCategory,imgUrl from smpos_mproduct</searchProduct> 
 		<searchProductById>Select * from smpos_mproduct where idProduct = ?</searchProductById> 
 		<searchProductByAnyLike>Select * from smpos_mproduct where nmProduct like ? or description like ? or unit like ? or unitPrice like ? or idCategory like ?</searchProductByAnyLike> 
 		<productDelete>Delete from smpos_mproduct where idProduct = ?</productDelete> 
