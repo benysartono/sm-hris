@@ -30,12 +30,13 @@ public class IndexAddAction extends SmBaseAction {
     private ArrayList<String> formArg = new ArrayList<String>();
     private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc;
+    private String procExpected="Save";
     private String res = new String();
     private String strIdOrder;
     private String strIdOrderCounter;
     
     public String execute() throws Exception{
-		if ("Save".equals(proc)){
+		if (procExpected.equals(proc)){
 	    		System.out.println("Ada di dalam proc equals save");
 	    		orderDAO.setOrder(order);
 				orderDAO.orderAdd();
