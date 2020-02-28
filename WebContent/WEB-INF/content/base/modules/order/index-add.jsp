@@ -129,6 +129,14 @@
 			})   
 	   }
 	   
+	   $scope.searchIdPaymentMethod = function(){
+		   var murl ="/sm-hris/base/modules/mgt/paymentmethod/select-payment-method-json";
+			$http.get(murl)
+			.then(function(response) {
+				$scope.paymentMethods = response.data.paymentMethods;
+			})   
+	   }
+
 	   $scope.totalCalc = function(){
 		   var k;
 		   var orderTotal;
@@ -291,9 +299,14 @@
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-5"
                         	tooltip="Payment Method Id"
-                        	value="{{idPaymentMethod}}"
                         	ng-model="idPaymentMethod"
+                        	ng-focus="searchIdPaymentMethod()"
+                        	list="idPaymentMethods"
                         	/>
+                        	<datalist id="idPaymentMethods">
+						    	<option ng-repeat="x in paymentMethods" value="{{x.idPaymentMethod}}">{{x.nmPaymentMethod}}</option>
+							</datalist>
+                        	
 					</div>
 				</div>
                 <div class="row">
@@ -386,7 +399,7 @@
 				        	elementCssClass="col-sm-2"/>
 						</div>
 				        <div class="col-md-3">
-		        		<img id="removeOrderDetail[{{$index}}]" src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail($index)" >Remove</img>
+		        		<img id="removeOrderDetail[{{$index}}]" src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail({{$index}})" >Remove</img>
 		        		</div>
 		        		</div>
 		                <div class="row">

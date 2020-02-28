@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
 		<searchDiscount>Select * from smpos_mdiscount</searchDiscount> 
-		<searchDiscountByIdProduct>Select IFNULL(discount,0) as discount from smpos_mdiscount where idProduct = ? and curdate() >= startTime and endTime >= curdate()</searchDiscountByIdProduct> 
+		<searchDiscountByIdProduct>Select idProduct, IFNULL(discount,0) as discount, startTime, endTime, idDiscount from smpos_mdiscount where idProduct = ? and curdate() >= startTime and endTime >= curdate()</searchDiscountByIdProduct> 
 		<searchDiscountByAnyLike>Select * from smpos_mdiscount where idProduct like ? or discount like ? or startDate like ? or endDate like ?</searchDiscountByAnyLike> 
 		<discountDelete>Delete from smpos_mdiscount where idDiscount = ?</discountDelete> 
 		<discountAdd>Insert into smpos_mdiscount(idProduct,discount,startTime,endTime) values(?,?,?,?)</discountAdd>

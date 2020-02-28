@@ -16,27 +16,32 @@ import sm.hris.struts2.base.db.CounterDAO;
 
 
 @Results({
-	@Result(name="tolist", location="/base/modules/order", type="redirect"),
+	@Result(name="tolist", location="/base/modules/order/", type="redirect"),
 	})
 @ParentPackage(value = "hris")
 
 public class IndexAddAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private OrderDAO orderDAO = new OrderDAO();
-	private OrderDAO orderDAO2 = new OrderDAO();
     private CounterDAO counterDAO = new CounterDAO();
     private Order order = new Order();
     private ArrayList<Order> orders;
     private String idOrder = new String();
     private ArrayList<String> formArg = new ArrayList<String>();
     private ArrayList<String> idOrders = new ArrayList<String>();
-    private String proc = new String();
+    private String proc;
     private String res = new String();
     private String strIdOrder;
     private String strIdOrderCounter;
     
     public String execute() throws Exception{
-		setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
+		if ("Save".equals(proc)){
+	    		System.out.println("Ada di dalam proc equals save");
+	    		orderDAO.setOrder(order);
+				orderDAO.orderAdd();
+				return "tolist";
+		}
+    	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
    		order.setOrderDate(new Date());
    		order.setIdOrder(strIdOrderCounter);
    		//orderDAO.setOrder(order);
