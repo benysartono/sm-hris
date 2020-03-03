@@ -176,7 +176,7 @@
      <div class="panel-default">
      <div class="panel-body">
      
-             <s:form id="frmOrder" theme="bootstrap" cssClass="form-vertical" action="index-add">
+            <s:form id="frmOrder" action="index-add" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-vertical">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
@@ -323,12 +323,6 @@
 					</div>
 				</div>
                 <div class="row">
-                    <div class="col-md-9">
-	        			<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Save" />
-                    <!--  <button ng-click="orderAddClick()">Add</button> -->
-	        		</div>
-				</div>
-                <div class="row">
                    	<div class="col-md-9">
 				      <h1>Order Detail</h1>
 				      <div class="row" data-ng-repeat="orderDetail in orderDetails">
@@ -410,6 +404,14 @@
 				      </div>
 				   	</div>
 				</div>
+
+                <div class="row">
+                    <div class="col-md-9">
+	        			<s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
+	        		</div>
+				</div>
+				
+				
                 <div class="row">
                 <div class="col-md-9">
 		        	<img src="http://127.0.0.1/img/icon/plus.png" width="30" height="30" alt="Add Item" ng-click="addNewOrderDetail()">Add Item</img>

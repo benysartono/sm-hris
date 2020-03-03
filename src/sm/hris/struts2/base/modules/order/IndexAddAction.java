@@ -36,12 +36,16 @@ public class IndexAddAction extends SmBaseAction {
     private String strIdOrderCounter;
     
     public String execute() throws Exception{
-		if (procExpected.equals(proc)){
-	    		System.out.println("Ada di dalam proc equals save");
-	    		orderDAO.setOrder(order);
-				orderDAO.orderAdd();
-				return "tolist";
-		}
+    	System.out.println("Ada di dalam IndexAddAction");
+    	System.out.println("proc nya:" + proc);
+    	
+    	if ("Submit".equals(proc)){
+	    	System.out.println("Ada di dalam proc equals save");
+	    	orderDAO.setOrder(order);
+			orderDAO.orderAdd();
+			return "tolist";
+		} else {
+    	System.out.println("Ada di dalam IndexAddAction Else");
     	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
    		order.setOrderDate(new Date());
    		order.setIdOrder(strIdOrderCounter);
@@ -53,6 +57,7 @@ public class IndexAddAction extends SmBaseAction {
    		//orders = orderDAO2.searchOrderByIdOrder();
 		//setOrder(orders.get(0));
    		return SUCCESS;
+		}
     }
     
 
@@ -75,6 +80,10 @@ public class IndexAddAction extends SmBaseAction {
 	public void setProc(String proc) {
         this.proc = proc;
     }
+
+	public String getProc(){
+		return proc;
+	}
 
 	public String getStrIdOrder(){
 		return strIdOrder;

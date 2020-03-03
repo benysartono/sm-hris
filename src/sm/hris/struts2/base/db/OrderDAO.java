@@ -135,10 +135,22 @@ public class OrderDAO extends SmBaseDAO{
     }
 
 	public String orderAdd() throws SQLException{
-		setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
-		argArray.add(0, strIdOrderCounter);
+		argArray.add(0, order.getIdOrder());
 		argArray.add(1, convertDateToString(order.getOrderDate()));
+		argArray.add(2, String.valueOf(order.getTotal()));
+		argArray.add(3, String.valueOf(order.getTotalDiscount()));
+		argArray.add(4, String.valueOf(order.getVat()));
+		argArray.add(5, String.valueOf(order.getGrandTotal()));
+		argArray.add(6, String.valueOf(order.getCash()));
+		argArray.add(7, String.valueOf(order.getChanges()));
+		argArray.add(8, order.getIdPaymentMethod());
+		argArray.add(9, order.getPaymentRemark());
 		this.run("orderAdd", argArray);
+		for(OrderDetail orderDetail : order.getOrderDetails()){
+			orderDetailDAO = new OrderDetailDAO();
+			orderDetailDAO.setOrderDetail(orderDetail);
+			orderDetailDAO.orderDetailAdd();
+		}
 		closeConnection();
 		return strIdOrderCounter;
     }
