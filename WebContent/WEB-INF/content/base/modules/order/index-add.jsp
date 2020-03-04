@@ -35,7 +35,11 @@
 	</script>
 	
 	<script>
-	 
+	 function orderSubmit(){
+		 document.getElementById("frmOrder").submit();
+	 } 
+	
+	
 	 var app = angular.module("orderApp", []);
 	 
 	 app.controller("orderAppCtrl", function($scope,$http,$window,$compile) {
@@ -393,7 +397,7 @@
 				        	elementCssClass="col-sm-2"/>
 						</div>
 				        <div class="col-md-3">
-		        		<img id="removeOrderDetail[{{$index}}]" src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail({{$index}})" >Remove</img>
+		        		<img src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail({{$index}})" >Remove</img>
 		        		</div>
 		        		</div>
 		                <div class="row">
@@ -407,7 +411,7 @@
 
                 <div class="row">
                     <div class="col-md-9">
-	        			<s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
+	        			<img src="http://127.0.0.1/img/icon/disk.png" width="50" height="50" alt="Add Item" onClick="orderSubmit()">Save</img>
 	        		</div>
 				</div>
 				

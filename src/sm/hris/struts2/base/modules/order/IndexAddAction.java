@@ -33,30 +33,32 @@ public class IndexAddAction extends SmBaseAction {
     private String procExpected="Save";
     private String res = new String();
     private String strIdOrder;
+    private String strIdOrderCmp = "";
     private String strIdOrderCounter;
     
     public String execute() throws Exception{
     	System.out.println("Ada di dalam IndexAddAction");
     	System.out.println("proc nya:" + proc);
+    	System.out.println("idOrder nya:" + order.getIdOrder());
     	
-    	if ("Submit".equals(proc)){
-	    	System.out.println("Ada di dalam proc equals save");
+    	if (order.getIdOrder()==null){
+    		System.out.println("Ada di dalam IndexAddAction If");
+        	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
+       		order.setOrderDate(new Date());
+       		order.setIdOrder(strIdOrderCounter);
+       		//orderDAO.setOrder(order);
+       		//String strIdOrderCounter = orderDAO.orderAdd();
+       		//ArrayList<String> argArray = new ArrayList<String>();
+       		//argArray.add(0,strIdOrderCounter);
+       		//orderDAO2.setArgArray(argArray);
+       		//orders = orderDAO2.searchOrderByIdOrder();
+    		//setOrder(orders.get(0));
+			return SUCCESS;
+		} else {
+	    	System.out.println("Ada di dalam IndexAddAction Else");
 	    	orderDAO.setOrder(order);
 			orderDAO.orderAdd();
 			return "tolist";
-		} else {
-    	System.out.println("Ada di dalam IndexAddAction Else");
-    	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
-   		order.setOrderDate(new Date());
-   		order.setIdOrder(strIdOrderCounter);
-   		//orderDAO.setOrder(order);
-   		//String strIdOrderCounter = orderDAO.orderAdd();
-   		//ArrayList<String> argArray = new ArrayList<String>();
-   		//argArray.add(0,strIdOrderCounter);
-   		//orderDAO2.setArgArray(argArray);
-   		//orders = orderDAO2.searchOrderByIdOrder();
-		//setOrder(orders.get(0));
-   		return SUCCESS;
 		}
     }
     
