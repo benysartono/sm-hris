@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Results;
 
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Order;
+import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.OrderDAO;
 import sm.hris.struts2.base.db.CounterDAO;
 
@@ -26,14 +27,12 @@ public class IndexAddAction extends SmBaseAction {
     private CounterDAO counterDAO = new CounterDAO();
     private Order order = new Order();
     private ArrayList<Order> orders;
+    private ArrayList<OrderDetail> orderDetails;
     private String idOrder = new String();
     private ArrayList<String> formArg = new ArrayList<String>();
     private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc;
-    private String procExpected="Save";
-    private String res = new String();
     private String strIdOrder;
-    private String strIdOrderCmp = "";
     private String strIdOrderCounter;
     
     public String execute() throws Exception{
@@ -41,24 +40,19 @@ public class IndexAddAction extends SmBaseAction {
     	System.out.println("proc nya:" + proc);
     	System.out.println("idOrder nya:" + order.getIdOrder());
     	
-    	if (order.getIdOrder()==null){
-    		System.out.println("Ada di dalam IndexAddAction If");
+    	if ("Save".equals(proc)){
+	    	System.out.println("Ada di dalam IndexAddAction If");
+	    	System.out.println("OrderDetailId nya: " + orderDetails.get(0).getIdOrderDetail());
+	    	orderDAO.setOrder(order);
+	    	orderDAO.setOrderDetails(orderDetails);
+			orderDAO.orderAdd();
+			return "tolist";
+		} else {
+    		System.out.println("Ada di dalam IndexAddAction Else");
         	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
        		order.setOrderDate(new Date());
        		order.setIdOrder(strIdOrderCounter);
-       		//orderDAO.setOrder(order);
-       		//String strIdOrderCounter = orderDAO.orderAdd();
-       		//ArrayList<String> argArray = new ArrayList<String>();
-       		//argArray.add(0,strIdOrderCounter);
-       		//orderDAO2.setArgArray(argArray);
-       		//orders = orderDAO2.searchOrderByIdOrder();
-    		//setOrder(orders.get(0));
 			return SUCCESS;
-		} else {
-	    	System.out.println("Ada di dalam IndexAddAction Else");
-	    	orderDAO.setOrder(order);
-			orderDAO.orderAdd();
-			return "tolist";
 		}
     }
     
@@ -77,6 +71,14 @@ public class IndexAddAction extends SmBaseAction {
 	
 	public void setOrder(Order order){
 		this.order = order;
+	}
+
+	public ArrayList<OrderDetail> getOrderDetails(){
+		return orderDetails;
+	}
+	
+	public void setOrderDetails(ArrayList<OrderDetail> orderDetails){
+		this.orderDetails = orderDetails;
 	}
 
 	public void setProc(String proc) {

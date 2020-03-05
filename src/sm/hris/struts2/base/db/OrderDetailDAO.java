@@ -91,6 +91,7 @@ public class OrderDetailDAO extends SmBaseDAO{
 
 	
 	public void orderDetailAdd() throws SQLException{
+		System.out.println("Dalam OrderDetailDAO orderDetailAdd -- " + orderDetail.getIdOrderDetail());
 		argArray.add(0, orderDetail.getIdOrder());
 		argArray.add(1, orderDetail.getIdOrderDetail());
 		argArray.add(2, orderDetail.getIdProduct());

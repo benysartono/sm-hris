@@ -111,6 +111,7 @@
 				$scope.orderDetails[idx].unitPrice = product.unitPrice;
 				$scope.orderDetails[idx].subTotal = $scope.orderDetails[idx].amount * $scope.orderDetails[idx].unitPrice;
 				$scope.orderDetails[idx].nmProduct = product.nmProduct;
+				$scope.orderDetails[idx].unit=product.unit;
 			})   
 	   }
 
@@ -364,6 +365,14 @@
 				        	value="{{orderDetail.nmProduct}}" 
 				        	readonly="true" 
 				        	elementCssClass="col-sm-4"/>
+				        <s:textfield 
+				        	ng-model="orderDetail.unit" 
+				        	name="orderDetails[{{$index}}].unit" 
+				        	id="orderDetails[{{$index}}].unit" 
+				        	placeholder="Unit" 
+				        	value="{{orderDetail.unit}}" 
+				        	readonly="true" 
+				        	elementCssClass="col-sm-4"/>
 				        </div> 
 				        </div>
 				        <div class="row">
@@ -396,6 +405,10 @@
 				        	readonly="true"
 				        	elementCssClass="col-sm-2"/>
 						</div>
+						<s:hidden 
+							name="orderDetails[{{$index}}].idOrder"
+							value="{{orderDetail.idOrder}}"
+						/>	
 				        <div class="col-md-3">
 		        		<img src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail({{$index}})" >Remove</img>
 		        		</div>
@@ -410,17 +423,17 @@
 				</div>
 
                 <div class="row">
-                    <div class="col-md-9">
-	        			<img src="http://127.0.0.1/img/icon/disk.png" width="50" height="50" alt="Add Item" onClick="orderSubmit()">Save</img>
-	        		</div>
-				</div>
-				
-				
-                <div class="row">
                 <div class="col-md-9">
 		        	<img src="http://127.0.0.1/img/icon/plus.png" width="30" height="30" alt="Add Item" ng-click="addNewOrderDetail()">Add Item</img>
 				</div>
 				</div>
+
+                <div class="row">
+                    <div class="col-md-9">
+		        		<s:submit cssClass="btn btn-primary" name="proc" value="Save"/>
+	        		</div>
+				</div>
+
 				</div>
 				</div>
 			</s:form>	

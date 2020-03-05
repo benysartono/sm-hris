@@ -66,6 +66,14 @@
         <div class="col-md-9">
 			<form id="frmIdOrder" method="post" action="index" theme="bootstrap" cssClass="form-horizontal" label="Order Delete">
 			<div class="row">
+				<div class="col-sm-4">
+		    		<s:submit cssClass="btn btn-primary" name="proc" value="Add"/> 
+	        	</div>
+	        	<div  class="col-sm-4">
+	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
+	        	</div>
+        	</div>
+			<div class="row">
 	        	<div class="col-md-10">
 				<!-- <div elementCssClass = "table-responsive">  -->
 				<table width="100%" Class="table-responsive table-striped table-bordered">
@@ -129,14 +137,6 @@
 				</table>
 				</div>
 			</div> 
-			<div class="row">
-				<div class="col-sm-4">
-		    		<s:submit cssClass="btn btn-primary" name="proc" value="Add"/> 
-	        	</div>
-	        	<div  class="col-sm-4">
-	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
-	        	</div>
-        	</div>
 			</form>
         </div>
     </div>

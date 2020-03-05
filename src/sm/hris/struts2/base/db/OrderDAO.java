@@ -14,6 +14,7 @@ import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.OrderDetailDAO;
 import sm.hris.struts2.base.db.CounterDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
+import sm.hris.struts2.base.db.OrderDetail;
 
 public class OrderDAO extends SmBaseDAO{
  
@@ -136,17 +137,18 @@ public class OrderDAO extends SmBaseDAO{
 
 	public String orderAdd() throws SQLException{
 		argArray.add(0, order.getIdOrder());
-		argArray.add(1, convertDateToString(order.getOrderDate()));
-		argArray.add(2, String.valueOf(order.getTotal()));
-		argArray.add(3, String.valueOf(order.getTotalDiscount()));
-		argArray.add(4, String.valueOf(order.getVat()));
-		argArray.add(5, String.valueOf(order.getGrandTotal()));
-		argArray.add(6, String.valueOf(order.getCash()));
-		argArray.add(7, String.valueOf(order.getChanges()));
-		argArray.add(8, order.getIdPaymentMethod());
-		argArray.add(9, order.getPaymentRemark());
+		argArray.add(1, String.valueOf(order.getTotal()));
+		argArray.add(2, String.valueOf(order.getTotalDiscount()));
+		argArray.add(3, String.valueOf(order.getVat()));
+		argArray.add(4, String.valueOf(order.getCash()));
+		argArray.add(5, String.valueOf(order.getChanges()));
+		argArray.add(6, order.getIdPaymentMethod());
+		argArray.add(7, order.getPaymentRemark());
+		argArray.add(8, convertDateToString(order.getOrderDate()));
+		argArray.add(9, String.valueOf(order.getGrandTotal()));
 		this.run("orderAdd", argArray);
-		for(OrderDetail orderDetail : order.getOrderDetails()){
+		for(OrderDetail orderDetail : orderDetails){
+			System.out.println("Dalam OrderDAO orderAdd forloop orderDetail -- " + orderDetail.getIdOrderDetail());
 			orderDetailDAO = new OrderDetailDAO();
 			orderDetailDAO.setOrderDetail(orderDetail);
 			orderDetailDAO.orderDetailAdd();
@@ -243,5 +245,7 @@ public class OrderDAO extends SmBaseDAO{
 	public void setStrIdOrderCounter(String strIdOrderCounter){
 		this.strIdOrderCounter = strIdOrderCounter;
 	} 
+	
+
 	
 }
