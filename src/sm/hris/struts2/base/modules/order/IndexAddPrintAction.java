@@ -14,28 +14,32 @@ import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDetail;
 import sm.hris.struts2.base.db.OrderDAO;
 import sm.hris.struts2.base.db.CounterDAO;
-
+import sm.hris.struts2.base.db.Product;
+import sm.hris.struts2.base.db.ProductDAO;
 
 @Results({
 	@Result(name="tolist", location="/base/modules/order/", type="redirect"),
 	})
 @ParentPackage(value = "hris")
 
-public class IndexAddAction extends SmBaseAction {
+public class IndexAddPrintAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
-	private OrderDAO orderDAO = new OrderDAO();
-    private CounterDAO counterDAO = new CounterDAO();
-    private Order order = new Order();
-    private ArrayList<Order> orders;
     private ArrayList<OrderDetail> orderDetails;
-    private String idOrder = new String();
-    private ArrayList<String> formArg = new ArrayList<String>();
-    private ArrayList<String> idOrders = new ArrayList<String>();
+    private ArrayList<String> argArray;
+    private OrderDetail orderDetail;
     private String proc;
-    private String strIdOrder;
-    private String strIdOrderCounter;
+    private String nmProduct;
+    private ProductDAO productDAO;
     
     public String execute() throws Exception{
+    	for(OrderDetail orderDetail:orderDetails){
+    		productDAO = new ProductDAO();
+    		argArray = new ArrayList<String>();
+    		argArray.add(orderDetail.getIdProduct());
+    		productDAO.setArgArray(argArray);
+    		nmProduct = productDAO.searchProductById().get(0).getNmProduct();
+    	}
+    	
     	System.out.println("Ada di dalam IndexAddAction");
     	System.out.println("proc nya:" + proc);
     	System.out.println("idOrder nya:" + order.getIdOrder());
