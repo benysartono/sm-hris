@@ -10,11 +10,12 @@ import java.util.Iterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
+import sm.hris.struts2.base.db.OrderFR;
 import sm.hris.struts2.base.db.OrderDetail;
+import sm.hris.struts2.base.db.OrderDetailFR;
 import sm.hris.struts2.base.db.OrderDetailDAO;
 import sm.hris.struts2.base.db.CounterDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
-import sm.hris.struts2.base.db.OrderDetail;
 
 public class OrderDAO extends SmBaseDAO{
  
@@ -22,7 +23,9 @@ public class OrderDAO extends SmBaseDAO{
 	private OrderDetail orderDetail = new OrderDetail();
 	private OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
 	private ArrayList<Order> orders = new ArrayList<Order>();
+	private ArrayList<OrderFR> orderFRs = new ArrayList<OrderFR>();
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private ArrayList<OrderDetailFR> orderDetailFRs = new ArrayList<OrderDetailFR>();
 	//private ArrayList<orderFR> ordersfr = new ArrayList<ordersFR>();
     private ArrayList<String> argArray = new ArrayList<String>();
     private CounterDAO counterDAO = new CounterDAO();
@@ -48,6 +51,42 @@ public class OrderDAO extends SmBaseDAO{
             if(rs != null){
      		   try {
      		   rs.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing result set: " + e);
+     		   }
+     		}
+        	closeConnection();
+        	return orders;
+        
+    }
+
+	public ArrayList<Order> searchOrderByIdOrderFR() throws SQLException{
+		System.out.println("Arg Array Get 0 nya:" + argArray.get(0));
+        ResultSet rs = this.runQuery("searchOrderByIdOrder",argArray.get(0));
+            while (rs.next()) {
+            	OrderFR orderFR = new OrderFR();
+            	OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+            	orderFR.setIdOrder(rs.getString("idOrder"));
+            	orderFR.setTotal(rs.getFloat("total"));
+            	orderFR.setTotalDiscount(rs.getFloat("totalDiscount"));
+            	orderFR.setVat(rs.getFloat("vat"));
+            	orderFR.setGrandTotal(rs.getFloat("grandTotal"));
+            	orderFR.setCash(rs.getFloat("cash"));
+            	orderFR.setChanges(rs.getFloat("changes"));
+            	orderFR.setIdPaymentMethod(rs.getString("idPaymentMethod"));
+            	orderFR.setPaymentRemark(rs.getString("paymentRemark"));
+            	orderFR.setOrderDate(rs.getDate("orderDate"));
+            	ArrayList<String> argArray = new ArrayList<String>();
+            	argArray.add(rs.getString("idOrder"));
+            	orderDetailDAO.setArgArray(argArray);
+            	orderFR.setOrderDetailFRs(orderDetailDAO.searchOrderDetailByIdOrderFR());
+            	orderFRs.add(orderFR);
+            } 
+        	
+            if(rs != null){
+  			   System.out.println("RS tidak null");
+     		   try {
+     			   rs.close();
      		   } catch (SQLException e) {
      		        System.out.println("Exception while closing result set: " + e);
      		   }

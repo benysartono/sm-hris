@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sm.hris.struts2.base.db.Order;
 import sm.hris.struts2.base.db.OrderDetail;
+import sm.hris.struts2.base.db.OrderDetailFR;
 import sm.hris.struts2.base.db.CounterDAO;
 import sm.hris.struts2.base.db.SmBaseDAO;
 
@@ -18,9 +19,11 @@ public class OrderDetailDAO extends SmBaseDAO{
  
 	private Order order = new Order();
 	private OrderDetail orderDetail = new OrderDetail();
+	private OrderDetailFR orderDetailFR = new OrderDetailFR();
 	private CounterDAO counterDAO = new CounterDAO();
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private ArrayList<OrderDetailFR> orderDetailFRs = new ArrayList<OrderDetailFR>();
     private ArrayList<String> argArray = new ArrayList<String>();
     private ArrayList<Object> argArrayObj = new ArrayList<Object>();
     private ArrayList<ArrayList<String>> rowArray = new ArrayList<ArrayList<String>>();
@@ -80,6 +83,36 @@ public class OrderDetailDAO extends SmBaseDAO{
  		}
     	closeConnection();
     	return orderDetails;
+    
+    }
+
+	public ArrayList<OrderDetailFR> searchOrderDetailByIdOrderFR() throws SQLException{
+        ResultSet rs = this.runQuery("searchOrderDetailFR",argArray);
+ 
+        while (rs.next()) {
+        	OrderDetailFR orderDetailFR = new OrderDetailFR();
+        	orderDetailFR.setIdOrderDetail(rs.getString("idOrderDetail"));
+        	orderDetailFR.setIdOrder(rs.getString("idOrder"));
+        	orderDetailFR.setIdProduct(rs.getString("idProduct"));
+        	orderDetailFR.setNmProduct(rs.getString("nmProduct"));
+        	orderDetailFR.setAmount(rs.getFloat("amount"));
+        	orderDetailFR.setUnit(rs.getString("unit"));
+        	orderDetailFR.setUnitPrice(rs.getFloat("unitPrice"));
+        	orderDetailFR.setSubTotal(rs.getFloat("subTotal"));
+        	orderDetailFR.setSubDiscount(rs.getFloat("subDiscount"));
+        	orderDetailFRs.add(orderDetailFR);
+            
+        } 
+    	
+        if(rs != null){
+ 		   try {
+ 		   rs.close();
+ 		   } catch (SQLException e) {
+ 		        System.out.println("Exception while closing result set: " + e);
+ 		   }
+ 		}
+    	closeConnection();
+    	return orderDetailFRs;
     
     }
 
@@ -171,5 +204,13 @@ public class OrderDetailDAO extends SmBaseDAO{
 	
 	public void setOrderDetail (OrderDetail orderDetail){
 		this.orderDetail = orderDetail;
+	}
+
+	public OrderDetailFR getOrderDetailFR(){
+		return orderDetailFR;
+	} 
+	
+	public void setOrderDetailFR (OrderDetailFR orderDetailFR){
+		this.orderDetailFR = orderDetailFR;
 	}
 }

@@ -32,6 +32,7 @@ public class IndexAddAction extends SmBaseAction {
     private ArrayList<String> formArg = new ArrayList<String>();
     private ArrayList<String> idOrders = new ArrayList<String>();
     private String proc;
+    private String procIn;
     private String strIdOrder;
     private String strIdOrderCounter;
     
@@ -43,20 +44,20 @@ public class IndexAddAction extends SmBaseAction {
     	if ("Print".equals(proc)){
 			return "tolist";
 		}
-    	if ("Save".equals(proc)){
+    	if ("Save, Save".equals(proc)){
 	    	System.out.println("Ada di dalam IndexAddAction If");
 	    	System.out.println("OrderDetailId nya: " + orderDetails.get(0).getIdOrderDetail());
 	    	orderDAO.setOrder(order);
 	    	orderDAO.setOrderDetails(orderDetails);
 			orderDAO.orderAdd();
-			proc = "Print";
+			procIn = "Print";
 			return "print";
 		} else {
     		System.out.println("Ada di dalam IndexAddAction Else");
         	setStrIdOrderCounter(counterDAO.selectIdOrderCounter());
        		order.setOrderDate(new Date());
        		order.setIdOrder(strIdOrderCounter);
-       		proc = "Save";
+       		procIn = "Save";
 			return SUCCESS;
 		}
     }
@@ -92,6 +93,14 @@ public class IndexAddAction extends SmBaseAction {
 
 	public String getProc(){
 		return proc;
+	}
+
+	public void setProcIn(String procIn) {
+        this.procIn = procIn;
+    }
+
+	public String getProcIn(){
+		return procIn;
 	}
 
 	public String getStrIdOrder(){
