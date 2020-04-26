@@ -55,12 +55,12 @@ public class OrderDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	return orders;
         
     }
 
-	public ArrayList<Order> searchOrderByIdOrderFR() throws SQLException{
+	public ArrayList<OrderFR> searchOrderByIdOrderFR() throws SQLException{
 		System.out.println("Arg Array Get 0 nya:" + argArray.get(0));
         ResultSet rs = this.runQuery("searchOrderByIdOrder",argArray.get(0));
             while (rs.next()) {
@@ -78,6 +78,7 @@ public class OrderDAO extends SmBaseDAO{
             	orderFR.setOrderDate(rs.getDate("orderDate"));
             	ArrayList<String> argArray = new ArrayList<String>();
             	argArray.add(rs.getString("idOrder"));
+            	System.out.println("OrderDAO.searchOrderByIdOrderFR.argArray: -- " + argArray.get(0));
             	orderDetailDAO.setArgArray(argArray);
             	orderFR.setOrderDetailFRs(orderDetailDAO.searchOrderDetailByIdOrderFR());
             	orderFRs.add(orderFR);
@@ -91,8 +92,8 @@ public class OrderDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
-        	return orders;
+        	//closeConnection();
+        	return orderFRs;
         
     }
 
@@ -127,7 +128,7 @@ public class OrderDAO extends SmBaseDAO{
      		        System.out.println("Exception while closing result set: " + e);
      		   }
      		}
-        	closeConnection();
+        	//closeConnection();
         	return orders;
         
     }
@@ -157,7 +158,7 @@ public class OrderDAO extends SmBaseDAO{
      	        System.out.println("Exception while closing result set: " + e);
      	   }
      	}
-        closeConnection();
+        //closeConnection();
         	
         return orders;
         
@@ -171,7 +172,7 @@ public class OrderDAO extends SmBaseDAO{
 			orderDetailDAO.orderDetailDeleteByIdOrder();
 			this.run("orderDelete", argArray.get(i));
 		}
-		closeConnection();
+		//closeConnection();
     }
 
 	public String orderAdd() throws SQLException{
@@ -192,7 +193,7 @@ public class OrderDAO extends SmBaseDAO{
 			orderDetailDAO.setOrderDetail(orderDetail);
 			orderDetailDAO.orderDetailAdd();
 		}
-		closeConnection();
+		//closeConnection();
 		return strIdOrderCounter;
     }
 	
@@ -217,7 +218,7 @@ public class OrderDAO extends SmBaseDAO{
 			orderDetailDAO.setOrderDetail(orderDetails.get(n));
 			orderDetailDAO.orderDetailAdd();
 		}
-		closeConnection();
+		//closeConnection();
 	}
 
 	public String convertDateToString(Date indate)

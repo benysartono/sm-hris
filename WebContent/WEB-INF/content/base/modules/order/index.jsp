@@ -70,7 +70,7 @@
 		    		<s:submit cssClass="btn btn-primary" name="proc" value="Add"/> 
 	        	</div>
 	        	<div  class="col-sm-4">
-	        		<s:submit cssClass="btn btn-primary" id="proc" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
+	        		<s:submit cssClass="btn btn-primary" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
 	        	</div>
         	</div>
 			<div class="row">

@@ -9,4 +9,5 @@
 		<orderDetailEdit>Update smpos_order_detail set idOrder=?,idOrderDetail=?,idProduct=?,amount=?,unit=?,unitPrice=?, subTotal=?, subDiscount=? where idOrder=? and idOrderDetail=?</orderDetailEdit>
 
 		<searchOrderDetailByIdOrderDetailFR>Select a.idOrder,a.idProduct,(select b.nmProduct from smpos_mproduct b where b.idProduct=a.idProduct) as nmProduct,a.amount,a.unit,a.unitPrice,a.subTotal,a.idOrderDetail,a.subDiscount from smpos_order_detail a where a.idOrder=? and a.idOrderDetail=?</searchOrderDetailByIdOrderDetailFR> 
+		<searchOrderDetailByIdOrderFR>Select a.idOrder,a.idProduct,(select b.nmProduct from smpos_mproduct b where b.idProduct=a.idProduct) as nmProduct,a.amount,a.unit,a.unitPrice,a.subTotal,a.idOrderDetail,a.subDiscount from smpos_order_detail a where a.idOrder=?</searchOrderDetailByIdOrderFR> 
 </xmlquery>		

@@ -49,6 +49,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			}
 			else {
 				session.put("userId", uid);
+				session.put("password", password);
 				//sessionAttributes.put("userId", uid);
 				//setSession(sessionAttributes);
 				//addActionMessage("<p>Login Pass</p><p><a href='index'>Click Here to Enter</a></p>");

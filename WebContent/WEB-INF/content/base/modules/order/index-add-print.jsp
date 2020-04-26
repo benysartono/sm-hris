@@ -23,6 +23,14 @@
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
         h5 {padding-left: 210px;}
+        
+        html {
+		    position: relative;
+		    min-width: 256px;
+		    min-height: 768px;
+		    height: 100%;
+		}	
+        
     </style>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
 	<!-- 
@@ -39,47 +47,49 @@
 		 window.print();
 	 } 
 	</script>
-
 </head>
 
 
-<body>
+<body onload="printOrder();">
 <table>
 	<tr>
 		<td>Id Order</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.idOrder"/></td>
+		<td><s:property value="orderFR.idOrder"/></td>
 	</tr>
 	<tr>
 		<td>Order Date</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.orderDate"/></td>
+		<td><s:property value="orderFR.orderDate"/></td>
 	</tr>
 	<tr>
 		<td>Total</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.total"/></td>
+		<td><s:property value="orderFR.total"/></td>
 	</tr>
 	<tr>
 		<td>Discount</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.discount"/></td>
+		<td><s:property value="orderFR.totalDiscount"/></td>
 	</tr>
 	<tr>
 		<td>VAT</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.vat"/></td>
+		<td><s:property value="orderFR.vat"/></td>
 	</tr>
 	<tr>
 		<td>Grand Total</td>
 		<td>&nbsp;</td>
-		<td><s:property value="order.grandTotal"/></td>
+		<td><s:property value="orderFR.grandTotal"/></td>
 	</tr>
 
 	<tr>
-		<td>=========================================================</td>
+		<td>========</td>
+		<td>===</td>
+		<td>========</td>
+		<td>========</td>
 	</tr>
-  	<s:iterator value="orderDetails" var="orderDetail">
+  	<s:iterator value="orderFR.orderDetailFRs" var="orderDetailFR">
 	<tr>
 		<td><s:property value="nmProduct"/></td>
 		<td><s:property value="amount"/></td>
@@ -91,23 +101,7 @@
 
 </table>
             
-<div class="container" >
 
-                <div class="row">
-                   	<div class="col-md-9">
-				      <h1>Order Detail</h1>
-					  <s:iterator value="orderDetails" var="orderDetail">
-    					<s:textfield value="%{nmProduct}" readonly="true"/>
-    					<s:textfield value="%{amount}" readonly="true"/>
-    					<s:textfield value="%{unitPrice}" readonly="true"/>
-    					<s:textfield value="%{subTotal}" readonly="true"/>
-    				  </s:iterator>
-				   	</div>
-				</div>
-
-                <div class="row">
-				</div>
-				</div>
 		</div>
 	</div>		
 </div>

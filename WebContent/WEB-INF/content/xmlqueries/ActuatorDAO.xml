@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smiot">
+		<searchActuator>Select * from smiot_actuator</searchActuator> 
+		<searchActuatorById>Select * from smiot_actuator where idActuator = ?</searchActuatorById> 
+		<searchActuatorBySite>Select * from smiot_actuator where idSite = ?</searchActuatorBySite> 
+		<actuatorDelete>Delete from smiot_actuator where idActuator=? and idRelay=?</actuatorDelete> 
+		<actuatorOnOff>Update smiot_actuator set command = ? where idActuator = ? and idRelay=? and idSite=?</actuatorOnOff> 
+		<actuatorOffPerSite>Update smiot_actuator set command = 0 where idSite?</actuatorOffPerSite> 
+		<actuatorAdd>Insert into smiot_actuator(idActuator,idRelay,idSite,createdBy,createdTime) values(?,?,?,?,now())</actuatorAdd>
+		<actuatorEdit>Update smiot_actuator set idActuator=?,idRelay=?,idSite=?, updatedBy=?  where idActuator=? and idRelay=? and idSite=?</actuatorEdit>
+</xmlquery>		

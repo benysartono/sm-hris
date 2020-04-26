@@ -44,14 +44,15 @@ public class MenuDAO extends SmBaseDAO{
 		argArray.add(1,idUser);
 		
         ResultSet rs = this.runQuery("checkRoleAccess",argArray);
+        res="unAuthorized";
         if((rs != null)&&(rs.first())){
-            res = "Authorized";
-       	} else {
+        	if(rs.getString("href").equals(url)) {
+        		res = "Authorized";
+        	}
+        }	
+        else {
             if ("/sm-hris/base/index".equals(url)) {
             	res = "Authorized";
-            }
-            else {
-            	res = "unAuthorized";
             }
         } 
         //this.con.close();

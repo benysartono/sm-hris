@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchSite>Select * from smhris_site</searchSite> 
+		<searchSiteById>Select * from smhris_site where idSite = ?</searchSiteById> 
+		<searchSiteByAnyLike>Select * from smhris_site where nmSite like ? or description like ? or location like ? or idSite like ?</searchSiteByAnyLike> 
+		<siteDelete>Delete from smhris_site where idSite = ?</siteDelete> 
+		<siteAdd>Insert into smhris_site(idSite,nmSite,description,location) values(?,?,?,?)</siteAdd>
+		<siteEdit>Update smhris_site set idSite=?,nmSite=?,description=?,location=? where idSite=?</siteEdit>
+</xmlquery>		

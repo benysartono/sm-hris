@@ -52,11 +52,19 @@ public class SmAuthInterceptor implements Interceptor, ServletRequestAware{
         } else {
         	System.out.println("Dalam if session is not null");
             HttpServletRequest request = ServletActionContext.getRequest(); 
-            String url = request.getRequestURI(); 
-            menuDAO.setUrl(url);
+            String url = request.getRequestURI();
+            String baseUrl = "";
+            int iUrlEnd = url.indexOf("?");
+            if (iUrlEnd != -1){
+            	baseUrl = url.substring(0,iUrlEnd);
+            } else {
+            	baseUrl = url;
+            }
+            
+            System.out.println("baseUrl nya --: " + baseUrl);
+            
+            menuDAO.setUrl(baseUrl);
             menuDAO.setIdUser(String.valueOf(session.get("userId")));
-            System.out.println("SMAuthInter - The URL is: " + url);
-            System.out.println("SMAuthInter - The idUser is: " + session.get("userId"));
             String access = menuDAO.checkRoleAccess();
         	if(access == "unAuthorized"){ 
         			return "loginx";

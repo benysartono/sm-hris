@@ -68,9 +68,9 @@ public class SmBaseDAO {
         try {
             ps = con.prepareStatement(sql);
             for (int i=0; i<argArray.size(); i++){
-                System.out.println("Prepare Statement = "+sql+" ");
-                System.out.println("Prepare Statement Arg("+i+")= "+argArray.get(i));
             	int n=i+1;
+                System.out.println("Prepare Statement = "+sql+" ");
+                System.out.println("Prepare Statement Arg("+n+")= "+argArray.get(i));
                 ps.setString(n, argArray.get(i));
             } 
             rs = ps.executeQuery();
@@ -166,12 +166,14 @@ public class SmBaseDAO {
 
         try {
             ps = con.prepareStatement(sql);
-            for (int i=0; i<argArray.size(); i++){
+        	System.out.println("Size ArgArray: " + argArray.size());
+            for(int i=0;i<argArray.size(); i++){
                 int n = i+1;
                	ps.setString(n, argArray.get(i));
-                System.out.println("Argument " +  i + ": " + argArray.get(i));
+                System.out.println("Argument " +  n + ": " + argArray.get(i));
             } 
-            executeResult = ps.execute();
+            //executeResult = ps.execute();
+            ps.executeUpdate();
         	if(ps != null){
      		   try {
      		   ps.close();

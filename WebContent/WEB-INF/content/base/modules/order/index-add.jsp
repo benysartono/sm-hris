@@ -415,7 +415,7 @@
 
 						<s:hidden 
 							name="proc"
-							value="%{procIn}"/>
+							value="%{proc}"/>
 				        <div class="col-md-3">
 		        		<img src="http://127.0.0.1/img/icon/cross.png" width="30" height="30" alt="Del Item" ng-click="removeNewOrderDetail({{$index}})" >Remove</img>
 		        		</div>
@@ -440,10 +440,10 @@
 		                =======================================================================
 		                =======================================================================
 		                =======================================================================
-                    	<s:if test="procIn=='Save'">
+                    	<s:if test="proc=='Save'">
 			        		<img src="http://127.0.0.1/img/icon/save.png" width="120" height="50" alt="Save" onclick="saveOrder()"></img>
 			        	</s:if>
-                    	<s:elseif test="procIn=='Print'">
+                    	<s:elseif test="proc=='Print'">
 			        		<img src="http://127.0.0.1/img/icon/print.png" width="120" height="50" alt="Print" onclick="printOrder()"></img>
 			        	</s:elseif>
 			        	<s:else>

@@ -32,7 +32,8 @@
                 <interceptor-ref name="authInterceptor"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
-        </interceptors>    
+        </interceptors>  
+        
     </package>
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
