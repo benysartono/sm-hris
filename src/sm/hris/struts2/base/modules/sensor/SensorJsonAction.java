@@ -1,4 +1,4 @@
-package sm.hris.struts2.base.modules.mqtt;
+package sm.hris.struts2.base.modules.sensor;
 
 import java.util.ArrayList;
 

@@ -2,6 +2,8 @@ package sm.hris.struts2.base;
 import java.util.ArrayList;
 import java.util.Map;
 
+import sm.hris.struts2.base.LoginAction;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -26,6 +28,8 @@ public class SmAuthInterceptor implements Interceptor, ServletRequestAware{
 	private Menu menu = new Menu();
     private ArrayList<Menu> menus;
 	private MenuDAO menuDAO = new MenuDAO();
+    private String baseUrl = "";
+    private String url; 
 
     @Override
     public void destroy() {
@@ -45,32 +49,36 @@ public class SmAuthInterceptor implements Interceptor, ServletRequestAware{
         Map<String, Object> session = actionInvocation.getInvocationContext().getSession();
         //HttpServletResponse response = (HttpServletResponse)actionInvocation.getInvocationContext().getActionInvocation();         
         //String userid = (String) sessionAttributes.get("USER");
+
+        HttpServletRequest request = ServletActionContext.getRequest(); 
+        url = request.getRequestURI();
+        baseUrl = "";
+        int iUrlEnd = url.indexOf("?");
+        if (iUrlEnd != -1){
+        	baseUrl = url.substring(0,iUrlEnd);
+        } else {
+        	baseUrl = url;
+        }
+
         
         if(session.get("userId") == null){
         	System.out.println("Dalam if session is null");
+        	LoginAction loginAction = new LoginAction();
+        	loginAction.setRequestedUrl(url);
         	return "loginx";
         } else {
         	System.out.println("Dalam if session is not null");
-            HttpServletRequest request = ServletActionContext.getRequest(); 
-            String url = request.getRequestURI();
-            String baseUrl = "";
-            int iUrlEnd = url.indexOf("?");
-            if (iUrlEnd != -1){
-            	baseUrl = url.substring(0,iUrlEnd);
-            } else {
-            	baseUrl = url;
-            }
-            
             System.out.println("baseUrl nya --: " + baseUrl);
             
             menuDAO.setUrl(baseUrl);
             menuDAO.setIdUser(String.valueOf(session.get("userId")));
             String access = menuDAO.checkRoleAccess();
         	if(access == "unAuthorized"){ 
-        			return "loginx";
+            	LoginAction loginAction = new LoginAction();
+            	loginAction.setRequestedUrl(url);
+       			return "loginx";
         	}
         }
-        
         return actionInvocation.invoke();
 
     }

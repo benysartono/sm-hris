@@ -54,6 +54,9 @@ public class MenuDAO extends SmBaseDAO{
             if ("/sm-hris/base/index".equals(url)) {
             	res = "Authorized";
             }
+            if ("/sm-hris/base/index-mobile".equals(url)) {
+            	res = "Authorized";
+            }
         } 
         //this.con.close();
         return res;

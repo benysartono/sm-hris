@@ -34,9 +34,9 @@
 			var murl = "<s:url value='sensor-json'/>";
 			$http.get(murl)
 			.then(function(response) {
-				$scope.smiotTests = response.data.smiotTests;
+				$scope.sensors = response.data.sensors;
 				//console.log("The murl :" + murl);
-		    })
+		    });
 	    	},10000);
 		//stop=$interval($scope.refreshDisplay,2000);
 
@@ -76,7 +76,7 @@
 								Value
 							</td>
 							<td>
-								Sendor Type
+								Sensor Type
 							</td>
 							<td>
 								Last Updated
@@ -84,34 +84,26 @@
 						</tr>
 					</thead>
 					<tbody>
-					<s:iterator value="sensors">
-						<tr>
+						<tr ng-repeat="sensor in sensors">
 							<td>       
-								<s:property value ="idSensor"/>
+								{{sensor.idSensor}}
 							</td>
 							<td>       
-								<s:property value ='value'/>
+								{{sensor.value}}
 							</td>
 							<td>       
-								<s:property value ='idSensorType'/>
+								{{sensor.idSensorType}}
 							</td>
 							<td>       
-								<s:property value ="updatedTime"/>
+								{{sensor.updatedTime}}
 							</td>
 						</tr>
-					</s:iterator>
 					</tbody>	 
 				</table>
 				</div>
 			</div> 
 
 
-        <table>
-        	<tr ng-repeat="x in smiotTests">
-        		<td>{{x.content}}</td>
-        	</tr>
-        </table>
-        {{cnt}}
         </div>
 		</div>
 	</div>  

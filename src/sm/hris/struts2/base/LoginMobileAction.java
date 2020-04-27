@@ -17,10 +17,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ValidationAware;
 import com.opensymphony.xwork2.ValidationAwareSupport;
 
-@Result(name="pass", location="/base/index", type="redirect")
+@Result(name="pass", location="/base/index-mobile", type="redirect")
 @ParentPackage(value = "hris")
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginMobileAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 7353477345330099548L;
     private String uid;
     private String password;
