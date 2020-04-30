@@ -52,7 +52,6 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Id"
                         	value="%{site.idSite}"
-                        	readonly="true"
                         	/>
 					</div>
                     <div class="col-md-9">

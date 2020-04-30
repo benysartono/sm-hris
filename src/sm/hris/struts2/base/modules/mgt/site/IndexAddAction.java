@@ -9,7 +9,7 @@ import sm.hris.struts2.base.db.Site;
 import sm.hris.struts2.base.db.SiteDAO;
 
 @Results({
-	@Result(name="tolist", location="/base/modules/mgt/site", type="redirect"),
+	@Result(name="tolist", location="/base/modules/mgt/site/index", type="redirect"),
 	})
 @ParentPackage(value = "hris")
 
@@ -21,6 +21,7 @@ public class IndexAddAction extends SmBaseAction {
     
     public String execute() throws Exception{
     	if((proc != null)&&(proc.equals("Submit"))) {
+    		System.out.println("Ada dalam proc == Submit ---");
 	   		siteDAO.setSite(site);
 	   		siteDAO.siteAdd();
 	   		return "tolist";

@@ -165,7 +165,7 @@ public class MenuDAO extends SmBaseDAO{
 			//closeConnection();
     }
 	
-	public void menuEdit(Menu menu) throws SQLException{
+	public void menuEdit() throws SQLException{
 		
 		argArray.add(0, menu.getIdMenu());
 		argArray.add(1, menu.getDescription());

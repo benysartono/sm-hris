@@ -87,10 +87,10 @@ public class EmployeeEditAction extends SmBaseAction {
    	 	//}
 		if ((proc != null)){
 			if (proc.equals("Submit")){
-			    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
-				    addFieldError("employee.name","The name is required");
-				    return SUCCESS;
-			    }
+			    //if (employee.getIdEmployee() == null || employee.getIdEmployee().trim().equals("")||employee.getName() == null || employee.getName().trim().equals("")){
+				//    addFieldError("employee.name","The id employee is missing");
+				//    return SUCCESS;
+			    //}
 				if (proc.equals("AddCareer")){
 					return "employee-career-add";
 				}

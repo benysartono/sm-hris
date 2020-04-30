@@ -68,10 +68,9 @@ public class SiteDAO extends SmBaseDAO{
     }
 
 	public ArrayList<Site> searchSiteByAnyLike() throws SQLException{
-		argArray.add(srcParam);
         ResultSet rs = this.runQuery("searchSiteByAnyLike",argArray);
  
-            while (rs.next()) {
+            while ((rs != null)&&(rs.next())) {
                 Site site = new Site();
                 site.setIdSite(rs.getString("idSite"));
                 site.setDescription(rs.getString("description"));
@@ -101,14 +100,14 @@ public class SiteDAO extends SmBaseDAO{
 	}
 
 	public void siteAdd() throws SQLException{
-		
-			argArray.add(0, site.getIdSite());
-			argArray.add(1, site.getDescription());
-			argArray.add(2, site.getLocation());
-			argArray.add(3, site.getNmSite());
-			this.run("siteAdd", argArray);
-	        //this.con.close();
-			//closeConnection();
+		System.out.println("Ada dalam SiteDAO.siteAdd --");
+		argArray.add(0, site.getIdSite());
+		argArray.add(1, site.getDescription());
+		argArray.add(2, site.getLocation());
+		argArray.add(3, site.getNmSite());
+		this.run("siteAdd", argArray);
+	    //this.con.close();
+		//closeConnection();
     }
 	
 	public void siteEdit() throws SQLException{

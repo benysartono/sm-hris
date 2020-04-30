@@ -45,8 +45,8 @@ public class IndexAction extends ActionSupport {
 	private String broker = "tcp://m12.cloudmqtt.com:11880";
 	private Map session = ActionContext.getContext().getSession();
 	private String clientid = String.valueOf(session.get("userId"));
-	//private char[] password = "ZI8YZa0LjRtb".toCharArray();
-	private char[] password = String.valueOf(session.get("password")).toCharArray();
+	private char[] password = "ZI8YZa0LjRtb".toCharArray();
+	//private char[] password = String.valueOf(session.get("password")).toCharArray();
 	private String topic = "iotek/actuator";
 	private String content;
 	private MqttClient mqttClient;

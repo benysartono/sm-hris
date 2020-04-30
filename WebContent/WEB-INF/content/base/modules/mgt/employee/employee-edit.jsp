@@ -109,13 +109,28 @@ dojo.event.topic.publish("show_unitlist");
                         	value="%{employee.idDepartment}"
                         	onchange="javascript:show_unitlist();return false"/>
                     </div>
-						<s:url id="d_url" action="unit-list" /> 
-						<sx:div 
-							id="unitlist" href="%{d_url}" 
-							listenTopics="show_unitlist" 
-							theme="ajax"
-							formId="frmEmployee" 
-							/>                    
+					<div class="col-md-9"> 
+						<!-- 
+						<select id="idUnitSelect" name="employee.idUnit" ng-model="idUnitSelect">
+							<option ng-repeat="x in unitlist" value="{{x.idUnit}}">{{x.name}}</option>
+						</select>
+						-->
+						<s:textfield
+                        	label="Unit"
+                        	name="employee.idUnit"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Unit"
+                        	value="%{employee.idUnit}"
+                        	id="idUnitSelect"
+                        	list="unitlist"
+                        	ng-model="idUnitSelect" 
+                        	/>
+						<datalist id="unitlist">
+						    <option ng-repeat="x in unitlist" value="{{x.idUnit}}">{{x.name}}</option>
+						</datalist>
+						
+					</div>
                     <div class="col-md-9">
                 		<s:textfield
                         	label="Position"

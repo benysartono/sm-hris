@@ -26,8 +26,14 @@ public class IndexAction extends SmBaseAction {
 	    	if(proc.equals("Delete")){
 	    		res = siteDelete();
 	    	}
+	    	if(proc.equals("Add")){
+	    		res = siteAdd();
+	    	}
 			if(!(proc.equals("Add")||proc.equals("Delete"))){
 		    	if (!srcParam.equals("")) {
+					argArray.add("%"+srcParam+"%");
+					argArray.add("%"+srcParam+"%");
+					argArray.add("%"+srcParam+"%");
 					argArray.add("%"+srcParam+"%");
 		    		siteDAO.setArgArray(argArray);
 					setSites(siteDAO.searchSiteByAnyLike());

@@ -37,54 +37,83 @@
         <div class="col-md-9">
       	<div class="panel panel-default">
           <div class="panel-heading">
-            <h1>Adding Site</h1>
+            <h1>Editing Menu</h1>
           </div>
           <div class="panel-body">
 			<div class="tab-content responsive">
-            <s:form id="frmSite" action="index-edit" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
+            <s:form id="frmMenu" action="menu-edit" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="ID Site"
-                        	name="site.idSite"
+                        	label="ID Menu"
+                        	name="menu.idMenu"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Id"
-                        	value="%{site.idSite}"
-                        	readonly="true"
-                        	/>
+                        	value="%{menu.idMenu}"/>
 					</div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Name"
-                        	name="site.nmSite"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Name"
-                        	value="%{site.nmSite}"
-                        	/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
                         	label="Description"
-                        	name="site.description"
+                        	name="menu.description"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Description"
-                        	value="%{site.description}"
+                        	value="%{menu.description}"
                         	/>
                     </div>
                     <div class="col-md-9">
                 		<s:textfield
-                        	label="Location"
-                        	name="site.location"
+                        	label="Href"
+                        	name="menu.href"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Location"
-                        	value="%{site.location}"
+                        	tooltip="Enter Href"
+                        	value="%{menu.href}"
                         	/>
                     </div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Has Children"
+                        	name="menu.hasChildren"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Has Children"
+                        	value="%{menu.HasChildren}"
+                        	/>
+                    </div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Level"
+                        	name="menu.lvl"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Level"
+                        	value="%{menu.lvl}"
+                        	/>
+                    </div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Order"
+                        	name="menu.ord"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Order"
+                        	value="%{menu.ord}"
+                        	/>
+                    </div>
+                    <div class="col-md-9">
+                		<s:textfield
+                        	label="Parent"
+                        	name="menu.parent"
+                        	cssClass="input-sm"
+                        	elementCssClass="col-sm-3"
+                        	tooltip="Enter Parent"
+                        	value="%{menu.parent}"
+                        	/>
+                    </div>
+                    
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>
                 </div>
                 </div>

@@ -11,7 +11,7 @@ import sm.hris.struts2.base.db.SiteDAO;
 
 
 @Results({
-	@Result(name="tolist", location="/base/modules/mgt/site", type="redirect"),
+	@Result(name="tolist", location="/base/modules/mgt/site/index", type="redirect"),
 	})
 @ParentPackage(value = "hris")
 

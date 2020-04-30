@@ -73,8 +73,8 @@
 			  <li><a href="#career">Career History</a></li>
 			</ul>
 
-			<div class="tab-content responsive">
             <s:form id="frmEmployee" action="employee-add" enctype="multipart/form-data" method="post" theme="bootstrap" cssClass="form-horizontal">
+			<div class="tab-content responsive">
 			<div class="tab-pane active" id="profile">
 
                 <div class="form-group">
@@ -221,7 +221,7 @@
                 </div>
                 </div>
         </div>
-			<div class="tab-pane"  id="edu">
+		<div class="tab-pane"  id="edu">
 				<div class="row">
 	                    <div class="col-md-9">
 	                		<s:textfield
@@ -420,8 +420,23 @@
 	
 			</div>
 			<div class="tab-pane" id="career"><p>Under Construction</p></div>
+			</div>  <!-- Tab -->
 			</s:form> 
 		
+
+		</div>
+		</div>
+        </div> <!-- -------col-md-9 -->
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+    		<p class="pull-right"><a href="#">Back to top</a></p>
+		</div>
+	</div>
+</div>	
+
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$('.nav-tabs > li > a').click(function(event){
@@ -454,18 +469,6 @@
 		
 		</script>
 
-		</div>  <!-- Tab -->
-		</div>
-		</div>
-        </div> <!-- -------col-md-9 -->
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-    		<p class="pull-right"><a href="#">Back to top</a></p>
-		</div>
-	</div>
-</div>	
+
 </body>
 </html>
