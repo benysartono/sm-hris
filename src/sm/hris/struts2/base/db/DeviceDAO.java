@@ -21,6 +21,33 @@ public class DeviceDAO extends SmBaseDAO{
             	device.setIdDevice(rs.getString("idDevice"));
             	device.setIdDeviceType(rs.getString("idDeviceType"));
             	device.setIdSite(rs.getString("idSite"));
+            	device.setNmDeviceType(rs.getString("nmDeviceType"));
+            	device.setNmSite(rs.getString("nmSite"));
+            	device.setUpdatedTime(rs.getString("updatedTime"));
+            	devices.add(device);
+            } 
+        	
+            if(rs != null){
+     		   try {
+     		   rs.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing result set: " + e);
+     		   }
+     		}
+        	//closeConnection();
+        	return devices;
+        
+    }
+
+	public ArrayList<Device> searchDeviceByIdSite() throws SQLException{
+        ResultSet rs = this.runQuery("searchDeviceByIdSite");
+            while (rs.next()) {
+            	Device device = new Device();
+            	device.setIdDevice(rs.getString("idDevice"));
+            	device.setIdDeviceType(rs.getString("idDeviceType"));
+            	device.setIdSite(rs.getString("idSite"));
+            	device.setNmDeviceType(rs.getString("nmDeviceType"));
+            	device.setNmSite(rs.getString("nmSite"));
             	device.setUpdatedTime(rs.getString("updatedTime"));
             	devices.add(device);
             } 
@@ -73,6 +100,8 @@ public class DeviceDAO extends SmBaseDAO{
         	device.setIdDevice(rs.getString("idDevice"));
         	device.setIdDeviceType(rs.getString("idDeviceType"));
         	device.setIdSite(rs.getString("idSite"));
+        	device.setNmDeviceType(rs.getString("nmDeviceType"));
+        	device.setNmSite(rs.getString("nmSite"));
         	device.setUpdatedTime(rs.getString("updatedTime"));
         	devices.add(device);
         } 

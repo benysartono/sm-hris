@@ -62,7 +62,7 @@
 								Device Type
 							</td>
 							<td>
-								Id Site
+								Site
 							</td>
 						</tr>
 					</thead>
@@ -78,10 +78,10 @@
     								<s:param name="device.idDeviceType"><s:property value ="idDeviceType"/></s:param>
     								<s:param name="device.idSite"><s:property value ="idSite"/></s:param>
 								</s:url>
-								<a href="<s:property value="#urlTag" />" ><s:property value ="idDeviceType"/></a>
+								<a href="<s:property value="#urlTag" />" ><s:property value ="nmDeviceType"/></a>
 							</td>
 							<td>       
-								<s:property value ="idSite"/>
+								<s:property value ="nmSite"/>
 							</td>
 						</tr>
 					</s:iterator>

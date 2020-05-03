@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchDevice>Select * from smiot_device order by updatedTime desc</searchDevice> 
-		<searchDeviceTrx>Select * from smiot_devicetrx where idSite = ? order by updatedTime desc</searchDeviceTrx> 
-		<searchDeviceById>Select * from smiot_device where idDevice = ?</searchDeviceById> 
-		<searchDeviceByAnyLike>Select * from smiot_device where idDevice like ? or idDeviceType like ? or idSite like ?</searchDeviceByAnyLike> 
-		<deviceAdd>Insert into smiot_device(idSite,idDevice,idDeviceType) values(?,?,?)</deviceAdd>
-		<deviceTrxAdd>Insert into smiot_device(idSite,idDevice,idDeviceType) values(?,?,?)</deviceTrxAdd>
-		<deviceEdit>Update smiot_device set idSite=?, idDevice=?, idDeviceType=?, where idSite=? and idDevice=?</deviceEdit>
+		<searchDeviceTrx>Select *, b.nmDeviceType as nmDeviceType, c.nmSite as nmSite from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite order by a.updatedTime desc</searchDeviceTrx> 
+		<searchDeviceTrxByIdSite>Select *, b.nmDeviceType as nmDeviceType, c.nmSite as nmSite from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where idSite = ? order by a.updatedTime desc</searchDeviceTrxByIdSite> 
+		<searchDeviceTrxByAnyLike>Select *, b.nmDeviceType as nmDeviceType from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where a.idDevice like ? or a.idDeviceType like ? or a.idSite like ?</searchDeviceTrxByAnyLike> 
 		<deviceDelete>Delete from smiot_device where idDevice = ?</deviceDelete> 
 		
 </xmlquery>		

@@ -23,8 +23,6 @@ public class ActuatorDAO extends SmBaseDAO{
 	private int oppCommand;
 	private Map<String, Object> sessionAttributes;
 	private Map session = ActionContext.getContext().getSession();
-
-
 	
 	public ArrayList<Actuator> searchActuator() throws SQLException{
 			ResultSet rs = this.runQuery("searchActuator");

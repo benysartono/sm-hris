@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchDevice>Select * from smiot_device order by updatedTime desc</searchDevice> 
+		<searchDevice>Select *, b.nmDeviceType as nmDeviceType from smiot_device a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite order by a.updatedTime desc</searchDevice> 
+		<searchDeviceByIdSite>Select *, b.nmDeviceType as nmDeviceType from smiot_device a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where idSite = ? order by a.updatedTime desc</searchDeviceByIdSite> 
 		<searchDeviceTrx>Select * from smiot_devicetrx where idSite = ? order by updatedTime desc</searchDeviceTrx> 
-		<searchDeviceById>Select * from smiot_device where idDevice = ?</searchDeviceById> 
-		<searchDeviceByAnyLike>Select * from smiot_device where idDevice like ? or idDeviceType like ? or idSite like ?</searchDeviceByAnyLike> 
+		<searchDeviceById>Select *, b.nmDeviceType as nmDeviceType from smiot_device a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where a.idDevice = ?</searchDeviceById> 
+		<searchDeviceByAnyLike>Select *, b.nmDeviceType as nmDeviceType from smiot_device a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where a.idDevice like ? or a.idDeviceType like ? or a.idSite like ?</searchDeviceByAnyLike> 
 		<deviceAdd>Insert into smiot_device(idSite,idDevice,idDeviceType) values(?,?,?)</deviceAdd>
 		<deviceEdit>Update smiot_device set idSite=?, idDevice=?, idDeviceType=? where idDevice=?</deviceEdit>
 		<deviceDelete>Delete from smiot_device where idDevice = ?</deviceDelete> 

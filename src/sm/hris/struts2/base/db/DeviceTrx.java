@@ -1,14 +1,14 @@
 package sm.hris.struts2.base.db;
 
 
-public class Device {
+public class DeviceTrx {
 
 	private String idDevice;
 	private String idDeviceType;
 	private String idSite;
 	private String nmSite;
 	private String nmDeviceType;
-	
+	private String value;
 	private String updatedTime;
 	
 	public String getIdDevice(){
@@ -50,6 +50,15 @@ public class Device {
 	public void setNmDeviceType(String nmDeviceType) {
 		this.nmDeviceType = nmDeviceType;
 	}
+
+	public String getValue(){
+		return value;
+	}
+	
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 
 	public String getUpdatedTime(){
 		return updatedTime;

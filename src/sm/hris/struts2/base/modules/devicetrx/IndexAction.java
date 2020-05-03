@@ -1,4 +1,4 @@
-package sm.hris.struts2.base.modules.sensor;
+package sm.hris.struts2.base.modules.devicetrx;
 
 
 import com.opensymphony.xwork2.ActionSupport;
