@@ -3,6 +3,7 @@
 		<searchEmployee>Select * from smhris_employee</searchEmployee> 
 		<searchEmployeeLogin>Select * from smhris_employee where uid = ? and password = ?</searchEmployeeLogin> 
 		<searchEmployeeByName>Select * from smhris_employee where name like ?</searchEmployeeByName> 
+		<searchEmployeeByUid>Select * from smhris_employee where uid = ?</searchEmployeeByUid> 
 		<searchEmployeeFRByNameAndDOB>Select * from smhris_employee where name like ? and dob between ? and ?</searchEmployeeFRByNameAndDOB> 
 		<searchEmployeeFR>Select * from smhris_employee</searchEmployeeFR> 
 		<employeeDelete>Delete from smhris_employee where idEmployee = ?</employeeDelete> 

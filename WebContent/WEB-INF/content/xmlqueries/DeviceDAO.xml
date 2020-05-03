@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchDevice>Select * from smiot_device order by updatedTime desc</searchDevice> 
+		<searchDeviceTrx>Select * from smiot_devicetrx where idSite = ? order by updatedTime desc</searchDeviceTrx> 
+		<searchDeviceById>Select * from smiot_device where idDevice = ?</searchDeviceById> 
+		<searchDeviceByAnyLike>Select * from smiot_device where idDevice like ? or idDeviceType like ? or idSite like ?</searchDeviceByAnyLike> 
+		<deviceAdd>Insert into smiot_device(idSite,idDevice,idDeviceType) values(?,?,?)</deviceAdd>
+		<deviceEdit>Update smiot_device set idSite=?, idDevice=?, idDeviceType=? where idDevice=?</deviceEdit>
+		<deviceDelete>Delete from smiot_device where idDevice = ?</deviceDelete> 
+		
+</xmlquery>		

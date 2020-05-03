@@ -21,7 +21,9 @@ import org.apache.struts2.convention.annotation.Results;
 
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Department;
+import sm.hris.struts2.base.db.Site;
 import sm.hris.struts2.base.db.DepartmentDAO;
+import sm.hris.struts2.base.db.SiteDAO;
 import sm.hris.struts2.base.db.Employee;
 import sm.hris.struts2.base.db.EmployeeDAO;
 import sm.hris.struts2.base.db.EmployeeEdu;
@@ -47,10 +49,13 @@ public class EmployeeEditAction extends SmBaseAction {
 
     private Department department = new Department();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
+    
+    private SiteDAO siteDAO = new SiteDAO();
 
     private ArrayList<EmployeeEdu> employeeEdus = new ArrayList<EmployeeEdu>();
     private ArrayList<EmployeeCareer> employeeCareers = new ArrayList<EmployeeCareer>();
     private ArrayList<Department> departments = new ArrayList<Department>();
+    private ArrayList<Site> sites = new ArrayList<Site>();
 
     private String proc;
     private String prmimg;
@@ -71,6 +76,7 @@ public class EmployeeEditAction extends SmBaseAction {
 		String filePath = "C:/Bitnami/tomcatstack-7.0.67-0/apache-tomcat/webapps/img/" + employee.getIdEmployee();
    	 	try {
 			departments = departmentDAO.searchDepartment();
+			sites = siteDAO.searchSite();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,6 +103,7 @@ public class EmployeeEditAction extends SmBaseAction {
 				if (proc.equals("DeleteCareer")){
 					return SUCCESS;
 			    } else {
+			    	System.out.println("employeeEditAction.employee.employeeId nya: " + employee.getIdEmployee());
 					employeeDAO.employeeEdit(employee);
 					return "tolist";
 				}	
@@ -153,6 +160,10 @@ public class EmployeeEditAction extends SmBaseAction {
 
 	public List<Department> getDepartments(){
 		return departments;
+	} 
+
+	public List<Site> getSites(){
+		return sites;
 	} 
 
 /*

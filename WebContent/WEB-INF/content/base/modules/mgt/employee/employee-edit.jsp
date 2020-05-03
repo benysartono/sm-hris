@@ -141,13 +141,27 @@ dojo.event.topic.publish("show_unitlist");
                         	value="%{employee.idPosition}"/>
                     </div>
                     <div class="col-md-9">
-                		<s:textfield
+                		<s:select
+                        	list="sites"
+                        	listKey="idSite"
+                        	listValue ="nmSite"
                         	label="Site"
                         	name="employee.idSite"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter site"
-                        	value="%{employee.idSite}"/>
+                        	tooltip="Enter Site"
+                        	value="%{employee.idSite}"
+                        	/>
+                    </div>
+                    <div class="col-md-9">
+                		<s:hidden
+                        	name="employee.imgUrl"
+                        	value="%{employee.imgUrl}"/>
+                    </div>
+                    <div class="col-md-9">
+                		<s:hidden
+                        	name="employee.idEmployee"
+                        	value="%{employee.idEmployee}"/>
                     </div>
 					<!--  <input type="file" name="employee.photo" />  -->
 					<div>

@@ -112,6 +112,35 @@ public class EmployeeDAO extends SmBaseDAO{
         	return employees;
     }
 
+	public ArrayList<Employee> searchEmployeeByUid(ArrayList<String> argArray) throws SQLException{
+        ResultSet rs = this.runQuery("searchEmployeeByUid",argArray);
+ 
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setIdEmployee(rs.getString("idEmployee"));
+                employee.setName(rs.getString("name"));
+                employee.setAddress(rs.getString("address"));
+                employee.setDob(rs.getDate("dob"));
+                employee.setIdDepartment(rs.getString("idDepartment"));
+                employee.setIdSite(rs.getString("idSite"));
+                employee.setIdUnit(rs.getString("idUnit"));
+                employee.setIdPosition(rs.getString("idPosition"));
+                employees.add(employee);
+                
+            } 
+        	
+            if(rs != null){
+     		   try {
+     		   rs.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing result set: " + e);
+     		   }
+     		}
+        	//closeConnection();
+        	
+        	return employees;
+    }
+
 	public ArrayList<EmployeeFR> searchEmployeeFRByNameAndDob(ArrayList<String> argArray) throws SQLException{
         ResultSet rs = this.runQuery("searchEmployeeFRByNameAndDob",argArray);
         	if(rs != null){
@@ -218,6 +247,8 @@ public class EmployeeDAO extends SmBaseDAO{
 	
 	public void employeeEdit(Employee employee) throws SQLException{
 		
+    	System.out.println("employeeDAO.employee.employeeId nya: " + employee.getIdEmployee());
+
 		argArray.add(0, employee.getName());
 		argArray.add(1, employee.getAddress());
 		String cvtDate;
@@ -228,7 +259,8 @@ public class EmployeeDAO extends SmBaseDAO{
 		argArray.add(4, employee.getIdUnit());
 		argArray.add(5, employee.getIdPosition());
 		argArray.add(6, employee.getIdSite());
-		argArray.add(7, employee.getIdEmployee());
+		argArray.add(7, employee.getImgURL());
+		argArray.add(8, employee.getIdEmployee());
 		this.run("employeeEdit", argArray);
 		//closeConnection();
 	}

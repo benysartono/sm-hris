@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xmlquery value="smhris">
-		<searchSensor>Select * from smiot_sensor order by updatedTime desc</searchSensor> 
-		<SensorAdd>Insert into smiot_sensor(idSite,idSensor,idSensorType,value) values(?,?,?,?)</SensorAdd>
-		<SensorEdit>Update smiot_sensor set idSite=?, idSensor=?, idSensorType=?, value=? where idSite=? and idSensor=?</SensorEdit>
-</xmlquery>		

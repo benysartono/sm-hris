@@ -19,7 +19,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import sm.hris.struts2.base.db.Department;
+import sm.hris.struts2.base.db.Site;
 import sm.hris.struts2.base.db.DepartmentDAO;
+import sm.hris.struts2.base.db.SiteDAO;
 import sm.hris.struts2.base.db.Employee;
 import sm.hris.struts2.base.db.EmployeeDAO;
 import sm.hris.struts2.base.db.EmployeeEdu;
@@ -38,12 +40,14 @@ public class EmployeeAddAction extends SmBaseAction {
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private EmployeeEduDAO employeeEduDAO = new EmployeeEduDAO();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
+    private ArrayList<Site> sites = new ArrayList<Site>();
     private ArrayList<Department> departments = new ArrayList<Department>();
     private ArrayList<EmployeeEdu> employeeEdus = new ArrayList<EmployeeEdu>();
     private String proc = new String();
 	private Blob img;
 	private String imgContentType;
-	
+    private SiteDAO siteDAO = new SiteDAO();
+
 	public String execute() throws Exception {
 		//super.getMenus(); 
 		System.out.println("Passing Id Employee: " + employee.getIdEmployee());
@@ -51,6 +55,7 @@ public class EmployeeAddAction extends SmBaseAction {
    	 	
 		try {
 			departments = departmentDAO.searchDepartment();
+			sites = siteDAO.searchSite();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,13 +64,6 @@ public class EmployeeAddAction extends SmBaseAction {
 		if(proc.equals("Submit")){ 
 		    if (getEmployee().getIdEmployee() == null || getEmployee().getIdEmployee().trim().equals("")||getEmployee().getName() == null || getEmployee().getName().trim().equals("")){
 			  	 
-		    	try {
-			  		departments = departmentDAO.searchDepartment();
-			  	 } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-			  	 }
-				
 			    addFieldError("employee.name","The name is required");
 			    return SUCCESS;
 			} else {
@@ -176,6 +174,9 @@ public class EmployeeAddAction extends SmBaseAction {
 		this.employeeEdus = employeeEdus;
 	}
 
+	public ArrayList<Site> getSites(){
+		return sites;
+	} 
 
 }
 

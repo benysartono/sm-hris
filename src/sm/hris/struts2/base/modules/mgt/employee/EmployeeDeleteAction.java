@@ -10,7 +10,7 @@ import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-//import sm.hris.struts2.base.db.Employee;
+import sm.hris.struts2.base.db.Employee;
 import sm.hris.struts2.base.db.EmployeeDAO;
 
 @Results({
@@ -22,7 +22,8 @@ public class EmployeeDeleteAction extends SmBaseAction {
     //private static final long serialVersionUID = 7353477345330099548L;
     //private Employee employee;
     private ArrayList<String> idEmployees = new ArrayList<String>();
-
+    private ArrayList<Employee> employees = new ArrayList<Employee>();
+    
 	public String execute() throws Exception {
 		System.out.println("In EmployeeDelete");
 		for(int i=0;i<idEmployees.size();i++){
@@ -30,6 +31,7 @@ public class EmployeeDeleteAction extends SmBaseAction {
 		}
 		EmployeeDAO employeeDAO = new EmployeeDAO();
 		employeeDAO.employeeDelete(idEmployees);
+		employees = employeeDAO.searchEmployee();
 		return "tolist";
 	}
 	
@@ -41,4 +43,13 @@ public class EmployeeDeleteAction extends SmBaseAction {
 	public void setIdEmployees(ArrayList<String> idEmployees){
 		this.idEmployees=idEmployees;
 	}
+	
+	public ArrayList<Employee> getEmployees(){
+		return employees;
+	}
+	
+	public void setEmployees(ArrayList<Employee> employees){
+		this.employees=employees;
+	}
+	
 }

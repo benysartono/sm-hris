@@ -21,7 +21,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Actuator;
 import sm.hris.struts2.base.db.ActuatorDAO;
-import sm.hris.struts2.base.db.Sensor;
+import sm.hris.struts2.base.db.Device;
 
 @ParentPackage(value = "hris")
 

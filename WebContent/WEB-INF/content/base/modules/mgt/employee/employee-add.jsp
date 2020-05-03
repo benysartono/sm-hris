@@ -121,7 +121,7 @@
                                 id="datepicker"
                                 parentTheme="bootstrap"
                                 name="employee.dob"
-                                label="Datepicker"
+                                label="DOB"
                                 tooltip="Enter DOB"
                                 cssClass="form-control"
                                 elementCssClass="col-sm-3"
@@ -130,54 +130,19 @@
                                 dateFormat="yy-m-d"
                                 />
 					</div>
-                    <div class="col-md-9">
-                		<!--  
-                		<select id="idDeptSelect" name="employee.idDept" ng-focus="deptOnFocus()" ng-blur="deptOnBlur()" ng-model="idDeptSelect">
-							<option ng-repeat="x in deptlist" value="{{x.idDepartment}}">{{x.name}}</option>
-                		</select>
-                		-->
-						<s:textfield
+
+					<div class="col-md-9"> 
+                		<s:select
+                        	list="departments"
+                        	listKey="idDepartment"
+                        	listValue ="name"
                         	label="Department"
                         	name="employee.idDepartment"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Department"
                         	value="%{employee.idDepartment}"
-                        	id="idDeptSelect"
-                        	list="departmentlist"
-                        	ng-model="idDeptSelect" 
-                        	ng-focus="deptOnFocus()" 
-                        	ng-blur="deptOnBlur()"
                         	/>
-						
-                		<!-- <input list="departmentlist" id="idDeptSelect" name="idDeptSelect" ng-model="idDeptSelect" ng-focus="deptOnFocus()" ng-blur="deptOnBlur()">  -->
-						<datalist id="departmentlist">
-						    <option ng-repeat="x in deptlist" value="{{x.idDepartment}}">{{x.name}}</option>
-						</datalist>
-                		<!-- <select ng-model="idDeptSelect" ng-options="item.idDepartment as item.name for item in deptlist" ng-focus="deptOnFocus()" ng-blur="deptOnBlur()"></select> --> 
-                    </div>
-					
-					<div class="col-md-9"> 
-						<!-- 
-						<select id="idUnitSelect" name="employee.idUnit" ng-model="idUnitSelect">
-							<option ng-repeat="x in unitlist" value="{{x.idUnit}}">{{x.name}}</option>
-						</select>
-						-->
-						<s:textfield
-                        	label="Unit"
-                        	name="employee.idUnit"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Unit"
-                        	value="%{employee.idUnit}"
-                        	id="idUnitSelect"
-                        	list="unitlist"
-                        	ng-model="idUnitSelect" 
-                        	/>
-						<datalist id="unitlist">
-						    <option ng-repeat="x in unitlist" value="{{x.idUnit}}">{{x.name}}</option>
-						</datalist>
-						
 					</div>
 					
 					<!-- 
@@ -199,13 +164,17 @@
                         	value="%{employee.idPosition}"/>
                     </div>
                     <div class="col-md-9">
-                		<s:textfield
+                		<s:select
+                        	list="sites"
+                        	listKey="idSite"
+                        	listValue ="nmSite"
                         	label="Site"
                         	name="employee.idSite"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter site"
-                        	value="%{employee.idSite}"/>
+                        	tooltip="Enter Site"
+                        	value="%{employee.idSite}"
+                        	/>
                     </div>
                     <div class="col-md-9">
                 		<s:file
