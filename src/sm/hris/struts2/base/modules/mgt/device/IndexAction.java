@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Device;
 import sm.hris.struts2.base.db.DeviceDAO;
+import sm.hris.struts2.base.db.ActuatorDAO;
 import sm.hris.struts2.base.db.Site;
 import sm.hris.struts2.base.db.SiteDAO;
 import sm.hris.struts2.base.db.DeviceType;
@@ -19,6 +20,7 @@ import sm.hris.struts2.base.db.DeviceTypeDAO;
 public class IndexAction extends SmBaseAction {
     private static final long serialVersionUID = 7353477345330099548L;
 	private DeviceDAO deviceDAO = new DeviceDAO();
+	private ActuatorDAO actuatorDAO = new ActuatorDAO();
     private ArrayList<Device> devices;
     private String srcParam;
     private ArrayList<String> argArray = new ArrayList<String>();
@@ -66,8 +68,13 @@ public class IndexAction extends SmBaseAction {
     }
     
 	public String deviceDelete() throws Exception {
-		deviceDAO.setArgArray(idDevices);
+		for(int n =0;n<devices.size();n++){
+			System.out.println("Ini lho IdDevice nya "+devices.get(n).getIdDevice());
+			System.out.println("Ini lho IdSite nya "+devices.get(n).getIdSite());
+		}
+		deviceDAO.setDevices(devices);
 		deviceDAO.deviceDelete();
+		//actuatorDAO.actuatorDelete();
 		setDevices(deviceDAO.searchDevice());
 		return "success";
 	}

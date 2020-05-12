@@ -2,18 +2,19 @@ package sm.hris.struts2.base.db;
 
 import java.sql.Timestamp;
 
+
 public class Actuator {
 
 	private String idActuator; 									
 	private Integer idRelay; 		
 	private Integer command;
-	private String idSite;
-	private Timestamp updatedTime;
 	private String updatedBy;
-	private Timestamp createdTime;
 	private String createdBy;
+	private String updatedTime;
+	private String createdTime;
 	private String idActuatorIdRelay;
 	private String idActuatorIdRelayCmd;
+	private Integer active;
 	
 	public String getIdActuator(){
 		return idActuator;
@@ -21,14 +22,6 @@ public class Actuator {
 	
 	public void setIdActuator(String idActuator) {
 		this.idActuator = idActuator;
-	}
-
-	public String getIdSite(){
-		return idSite;
-	}
-	
-	public void setIdSite(String idSite) {
-		this.idSite = idSite;
 	}
 
 	public Integer getIdRelay(){
@@ -55,6 +48,14 @@ public class Actuator {
 		this.updatedBy = updatedBy;
 	}
 
+	public String getUpdatedTime(){
+		return updatedTime;
+	}
+	
+	public void setUpdatedTime(String updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
 	public String getCreatedBy(){
 		return createdBy;
 	}
@@ -63,19 +64,11 @@ public class Actuator {
 		this.createdBy = createdBy;
 	}
 
-	public Timestamp getUpdatedTime(){
-		return updatedTime;
-	}
-	
-	public void setUpdatedTime(Timestamp updatedTime){
-		this.updatedTime = updatedTime;
-	}
-
-	public Timestamp getCreatedTime(){
+	public String getCreatedTime(){
 		return createdTime;
 	}
 	
-	public void setCreatedTime(Timestamp createdTime){
+	public void setCreatedTime(String createdTime) {
 		this.createdTime = createdTime;
 	}
 
@@ -91,8 +84,16 @@ public class Actuator {
 		return this.idActuator + "," + this.idRelay;
 	}
 	
-	public void setIdActuatorIdRelayCmd(String idActuatorIdRelay) {
-		this.idActuatorIdRelay = idActuatorIdRelay;
+	public void setIdActuatorIdRelayCmd(String idActuatorIdRelayCmd) {
+		this.idActuatorIdRelayCmd = idActuatorIdRelayCmd;
+	}
+
+	public Integer getActive(){
+		return this.active;
+	}
+	
+	public void setActive(Integer active) {
+		this.active = active;
 	}
 
 }

@@ -20,6 +20,30 @@ public class DeviceTypeDAO extends SmBaseDAO{
             	DeviceType deviceType = new DeviceType();
             	deviceType.setIdDeviceType(rs.getString("idDeviceType"));
             	deviceType.setNmDeviceType(rs.getString("nmDeviceType"));
+            	deviceType.setMaxRelayNbr(rs.getInt("maxRelayNbr"));
+            	deviceType.setUpdatedTime(rs.getString("updatedTime"));
+            	deviceTypes.add(deviceType);
+            } 
+        	
+            if(rs != null){
+     		   try {
+     		   rs.close();
+     		   } catch (SQLException e) {
+     		        System.out.println("Exception while closing result set: " + e);
+     		   }
+     		}
+        	//closeConnection();
+        	return deviceTypes;
+        
+    }
+
+	public ArrayList<DeviceType> searchDeviceTypeByIdDeviceType() throws SQLException{
+        ResultSet rs = this.runQuery("searchDeviceTypeByIdDeviceType",argArray);
+            while (rs.next()) {
+            	DeviceType deviceType = new DeviceType();
+            	deviceType.setIdDeviceType(rs.getString("idDeviceType"));
+            	deviceType.setNmDeviceType(rs.getString("nmDeviceType"));
+            	deviceType.setMaxRelayNbr(rs.getInt("maxRelayNbr"));
             	deviceType.setUpdatedTime(rs.getString("updatedTime"));
             	deviceTypes.add(deviceType);
             } 
@@ -69,6 +93,7 @@ public class DeviceTypeDAO extends SmBaseDAO{
         	DeviceType deviceType = new DeviceType();
         	deviceType.setIdDeviceType(rs.getString("idDeviceType"));
         	deviceType.setNmDeviceType(rs.getString("nmDeviceType"));
+        	deviceType.setMaxRelayNbr(rs.getInt("maxRelayNbr"));
         	deviceType.setUpdatedTime(rs.getString("updatedTime"));
         	deviceTypes.add(deviceType);
         } 

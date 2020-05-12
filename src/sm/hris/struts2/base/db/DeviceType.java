@@ -5,6 +5,7 @@ public class DeviceType {
 
 	private String idDeviceType;
 	private String nmDeviceType;
+	private Integer maxRelayNbr;
 	private String updatedTime;
 	
 	public String getIdDeviceType(){
@@ -21,6 +22,14 @@ public class DeviceType {
 	
 	public void setNmDeviceType(String nmDeviceType) {
 		this.nmDeviceType = nmDeviceType;
+	}
+
+	public Integer getMaxRelayNbr(){
+		return maxRelayNbr;
+	}
+	
+	public void setMaxRelayNbr(Integer maxRelayNbr) {
+		this.maxRelayNbr = maxRelayNbr;
 	}
 
 

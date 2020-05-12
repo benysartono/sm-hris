@@ -37,7 +37,7 @@
         <div class="col-md-9">
       	<div class="panel panel-default">
           <div class="panel-heading">
-            <h1>Adding Actuator</h1>
+            <h1>Editing Actuator</h1>
           </div>
           <div class="panel-body">
 			<div class="tab-content responsive">
@@ -45,14 +45,20 @@
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
-                		<s:textfield
-                        	label="ID Actuator"
+                		<s:select
+                        	list="devices"
+                        	listKey="idDevice"
+                        	listValue ="idDevice"
+                        	label="Device"
                         	name="actuator.idActuator"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Id"
+                        	tooltip="Enter Device"
                         	value="%{actuator.idActuator}"
-                        	readonly="true"
+                        	/>
+                		<s:hidden
+                        	name="oriIdActuator"
+                        	value="%{actuator.idActuator}"
                         	/>
 					</div>
                     <div class="col-md-9">
@@ -64,15 +70,9 @@
                         	tooltip="Enter Id Relay"
                         	value="%{actuator.idRelay}"
                         	/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Id Site"
-                        	name="actuator.idSite"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Id Site"
-                        	value="%{actuator.idSite}"
+                		<s:hidden
+                        	name="oriIdRelay"
+                        	value="%{actuator.idRelay}"
                         	/>
                     </div>
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>

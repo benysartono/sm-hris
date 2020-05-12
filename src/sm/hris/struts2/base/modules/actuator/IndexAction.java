@@ -22,12 +22,13 @@ import sm.hris.struts2.base.SmBaseAction;
 import sm.hris.struts2.base.db.Actuator;
 import sm.hris.struts2.base.db.ActuatorDAO;
 import sm.hris.struts2.base.db.Device;
+import sm.hris.struts2.base.db.DeviceDAO;
+import sm.hris.struts2.base.db.EmployeeDAO;
 
 @ParentPackage(value = "hris")
 
 public class IndexAction extends ActionSupport {
     private static final long serialVersionUID = 7353477345330099548L;
-	private ActuatorDAO actuatorDAO = new ActuatorDAO();
     private ArrayList<Actuator> actuators;
     private String srcParam;
     private ArrayList<String> argArray = new ArrayList<String>();
@@ -37,19 +38,28 @@ public class IndexAction extends ActionSupport {
     private String idActuatorIdRelayCmd;
     private String proc;
     private String res;
-    private Actuator actuator;
 	private String idActuator;
 	private String IdRelay;
 	private String Command;
+	
+	private EmployeeDAO employeeDAO = new EmployeeDAO();
+	private DeviceDAO deviceDAO = new DeviceDAO();
+    private ArrayList<Device> devices = new ArrayList<Device>();
+	private ActuatorDAO actuatorDAO = new ActuatorDAO();
+    private Actuator actuator = new Actuator();
 
-	private String broker = "tcp://m12.cloudmqtt.com:11880";
+    
+	//private String broker = "tcp://m12.cloudmqtt.com:11880";
+	private static String broker = "tcp://127.0.0.1:1883";
 	private Map session = ActionContext.getContext().getSession();
-	private String clientid = String.valueOf(session.get("userId"));
+	private String clientid = "ptgijdgb";
 	private char[] password = "ZI8YZa0LjRtb".toCharArray();
 	//private char[] password = String.valueOf(session.get("password")).toCharArray();
 	private String topic = "iotek/actuator";
 	private String content;
 	private MqttClient mqttClient;
+	private String userId = String.valueOf(session.get("userId"));
+	private String idSite;
 	
     MemoryPersistence persistence = new MemoryPersistence();
     int qos = 2;
@@ -60,27 +70,34 @@ public class IndexAction extends ActionSupport {
 
     
     public String execute() throws Exception{
+    	argArray.add(userId);
+    	System.out.println("User e : " + userId);
+    	idSite = employeeDAO.searchEmployeeByUid(argArray).get(0).getIdSite();
+    	System.out.println("Site e : " + idSite);
+    	argArray = new ArrayList<String>();
+    	argArray.add(idSite);
+    	deviceDAO.setArgArray(argArray);
+		devices = deviceDAO.searchDeviceByIdSite();
+
     	if (proc != null){
-	    	if(proc.equals("Delete")){
-	    		res = actuatorDelete();
-	    	}
 	    	if(proc.equals("OnOff")){
+	    		System.out.println("Ada dalam OnOff return");
 	    		res = actuatorOnOff();
 	    	}
-			if(!(proc.equals("Add")||proc.equals("Delete"))){
-				//argArray = new ArrayList<String>();
-				//argArray.add(e)
-	    		//actuatorDAO.setArgArray(argArray);
-				setActuators(actuatorDAO.searchActuator());
-				res="success";
-			}
-	    	else if(proc.equals("Add")){
-	    		System.out.println("Ada dalam add return");
-	    		res= "add";
+	    	else if(proc.equals("Actv")){
+	    		System.out.println("Ada dalam Active return");
+	    		res= actuatorActive();
+	    	}
+	    	else if(proc.equals("InActv")){
+	    		System.out.println("Ada dalam InActive return");
+	    		res= actuatorInActive();
 	    	}
     	}
 		else {
-			setActuators(actuatorDAO.searchActuator());
+			argArray = new ArrayList<String>();
+			argArray.add(idSite);
+    		actuatorDAO.setArgArray(argArray);
+			setActuators(actuatorDAO.searchActuatorByIdSite());
 			res="success";
 		} 
 		return res;
@@ -93,18 +110,65 @@ public class IndexAction extends ActionSupport {
 			argArray.add(idActuatorIdRelays.get(cnt).substring(0 , iend));
 			argArray.add(idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
 			
-			System.out.println("Actuator Kode: " + idActuatorIdRelays.get(cnt).substring(0 , iend));
-			System.out.println("Relay Kode: " + idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
+			//System.out.println("Actuator Kode: " + idActuatorIdRelays.get(cnt).substring(0 , iend));
+			//System.out.println("Relay Kode: " + idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
 			actuatorDAO.setArgArray(argArray);
 			actuatorDAO.actuatorDelete();
 		}
-		setActuators(actuatorDAO.searchActuator());
+		argArray = new ArrayList<String>();
+		argArray.add(idSite);
+		actuatorDAO.setArgArray(argArray);
+		setActuators(actuatorDAO.searchActuatorByIdSite());
 		return "success";
 	}
 	
+	public String actuatorActive() throws Exception {
+		for(int cnt=0;cnt<idActuatorIdRelays.size();cnt++){
+			argArray = new ArrayList<String>();
+			int iend = idActuatorIdRelays.get(cnt).indexOf(",");
+			argArray.add(session.get("userId").toString());
+			argArray.add(idActuatorIdRelays.get(cnt).substring(0 , iend));
+			argArray.add(idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
+			argArray.add(idSite);
+			
+			//System.out.println("Actuator Kode: " + idActuatorIdRelays.get(cnt).substring(0 , iend));
+			//System.out.println("Relay Kode: " + idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
+			actuatorDAO.setArgArray(argArray);
+			actuatorDAO.actuatorActive();
+		}
+		argArray = new ArrayList<String>();
+		argArray.add(idSite);
+		actuatorDAO.setArgArray(argArray);
+		setActuators(actuatorDAO.searchActuatorByIdSite());
+		return "success";
+	}
 	
+	public String actuatorInActive() throws Exception {
+		for(int cnt=0;cnt<idActuatorIdRelays.size();cnt++){
+			argArray = new ArrayList<String>();
+			int iend = idActuatorIdRelays.get(cnt).indexOf(",");
+			argArray.add(session.get("userId").toString());
+			argArray.add(idActuatorIdRelays.get(cnt).substring(0 , iend));
+			argArray.add(idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
+			argArray.add(idSite);
+			
+			//System.out.println("Actuator Kode: " + idActuatorIdRelays.get(cnt).substring(0 , iend));
+			//System.out.println("Relay Kode: " + idActuatorIdRelays.get(cnt).substring(idActuatorIdRelays.get(cnt).lastIndexOf(",") + 1));
+			actuatorDAO.setArgArray(argArray);
+			actuatorDAO.actuatorInActive();
+		}
+		argArray = new ArrayList<String>();
+		argArray.add(idSite);
+		actuatorDAO.setArgArray(argArray);
+		setActuators(actuatorDAO.searchActuatorByIdSite());
+		return "success";
+	}
+
 	public String actuatorOnOff() throws Exception {
-	    MqttClient publishClient = getMqttClient();
+	    if(actuator.getCommand()==3){
+	    	
+	    } else {
+		MqttClient publishClient = getMqttClient();
 		try {
 	        content = actuator.getIdActuator() + "|" + actuator.getIdRelay() + "|" + actuator.getCommand();
 	        MqttMessage message = new MqttMessage(content.getBytes());
@@ -123,10 +187,15 @@ public class IndexAction extends ActionSupport {
 	        return "error";
 	    }
 		actuatorDAO.setActuator(actuator);
+		actuatorDAO.setIdSite(idSite);
 		actuatorDAO.actuatorOnOff();
-		System.out.println("Sukses lewati publish");
+		}
+		argArray = new ArrayList<String>();
+		argArray.add(idSite);
+		actuatorDAO.setArgArray(argArray);
+		setActuators(actuatorDAO.searchActuatorByIdSite());
         return SUCCESS;
-	}
+	 }
 
 	public MqttClient getMqttClient(){
 	    try {
@@ -177,6 +246,10 @@ public class IndexAction extends ActionSupport {
 		this.srcParam = srcParam;
 	}
 
+	public String getProc(){
+		return proc;
+	}
+
 	public void setProc(String proc) {
         this.proc = proc;
     }
@@ -220,5 +293,15 @@ public class IndexAction extends ActionSupport {
 	public void setActuator(Actuator actuator){
 		this.actuator = actuator;
 	}
+	
+	public ArrayList<Device> getDevices(){
+		return devices;
+	}
+	
+	public void setDevices(ArrayList<Device> devices){
+		this.devices = devices;
+	}
+
+
 
 }

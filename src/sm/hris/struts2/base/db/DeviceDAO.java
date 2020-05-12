@@ -40,7 +40,7 @@ public class DeviceDAO extends SmBaseDAO{
     }
 
 	public ArrayList<Device> searchDeviceByIdSite() throws SQLException{
-        ResultSet rs = this.runQuery("searchDeviceByIdSite");
+        ResultSet rs = this.runQuery("searchDeviceByIdSite",argArray);
             while (rs.next()) {
             	Device device = new Device();
             	device.setIdDevice(rs.getString("idDevice"));
@@ -65,10 +65,11 @@ public class DeviceDAO extends SmBaseDAO{
     }
 
 	public void deviceDelete() throws SQLException{
-		for(int i=0;i<argArray.size();i++) {
-			ArrayList<String> argArray2 = new ArrayList<String>();
-			argArray2.add(argArray.get(i));
-			this.run("deviceDelete", argArray.get(i));
+		for(int i=0;i<devices.size();i++) {
+			argArray = new ArrayList<String>();
+			argArray.add(devices.get(i).getIdDevice());
+			argArray.add(devices.get(i).getIdSite());
+			this.run("deviceDelete", argArray);
 		}
 		//closeConnection();
     }
@@ -141,5 +142,12 @@ public class DeviceDAO extends SmBaseDAO{
 		return argArray;
 	}
 
+	public void setDevices(ArrayList<Device> devices){
+		this.devices = devices;
+	}
+	
+	public ArrayList<Device> getDevices(){
+		return devices;
+	}
 	
 }

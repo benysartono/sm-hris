@@ -70,7 +70,7 @@
 					<s:iterator value="devices">
 						<tr>
 							<td>       
-								<input type="checkbox" name="idDevices"  value="<s:property value ="idDevice"/>"><s:property value ="idDevice"/></checkbox>
+								<input type="checkbox" name="devices"  value="device.idDevice=<s:property value ="idDevice"/>&device.idSite=<s:property value ="idSite"/>"><s:property value ="idDevice"/></checkbox>
 							</td>
 							<td>       
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">
@@ -78,7 +78,8 @@
     								<s:param name="device.idDeviceType"><s:property value ="idDeviceType"/></s:param>
     								<s:param name="device.idSite"><s:property value ="idSite"/></s:param>
 								</s:url>
-								<a href="<s:property value="#urlTag" />" ><s:property value ="nmDeviceType"/></a>
+								<!-- <a href="<s:property value="#urlTag" />" ><s:property value ="nmDeviceType"/></a>  -->
+								<s:property value ="nmDeviceType"/>
 							</td>
 							<td>       
 								<s:property value ="nmSite"/>

@@ -4,10 +4,10 @@ package sm.hris.struts2.base.db;
 public class DeviceTrx {
 
 	private String idDevice;
-	private String idDeviceType;
+	private String idValueType;
 	private String idSite;
 	private String nmSite;
-	private String nmDeviceType;
+	private String nmValueType;
 	private String value;
 	private String updatedTime;
 	
@@ -19,12 +19,12 @@ public class DeviceTrx {
 		this.idDevice = idDevice;
 	}
 
-	public String getIdDeviceType(){
-		return idDeviceType;
+	public String getIdValueType(){
+		return idValueType;
 	}
 	
-	public void setIdDeviceType(String idDeviceType) {
-		this.idDeviceType = idDeviceType;
+	public void setIdValueType(String idValueType) {
+		this.idValueType = idValueType;
 	}
 
 	public String getIdSite(){
@@ -43,12 +43,12 @@ public class DeviceTrx {
 		this.nmSite = nmSite;
 	}
 
-	public String getNmDeviceType(){
-		return nmDeviceType;
+	public String getNmValueType(){
+		return nmValueType;
 	}
 	
-	public void setNmDeviceType(String nmDeviceType) {
-		this.nmDeviceType = nmDeviceType;
+	public void setNmValueType(String nmValueType) {
+		this.nmValueType = nmValueType;
 	}
 
 	public String getValue(){

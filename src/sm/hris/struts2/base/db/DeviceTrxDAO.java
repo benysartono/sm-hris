@@ -19,9 +19,9 @@ public class DeviceTrxDAO extends SmBaseDAO{
             while (rs.next()) {
             	DeviceTrx deviceTrx = new DeviceTrx();
             	deviceTrx.setIdDevice(rs.getString("idDevice"));
-            	deviceTrx.setIdDeviceType(rs.getString("idDeviceType"));
+            	deviceTrx.setIdValueType(rs.getString("idValueType"));
             	deviceTrx.setIdSite(rs.getString("idSite"));
-            	deviceTrx.setNmDeviceType(rs.getString("nmDeviceType"));
+            	deviceTrx.setNmValueType(rs.getString("nmValueType"));
             	deviceTrx.setNmSite(rs.getString("nmSite"));
             	deviceTrx.setUpdatedTime(rs.getString("updatedTime"));
             	deviceTrxs.add(deviceTrx);
@@ -44,9 +44,10 @@ public class DeviceTrxDAO extends SmBaseDAO{
         while (rs.next()) {
         	DeviceTrx deviceTrx = new DeviceTrx();
         	deviceTrx.setIdDevice(rs.getString("idDevice"));
-        	deviceTrx.setIdDeviceType(rs.getString("idDeviceType"));
+        	deviceTrx.setIdValueType(rs.getString("idValueType"));
+        	deviceTrx.setValue(rs.getString("value"));
         	deviceTrx.setIdSite(rs.getString("idSite"));
-        	deviceTrx.setNmDeviceType(rs.getString("nmDeviceType"));
+        	deviceTrx.setNmValueType(rs.getString("nmValueType"));
         	deviceTrx.setNmSite(rs.getString("nmSite"));
         	deviceTrx.setUpdatedTime(rs.getString("updatedTime"));
         	deviceTrxs.add(deviceTrx);
@@ -79,9 +80,9 @@ public class DeviceTrxDAO extends SmBaseDAO{
         while (rs.next()) {
         	DeviceTrx deviceTrx = new DeviceTrx();
         	deviceTrx.setIdDevice(rs.getString("idDevice"));
-        	deviceTrx.setIdDeviceType(rs.getString("idDeviceType"));
+        	deviceTrx.setIdValueType(rs.getString("idValueType"));
         	deviceTrx.setIdSite(rs.getString("idSite"));
-        	deviceTrx.setNmDeviceType(rs.getString("nmDeviceType"));
+        	deviceTrx.setNmValueType(rs.getString("nmValueType"));
         	deviceTrx.setNmSite(rs.getString("nmSite"));
         	deviceTrx.setUpdatedTime(rs.getString("updatedTime"));
         	deviceTrxs.add(deviceTrx);

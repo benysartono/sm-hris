@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlquery value="smhris">
-		<searchDeviceTrx>Select *, b.nmDeviceType as nmDeviceType, c.nmSite as nmSite from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite order by a.updatedTime desc</searchDeviceTrx> 
-		<searchDeviceTrxByIdSite>Select *, b.nmDeviceType as nmDeviceType, c.nmSite as nmSite from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where idSite = ? order by a.updatedTime desc</searchDeviceTrxByIdSite> 
-		<searchDeviceTrxByAnyLike>Select *, b.nmDeviceType as nmDeviceType from smiot_device_trx a inner join smiot_device_type b inner join smhris_site c on a.idDeviceType = b.idDeviceType and a.idSite = c.idSite where a.idDevice like ? or a.idDeviceType like ? or a.idSite like ?</searchDeviceTrxByAnyLike> 
+		<searchDeviceTrx>Select a.idDevice as idDevice, a.idValueType as idValueType, d.idSite as idSite, a.value as value, b.nmValueType as nmValueType, d.nmSite as nmSite, a.updatedTime from smiot_device_trx a inner join smiot_value_type b inner join smiot_device c inner join smhris_site d on a.idValueType = b.idValueType and a.idDevice = c.idDevice  and c.idSite = d.idSite order by a.updatedTime desc</searchDeviceTrx> 
+		<searchDeviceTrxByIdSite>Select a.idDevice as idDevice, a.idValueType as idValueType, d.idSite as idSite, a.value as value, b.nmValueType as nmValueType, d.nmSite as nmSite, a.updatedTime from smiot_device_trx a inner join smiot_value_type b inner join smiot_device c inner join smhris_site d on a.idValueType = b.idValueType and a.idDevice = c.idDevice  and c.idSite = d.idSite where d.idSite = ? order by a.updatedTime desc</searchDeviceTrxByIdSite> 
+		<searchDeviceTrxByAnyLike>Select *, b.nmValueType as nmValueType, d.nmSite as nmSite, a.updatedTime from smiot_device_trx a inner join smiot_value_type b inner join smiot_device c inner join smhris_site d on a.idValueType = b.idValueType and a.idDevice = c.idDevice  and c.idSite = d.idSite where a.idDevice like ? or a.idValueType like ? or a.idSite like ?</searchDeviceTrxByAnyLike> 
 		<deviceDelete>Delete from smiot_device where idDevice = ?</deviceDelete> 
 		
 </xmlquery>		

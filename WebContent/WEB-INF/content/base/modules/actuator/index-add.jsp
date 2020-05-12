@@ -45,12 +45,15 @@
                 <div class="form-group">
                 <div class="row">
                     <div class="col-md-9">
-                		<s:textfield
-                        	label="ID Actuator"
+                		<s:select
+                        	list="devices"
+                        	listKey="idDevice"
+                        	listValue ="idDevice"
+                        	label="Device"
                         	name="actuator.idActuator"
                         	cssClass="input-sm"
                         	elementCssClass="col-sm-3"
-                        	tooltip="Enter Id"
+                        	tooltip="Enter Device"
                         	value="%{actuator.idActuator}"
                         	/>
 					</div>
@@ -62,16 +65,6 @@
                         	elementCssClass="col-sm-3"
                         	tooltip="Enter Id Relay"
                         	value="%{actuator.idRelay}"
-                        	/>
-                    </div>
-                    <div class="col-md-9">
-                		<s:textfield
-                        	label="Id Site"
-                        	name="actuator.idSite"
-                        	cssClass="input-sm"
-                        	elementCssClass="col-sm-3"
-                        	tooltip="Enter Id Site"
-                        	value="%{actuator.idSite}"
                         	/>
                     </div>
                     <s:submit cssClass="btn btn-primary" name="proc" value="Submit"/>

@@ -31,10 +31,10 @@
 		$scope.cnt=0;
 		stop =$interval(function(){
 			$scope.cnt++; 
-			var murl = "<s:url value='sensor-json'/>";
+			var murl = "<s:url value='search-device-trx-by-id-site-json'/>";
 			$http.get(murl)
 			.then(function(response) {
-				$scope.sensors = response.data.sensors;
+				$scope.deviceTrxs = response.data.deviceTrxs;
 				//console.log("The murl :" + murl);
 		    });
 	    	},10000);
@@ -49,11 +49,12 @@
 
 
 <div class="container">
+   	<div class="panel panel-default">
+    <div class="panel-heading">
+	    <h1>Device Activity Log</h1>
+    </div>
     <div class="row">
         <div class="col-md-9">
-
-            <h1>Subscribe</h1>
-
             <s:actionerror theme="bootstrap"/>
             <s:actionmessage theme="bootstrap"/>
             <s:fielderror theme="bootstrap"/>
@@ -70,13 +71,16 @@
 					<thead>
 						<tr>
 							<td>
-								ID Sensor
+								ID Device
 							</td>
 							<td>
 								Value
 							</td>
 							<td>
-								Sensor Type
+								Value Type
+							</td>
+							<td>
+								Site
 							</td>
 							<td>
 								Last Updated
@@ -84,18 +88,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="sensor in sensors">
+						<tr ng-repeat="deviceTrx in deviceTrxs">
 							<td>       
-								{{sensor.idSensor}}
+								{{deviceTrx.idDevice}}
 							</td>
 							<td>       
-								{{sensor.value}}
+								{{deviceTrx.value}}
 							</td>
 							<td>       
-								{{sensor.idSensorType}}
+								{{deviceTrx.nmValueType}}
 							</td>
 							<td>       
-								{{sensor.updatedTime}}
+								{{deviceTrx.nmSite}}
+							</td>
+							<td>       
+								{{deviceTrx.updatedTime}}
 							</td>
 						</tr>
 					</tbody>	 
@@ -107,7 +114,7 @@
         </div>
 		</div>
 	</div>  
-	  
+</div>	  
 </div>
 <div class="container">
 <footer>

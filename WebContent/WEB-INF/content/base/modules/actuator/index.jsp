@@ -27,41 +27,47 @@
 <div class="panel-body">
     <div class="row">
         <div class="col-md-9">
-			<form id="frmSearchActuator" method="post" action="index" theme="bootstrap" class="navbar-form navbar-right" label="Actuator Search">
+			<s:form id="frmSearchActuator" method="post" action="index" theme="bootstrap" class="navbar-form navbar-right" label="Actuator Search">
 			<table width="100%" Class="table-responsive table-striped table-bordered">
 			<tr>
 			<td>
+			<label for="description" class="text-right">Actuator Search</label>        	
 			</td>
 			<td>
+			<s:textfield
+        			id="srcParam"
+                	name="srcParam"
+                	cssClass="input-sm"
+                	elementCssClass="col-sm-3"
+                	tooltip="Enter search param"
+                	class="text-right"/>
+                	<s:submit cssClass="btn btn-primary" name="proc" value="Search"/>
 			</td>
 			</tr>
 			</table>
-            </form>
+            </s:form>
 		</div>
-	</div>	
+	</div>
 	<div class="row">
         <div class="col-md-9">
-			<form id="frmActuator" method="post" action="index" theme="bootstrap" cssClass="form-horizontal" label="Actuator Delete">
+			<s:form id="frmActuator" method="post" action="index" enctype="multipart/form-data" >
 			<div class="row">
-	        	<div class="col-md-10">
+	        	<div class="col-md-12">
 				<table width="100%" Class="table-responsive table-striped table-bordered">
 					<thead>
 						<tr>
-							<td>
+							<th align="center">
 								ID Actuator
-							</td>
-							<td>
+							</th>
+							<th align="center">
 								On Off
-							</td>
-							<td>
+							</th>
+							<th align="center">
 								id Relay
-							</td>
-							<td>
-								Id Site
-							</td>
-							<td>
+							</th>
+							<th align="center">
 								Last Updated
-							</td>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,13 +76,12 @@
 							<td>       
 								<input type="checkbox" name="idActuatorIdRelays"  value="<s:property value ="idActuatorIdRelay"/>"><s:property value ="idActuator"/></checkbox>
 							</td>
-							<td>       
+							<td align="center">  
 								<s:url action="index" var="urlTag" escapeAmp="false">
     								<s:param name="proc">OnOff</s:param>
     								<s:param name="actuator.idActuator"><s:property value ="idActuator"/></s:param>
     								<s:param name="actuator.idRelay"><s:property value ="idRelay"/></s:param>
     								<s:param name="actuator.command"><s:property value ="command"/></s:param>
-    								<s:param name="actuator.idSite"><s:property value ="idSite"/></s:param>
 								</s:url>
 								<a href="<s:property value="#urlTag" />" ><img src="/img/icon/<s:property value ='command'/>.png"/></a>
 							</td>
@@ -85,12 +90,8 @@
     								<s:param name="actuator.idActuator"><s:property value ="idActuator"/></s:param>
     								<s:param name="actuator.idRelay"><s:property value ="idRelay"/></s:param>
     								<s:param name="actuator.command"><s:property value ="command"/></s:param>
-    								<s:param name="actuator.idSite"><s:property value ="idSite"/></s:param>
 								</s:url>
 								<a href="<s:property value="#urlTag" />" ><s:property value ="idRelay"/></a>
-							</td>
-							<td>       
-								<s:property value ="idSite"/>
 							</td>
 							<td>       
 								<s:property value ="updatedTime"/>
@@ -103,13 +104,13 @@
 			</div> 
 			<div class="row">
 				<div class="col-sm-4">
-		    		<s:submit cssClass="btn btn-primary" name="proc" value="Add"/> 
+		    		<s:submit cssClass="btn btn-primary" name="proc" id="Actv" value="Actv" onclick = "return confirm('Are You Sure?')"></s:submit> 
 	        	</div>
 	        	<div  class="col-sm-4">
-	        		<s:submit cssClass="btn btn-primary" name="proc" value="Delete" onclick = "return confirm('Are You Sure?')"/>
+	        		<s:submit cssClass="btn btn-primary" name="proc" id="InActv" value="InActv" onclick = "return confirm('Are You Sure?')"></s:submit>
 	        	</div>
         	</div>
-			</form>
+			</s:form>
         </div>
     </div>
 </div>

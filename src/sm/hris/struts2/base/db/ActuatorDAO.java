@@ -20,6 +20,9 @@ public class ActuatorDAO extends SmBaseDAO{
     private String idActuator;
     private ArrayList<String> argArray = new ArrayList<String>();
     private String idSite;
+    private String oriIdActuator;
+    private String oriIdRelay;
+
 	private int oppCommand;
 	private Map<String, Object> sessionAttributes;
 	private Map session = ActionContext.getContext().getSession();
@@ -31,10 +34,9 @@ public class ActuatorDAO extends SmBaseDAO{
                 actuator.setIdActuator(rs.getString("idActuator"));
                 actuator.setIdRelay(rs.getInt("idRelay"));
                 actuator.setCommand(rs.getInt("command"));
-                actuator.setIdSite(rs.getString("idSite"));
-                actuator.setUpdatedTime(rs.getTimestamp("updatedTime"));
-                actuator.setCreatedTime(rs.getTimestamp("createdTime"));
+                actuator.setUpdatedTime(rs.getString("updatedTime"));
                 actuator.setUpdatedBy(rs.getString("updatedBy"));
+                actuator.setCreatedTime(rs.getString("createdTime"));
                 actuator.setCreatedBy(rs.getString("createdBy"));
                 
                 actuators.add(actuator);
@@ -45,7 +47,6 @@ public class ActuatorDAO extends SmBaseDAO{
     }
 	
 	public ArrayList<Actuator> searchActuatorById() throws SQLException{
-		argArray.add(idActuator);
         ResultSet rs = this.runQuery("searchActuatorById",argArray);
  
             while (rs.next()) {
@@ -53,9 +54,8 @@ public class ActuatorDAO extends SmBaseDAO{
                 actuator.setIdActuator(rs.getString("idActuator"));
                 actuator.setIdRelay(rs.getInt("idRelay"));
                 actuator.setCommand(rs.getInt("command"));
-                actuator.setIdSite(rs.getString("idSite"));
-                actuator.setUpdatedTime(rs.getTimestamp("updatedTime"));
-                actuator.setCreatedTime(rs.getTimestamp("createdTime"));
+                actuator.setUpdatedTime(rs.getString("updatedTime"));
+                actuator.setCreatedTime(rs.getString("createdTime"));
                 actuator.setUpdatedBy(rs.getString("updatedBy"));
                 actuator.setCreatedBy(rs.getString("createdBy"));
                 
@@ -75,18 +75,16 @@ public class ActuatorDAO extends SmBaseDAO{
         	return actuators;
     }
 
-	public ArrayList<Actuator> searchActuatorBySite() throws SQLException{
-		argArray.add(idSite);
-        ResultSet rs = this.runQuery("searchActuatorBySite",argArray);
+	public ArrayList<Actuator> searchActuatorByIdSite() throws SQLException{
+        ResultSet rs = this.runQuery("searchActuatorByIdSite",argArray);
  
         while (rs.next()) {
             Actuator actuator = new Actuator();
             actuator.setIdActuator(rs.getString("idActuator"));
             actuator.setIdRelay(rs.getInt("idRelay"));
             actuator.setCommand(rs.getInt("command"));
-            actuator.setIdSite(rs.getString("idSite"));
-            actuator.setUpdatedTime(rs.getTimestamp("updatedTime"));
-            actuator.setCreatedTime(rs.getTimestamp("createdTime"));
+            actuator.setUpdatedTime(rs.getString("updatedTime"));
+            actuator.setCreatedTime(rs.getString("createdTime"));
             actuator.setUpdatedBy(rs.getString("updatedBy"));
             actuator.setCreatedBy(rs.getString("createdBy"));
             
@@ -116,10 +114,11 @@ public class ActuatorDAO extends SmBaseDAO{
 		//for(int cnt=0;cnt<actuators.size();cnt++){
 		if(actuator.getCommand()==1) oppCommand = 0;  
 		if(actuator.getCommand()==0) oppCommand = 1;  
+		if(actuator.getCommand()==3) oppCommand = 3;  
 		argArray.add(0, String.valueOf(oppCommand));
 		argArray.add(1, actuator.getIdActuator());
 		argArray.add(2, String.valueOf(actuator.getIdRelay()));
-		argArray.add(3, actuator.getIdSite());
+		argArray.add(3, idSite);
 		this.run("actuatorOnOff", argArray);
 		//}
 	}
@@ -128,23 +127,30 @@ public class ActuatorDAO extends SmBaseDAO{
 		
 			argArray.add(0, actuator.getIdActuator());
 			argArray.add(1, String.valueOf(actuator.getIdRelay()));
-			argArray.add(2, actuator.getIdSite());
-			argArray.add(3, session.get("userId").toString());
+			argArray.add(2, String.valueOf(actuator.getCommand()));
+			argArray.add(3, actuator.getUpdatedBy());
+			argArray.add(4, actuator.getCreatedBy());
 			this.run("actuatorAdd", argArray);
 	        //this.con.close();
 			//closeConnection();
     }
 	
+	public void actuatorActive() throws SQLException{
+		this.run("actuatorActive", argArray);
+	}
+	
+	public void actuatorInActive() throws SQLException{
+		this.run("actuatorInActive", argArray);
+	}
+	
 	public void actuatorEdit() throws SQLException{
 		
 		argArray.add(0, actuator.getIdActuator());
 		argArray.add(1, String.valueOf(actuator.getIdRelay()));
-		argArray.add(2, actuator.getIdSite());
-		argArray.add(3, session.get("userId").toString());
-		argArray.add(4, actuator.getIdActuator());
-		argArray.add(5, String.valueOf(actuator.getIdRelay()));
-		argArray.add(6, actuator.getIdSite());
-		this.run("actuatorAdd", argArray);
+		argArray.add(2, session.get("userId").toString());
+		argArray.add(3, oriIdActuator);
+		argArray.add(4, String.valueOf(oriIdRelay));
+		this.run("actuatorEdit", argArray);
         //this.con.close();
 		//closeConnection();
 	}
@@ -155,7 +161,6 @@ public class ActuatorDAO extends SmBaseDAO{
 		argArray.add(0, String.valueOf(actuator.getCommand()));
 		argArray.add(1, actuator.getIdActuator());
 		argArray.add(2, String.valueOf(actuator.getIdRelay()));
-		argArray.add(3, actuator.getIdSite());
 		this.run("actuatorAdd", argArray);
         //this.con.close();
 		//closeConnection();
@@ -200,5 +205,22 @@ public class ActuatorDAO extends SmBaseDAO{
 	public ArrayList<String> getArgArray(){
 		return argArray;
 	}
+
+    public String getOriIdActuator(){
+		return oriIdActuator;
+	}
+	
+	public void setOriIdActuator(String oriIdActuator){
+		this.oriIdActuator = oriIdActuator;
+	}
+
+    public String getOriIdRelay(){
+		return oriIdRelay;
+	}
+	
+	public void setOriIdRelay(String oriIdRelay){
+		this.oriIdRelay = oriIdRelay;
+	}
+
 
 }
