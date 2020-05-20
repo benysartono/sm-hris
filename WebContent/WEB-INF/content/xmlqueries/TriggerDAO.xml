@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smiot">
+		<searchTrigger>Select * from smiot_trigger where idSite=?</searchTrigger> 
+		<searchTriggerByIdCondition>Select * from smiot_trigger where idCondition = ? and idSite=?</searchTriggerByIdCondition> 
+		<triggerDelete>Delete from smiot_trigger where idCondition=? and idActuator=? and idRelay=? and idSite=?</triggerDelete> 
+		<triggerAdd>Insert into smiot_trigger(idCondition, idActuator, idRelay, command, idSite, updatedBy, createdBy, createdTime) values(?,?,?,?,?,?,?,Now)</triggerAdd>
+		<triggerEdit>Update smiot_trigger set idCodition=?,idActuator=?, idRelay=?, idSite=?, updatedBy=?, createdBy=? where idCondition=? and idTrigger=? and idSite=?</triggerEdit>
+</xmlquery>		

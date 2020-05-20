@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smiot">
+		<searchValueType>Select * from smiot_value_type</searchValueType> 
+		<searchValueTypeById>Select * from smiot_value_type where idValueType = ?</searchValueTypeById> 
+		<searchValueTypeByAnyLike>Select * from smiot_value_type where nmValueType like ?</searchValueTypeByAnyLike> 
+		<valueTypeDelete>Delete from smiot_value_type where idValueType = ?</valueTypeDelete> 
+		<valueTypeAdd>Insert into smiot_value_type(idValueType,nmValueType) values(?,?)</valueTypeAdd>
+		<valueTypeEdit>Update smiot_value_type set idValueType=?,description=?,location=?,nmValueType=? where idValueType=?</valueTypeEdit>
+</xmlquery>		

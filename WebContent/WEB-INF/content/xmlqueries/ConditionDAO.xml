@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlquery value="smhris">
+		<searchCondition>Select * from smiot_condition</searchCondition> 
+		<searchConditionByIdSite>Select a.idCondition as idCondition, a.idSite as idSite, a.idDevice as idDevice, a.operand as operand, a.value as value, a.idValueType as idValueType, b.nmValueType as nmValueType from smiot_condition a inner join smiot_value_type b on a.idValueType=b.idValueType where a.idSite = ?</searchConditionByIdSite> 
+		<searchConditionByAnyLike>Select a.idCondition as idCondition, a.idSite as idSite, a.idDevice as idDevice, a.operand as operand, a.value as value, a.idValueType as idValueType, b.nmValueType as nmValueType from smiot_condition a inner join smiot_value_type b on a.idValueType=b.idValueType where a.idSite = ? and (a.idCondition like ? or a.idSite like ? or a.idDevice like ? or a.operand like ? or a.value like ? or a.idValueType like ?)</searchConditionByAnyLike> 
+		<conditionDelete>Delete from smiot_condition where idCondition = ? and idSite=? and idDevice=?</conditionDelete> 
+		<conditionAdd>Insert into smiot_condition(idCondition,idSite,idDevice,operand,value,idValueType) values(?,?,?,?,?,?)</conditionAdd>
+		<conditionEdit>Update smiot_condition set idCondition=?,idSite=?,idDevice=?,operand=?,value=?,idValueType=? where idCondition=? and idSite=? and idDevice=?</conditionEdit>
+</xmlquery>		
