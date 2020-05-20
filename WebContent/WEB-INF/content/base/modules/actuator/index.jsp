@@ -79,19 +79,23 @@
 							<td align="center">  
 								<s:url action="index" var="urlTag" escapeAmp="false">
     								<s:param name="proc">OnOff</s:param>
+    								<s:param name="actuator.command"><s:property value ="command"/></s:param>
     								<s:param name="actuator.idActuator"><s:property value ="idActuator"/></s:param>
     								<s:param name="actuator.idRelay"><s:property value ="idRelay"/></s:param>
-    								<s:param name="actuator.command"><s:property value ="command"/></s:param>
+    								<s:param name="actuator.idSite"><s:property value ="idSite"/></s:param>
 								</s:url>
 								<a href="<s:property value="#urlTag" />" ><img src="/img/icon/<s:property value ='command'/>.png"/></a>
 							</td>
-							<td>       
+							<td> 
+								<!--       
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">
     								<s:param name="actuator.idActuator"><s:property value ="idActuator"/></s:param>
     								<s:param name="actuator.idRelay"><s:property value ="idRelay"/></s:param>
     								<s:param name="actuator.command"><s:property value ="command"/></s:param>
 								</s:url>
 								<a href="<s:property value="#urlTag" />" ><s:property value ="idRelay"/></a>
+								-->
+								<s:property value ="idRelay"/>
 							</td>
 							<td>       
 								<s:property value ="updatedTime"/>

@@ -20,6 +20,7 @@ import sm.hris.struts2.base.db.Site;
 import sm.hris.struts2.base.db.SiteDAO;
 import sm.hris.struts2.base.db.DeviceType;
 import sm.hris.struts2.base.db.DeviceTypeDAO;
+import sm.hris.struts2.base.db.EmployeeDAO;
 
 @Results({
 	@Result(name="tolist", location="/base/modules/mgt/device/index", type="redirect"),
@@ -41,9 +42,15 @@ public class IndexAddAction extends SmBaseAction {
     private ActuatorDAO actuatorDAO; 
 	private Map session = ActionContext.getContext().getSession();
 	private String userId = String.valueOf(session.get("userId"));
+	private String idSite;
     
     public String execute() throws Exception{
-		try {
+    	argArray = new ArrayList<String>();
+    	argArray.add(userId);
+    	EmployeeDAO employeeDAO = new EmployeeDAO();
+		idSite = employeeDAO .searchEmployeeByUid(argArray).get(0).getIdSite();
+
+    	try {
 			sites = siteDAO.searchSite();
 			deviceTypes = deviceTypeDAO.searchDeviceType();
 		} catch (SQLException e) {
@@ -75,6 +82,7 @@ public class IndexAddAction extends SmBaseAction {
 		   		actuator.setIdActuator(device.getIdDevice());
 		   		actuator.setIdRelay(n);
 		   		actuator.setCommand(3);
+		   		actuator.setIdSite(idSite);
 		   		actuator.setUpdatedBy(userId);
 		   		actuator.setCreatedBy(userId);
 		   		actuatorDAO.setActuator(actuator);

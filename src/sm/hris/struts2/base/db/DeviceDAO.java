@@ -65,13 +65,12 @@ public class DeviceDAO extends SmBaseDAO{
     }
 
 	public void deviceDelete() throws SQLException{
-		for(int i=0;i<devices.size();i++) {
-			argArray = new ArrayList<String>();
-			argArray.add(devices.get(i).getIdDevice());
-			argArray.add(devices.get(i).getIdSite());
+		System.out.println("Ada di dalam DeviceDAO.deviceDelete");
+		try{
 			this.run("deviceDelete", argArray);
+		} catch (SQLException e) {
+		        System.out.println("Exception DeviceDAO.deviceDelete: " + e);
 		}
-		//closeConnection();
     }
 
 	public void deviceAdd() throws SQLException{

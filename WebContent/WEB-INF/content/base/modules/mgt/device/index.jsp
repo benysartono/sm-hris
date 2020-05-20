@@ -70,7 +70,7 @@
 					<s:iterator value="devices">
 						<tr>
 							<td>       
-								<input type="checkbox" name="devices"  value="device.idDevice=<s:property value ="idDevice"/>&device.idSite=<s:property value ="idSite"/>"><s:property value ="idDevice"/></checkbox>
+								<input type="checkbox" name="idDeviceIdSite"  value="<s:property value ="idDevice"/>,<s:property value ="idSite"/>"><s:property value ="idDevice"/></checkbox>
 							</td>
 							<td>       
 								<s:url action="index-edit" var="urlTag" escapeAmp="false">

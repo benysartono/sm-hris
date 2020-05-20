@@ -8,6 +8,8 @@ public class Actuator {
 	private String idActuator; 									
 	private Integer idRelay; 		
 	private Integer command;
+	private String idSite; 									
+	
 	private String updatedBy;
 	private String createdBy;
 	private String updatedTime;
@@ -30,6 +32,14 @@ public class Actuator {
 	
 	public void setIdRelay(Integer idRelay) {
 		this.idRelay = idRelay;
+	}
+
+	public String getIdSite(){
+		return idSite;
+	}
+	
+	public void setIdSite(String idSite) {
+		this.idSite = idSite;
 	}
 
 	public Integer getCommand(){

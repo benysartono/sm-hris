@@ -41,6 +41,7 @@ public class IndexAction extends ActionSupport {
 	private String idActuator;
 	private String IdRelay;
 	private String Command;
+	private int oppCommand;
 	
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
 	private DeviceDAO deviceDAO = new DeviceDAO();
@@ -170,6 +171,11 @@ public class IndexAction extends ActionSupport {
 	    } else {
 		MqttClient publishClient = getMqttClient();
 		try {
+			if(actuator.getCommand()==1) oppCommand = 0;  
+			if(actuator.getCommand()==0) oppCommand = 1;  
+			if(actuator.getCommand()==3) oppCommand = 3;  
+			actuator.setCommand(oppCommand);
+
 	        content = actuator.getIdActuator() + "|" + actuator.getIdRelay() + "|" + actuator.getCommand();
 	        MqttMessage message = new MqttMessage(content.getBytes());
 	        message.setQos(qos);
@@ -187,7 +193,6 @@ public class IndexAction extends ActionSupport {
 	        return "error";
 	    }
 		actuatorDAO.setActuator(actuator);
-		actuatorDAO.setIdSite(idSite);
 		actuatorDAO.actuatorOnOff();
 		}
 		argArray = new ArrayList<String>();
